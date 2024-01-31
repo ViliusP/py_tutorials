@@ -1,9 +1,6 @@
-import DefaultLayout from "./layouts/default"
 
 <template>
-  <DefaultLayout>
-    <div>
-      <h1>Welcome to the homepage</h1>
-    </div>
-  </DefaultLayout>
+  <NuxtLayout>
+    <h1>Welcome to the homepage</h1>
+  </NuxtLayout>
 </template>
