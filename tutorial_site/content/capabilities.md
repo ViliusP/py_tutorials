@@ -80,3 +80,43 @@ export default () => {
 console.log('Code block')
 }
 ```
+
+::TextH1 
+Material Headline 1 
+::
+
+::TextH2
+Material Headline 2 
+::
+
+::TextH3
+Material Headline 3
+::
+
+::TextH4
+Material Headline 4
+::
+
+::TextH5
+Material Headline 5
+::
+
+::TextH6
+Material Headline 6
+::
+
+::TextBody1
+Material body 1
+::
+
+::TextBody2
+Material body 2
+::
+
+::TextSubtitle1
+Material subtitle 1
+::
+
+::TextSubtitle2
+Material subtitle 2
+::
