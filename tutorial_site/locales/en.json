@@ -1,0 +1,10 @@
+{
+    "hello": {
+        "world": "Hello, World!",
+        "vilius": "Hello, Vilius."
+    },
+    "about": {
+        "title": "About screen",
+        "description": "That's what this is all about...."
+    }
+}

@@ -8,11 +8,8 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify']
   },
-  vite: {
-    ssr: {
-      noExternal: ['vuetify']
-    }
-  },
+
+
   modules: [
     async (options, nuxt) => {
       // @ts-ignore
@@ -20,6 +17,15 @@ export default defineNuxtConfig({
         vuetify()
       ))
     },
+    '@nuxtjs/i18n',
   ],
+  i18n: {
+    vueI18n: './locales/i18n.config.ts' // if you are using custom path, default 
+  },
+  vite: {
+    ssr: {
+      noExternal: ['vuetify']
+    }
+  },
   devtools: { enabled: true }
 });

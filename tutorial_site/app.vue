@@ -1,6 +1,24 @@
 
 <template>
   <NuxtLayout>
-    <h1>Welcome to the homepage</h1>
+    <template>
+      <div>
+        <v-btn href="#" v-for="locale in availableLocales" :key="locale.code"
+          @click.prevent.stop="setLocale(locale.code)">
+          {{ locale.name }}
+        </v-btn>
+
+
+      </div>
+    </template>
   </NuxtLayout>
 </template>
+
+<script setup>
+
+const { locale, locales, setLocale } = useI18n()
+
+const availableLocales = computed(() => {
+  return (locales.value).filter(i => i.code !== locale.value)
+})
+</script>
