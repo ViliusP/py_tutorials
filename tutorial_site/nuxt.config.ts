@@ -4,6 +4,42 @@ import { fileURLToPath } from "url";
 import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
 
 export default defineNuxtConfig({
+  modules: [
+    '@nuxt/content',
+    "@nuxtjs/i18n",
+    async (options, nuxt) => {
+      // @ts-ignore
+      nuxt.hooks.hook("vite:extendConfig", (config) =>
+        // @ts-ignore
+        config.plugins?.push(vuetify())
+      );
+    },
+  ],
+  content: {
+    // documentDriven: true
+    highlight: {
+      // Theme used in all color schemes.
+      theme: {
+        // Default theme (same as single string)
+        default: 'github-dark',
+        // Theme used if `html.dark`
+        dark: 'github-dark',
+      },
+      preload: [
+        'python',
+        'md',
+        'diff',
+        'json'
+      ]
+    },
+    markdown: {
+      // Object syntax can be used to override default options
+      // @ts-ignore
+      remarkPlugins: {
+        'remark-gfm': true,
+      },
+    }
+  },
   typescript: {
     typeCheck: true
   },
@@ -15,16 +51,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify", "vue-i18n"],
   },
 
-  modules: [
-    "@nuxtjs/i18n",
-    async (options, nuxt) => {
-      // @ts-ignore
-      nuxt.hooks.hook("vite:extendConfig", (config) =>
-        // @ts-ignore
-        config.plugins?.push(vuetify())
-      );
-    },
-  ],
+
   i18n: {
     locales: [
       {
@@ -36,7 +63,7 @@ export default defineNuxtConfig({
         name: 'English'
       },
     ],
-    defaultLocale: 'lt',   
+    defaultLocale: 'lt',
     vueI18n: './i18n.config.ts'
   },
   vite: {

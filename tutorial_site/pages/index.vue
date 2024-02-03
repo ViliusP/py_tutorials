@@ -1,11 +1,20 @@
 <script setup lang="ts">
+import type { LocaleObject } from 'vue-i18n-routing';
+
+const { locale, locales } = useI18n()
+
+
 const route = useRoute()
+
+const switchLocalePath = useSwitchLocalePath()
+
+const availableLocales = computed(() => {
+  return (locales.value).filter(i => (i as LocaleObject).code !== locale.value)
+})
 </script>
 
 <template>
-  <div>
-    <h1>Nuxt Routing set up successfully!</h1>
-    <p>Current route: {{ route.path }}</p>
-    <a href="https://nuxt.com/docs/getting-started/routing" target="_blank">Learn more about Nuxt Routing</a>
-  </div>
+  <main>
+    <ContentDoc path="/index" />
+  </main>
 </template>
