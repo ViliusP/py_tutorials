@@ -53,6 +53,7 @@ export default defineNuxtConfig({
 
 
   i18n: {
+    strategy: 'no_prefix', // No path changes for locales
     locales: [
       {
         code: 'lt',
@@ -77,6 +78,11 @@ export default defineNuxtConfig({
         ],
       }),
     ],
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
   },
   devtools: { enabled: true },
 });
