@@ -4,7 +4,7 @@ description: 'first tutorial page'
 ---
 
 ::TextH4 
-First page 
+Prieš pradedant 
 ::
 
 ::TextBody1
