@@ -36,10 +36,33 @@ Prieš pradedant
 Trumpai apie žaidimų kūrimą ir PyGame
 ::
 
-
 ::TextBody1
 ​
 Sukurti žaidimą reikalauja įvairių žinių iš kūrybos ir techninių sričių, kadangi žaidimų kūrimo procese reikia įgyvendinti įvairias grafinio dizaino, programavimo, meninio rašymo, garso dizaino užduotis. Dažnu atveju, profesionaliose aplinkose yra naudojami žaidimų varikliai (angl. game engines), šiuose yra daug įvairių įrankių leidžiančių supaprastinti žaidimų kūrimą. Žaidimų variklius sudaro platus spektras pagalbinių priemonių, funkcijų grafikos atvaizdavimui, fizikos modeliavimui, vartotojo įvesties valdymui, žaidimo vykdymui tinkle. Modernūs žaidimai kuriami naudojantis pačių kūrėjų sukurtais žaidimų varikliais arba visiems viešai prieinamais, tokiais, kaip „Unity“, „Unreal Engine“, „Godot“. Nors šie varikliai ir sukurti tam, kad būtų kuriami geriausi žaidimai, leidžiantys išnaudoti galingiausią kompiuterinę techniką, jie gali būti per daug sudėtingi pradedantiesiems kurėjams, kadangi reikalauja plačių ir gilių žinių, kad būtų galima juos efektyviai panaudoti.
+ 
 
 Susipažindami apie žaidimų kūrimą, naudosimės „Pygame“ biblioteka. Šis įrankis yra nemokamas, atvirojo kodo. Atviro kodo programų programinis kodas yra viešai prieinamas, jį galima keisti savo nuožiūra, platinti. Naudotojui suteikiama visapusiškai laisvė ja naudotis. 
 Skirtingai nuo sudėtingesnių variklių, kurie paslepia daugelį programavimo darbų, „Pygame“ leidžia praktiškai išbandyti sukurti žaidimo ciklus, įvykių tvarkymą ir grafikos atvaizdavimą, naudotojo įvykių kontrolę, susidūrimo aptikimus, o todėl tai leidžia susipažinti su žaidimų kūrimo pagrindais. Pradėdami nuo „Pygame“, pradedantieji gali įgauti programavimo ir žaidimų kūrimo pagrindus, šiuos bus galima ateityje panaudoti  pažangesniems projektams ir technologijoms.
+::
+
+::TextH6
+Užduotis ir reikalavimai
+::
+
+::TextBody1
+Prieš pradedant programinės įrangos kūrimo procesą, reikia turėti užduotį ir jos reikalavimus. Šios mokomosios medžiagos metu kursime „Asteroids“ žaidimo kloną. Šį galite išbandyti https://www.echalk.co.uk/amusements/Games/asteroidsClassic/ateroids.html.
+
+Dabar apie reikalavimus. Programinės įrangos reikalavimuose iš esmės nurodoma, kokie elementai yra labai svarbūs projekto sėkmei. Tai kruopščiai apgalvoti jūsų kūrimo projekto tikslai ir uždaviniai, dalykai, kurie turi būti įtraukti, kad produktas būtų toks, koks yra. Gali būti mažiau esminių tikslų, kuriuos jūs arba suinteresuotosios šalys kelia projektui ir kurie nėra reikalavimai. Kitaip tariant, reikalavimai yra privalomi dalykai.
+Šie reikalavimai nurodomi prieš pradedant kūrimo procesą. Taip yra todėl, kad jie diktuos praktiškai kiekvieną žingsnį, kurį žengsite link galutinio užbaigimo.
+
+Reikalavimai dažniausiai ateina iš kliento norų, kadangi šiuo momentu kursime žaidimą sau, šiu reikalavimus mes patys susigalvosime. Kadangi kursime žaidimo kloną, šį žaidimą reikia išanalizuoti ir pagal tai sukurti reikalavimus:
+
+- Turi būti erdvėlaivis valdomas su rodyklių klavišais;
+- Erdvėlaivis turi galėti šaudyti su space klavišu;
+- Šaudymas turi būti su garsu;
+- Žaidėjas turi 3 gyvybes, jos prarandomos susiduriant su asteroidu arba pašovus kitam erdvėlaiviui;
+- Priklausomai nuo asteroido dydžio, šis sunaikinamas arba padalijamas pusiau į dvi dalis į jį šaudant;
+- Žaidimo laukas turi būti nesibaigiantis - praskridus šio ribą, atsiduriame kitoje pusėje.
+  
+Šie užrašyti reikalavimai žaidimo kūrimo procese gali būti tikslinami, keičiami.
+::
