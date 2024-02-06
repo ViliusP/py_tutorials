@@ -102,10 +102,12 @@ import pygame
 print(pygame.ver)
 ```
 
-Pirmojoje eilutėje, mes importuojame (įkeliame) šią biblioteką į savo programinį kodą, kad galėtume jį panaudoti. Kitoje eilutėje mes išvedame į konsolinį langą bibliotekos versiją. Paleidus šį kodą, konsoliniame lange turėtume pamatyti:
+Pirmojoje eilutėje, mes importuojame (įkeliame) šią biblioteką į savo programinį kodą, kad galėtume ją panaudoti. Kitoje eilutėje mes išvedame į konsolinį langą bibliotekos versiją. Paleidus šį kodą, konsoliniame lange turėtume pamatyti:
 
 ```text
 pygame 2.5.2 (SDL 2.28.2, Python 3.10.12)
 Hello from the pygame community. https://www.pygame.org/contribute.html
 2.5.2
 ```
+
+O toliau sukursime savo pirmo žaidimo langą.
