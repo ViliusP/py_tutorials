@@ -1,0 +1,268 @@
+---
+title: 'Game loop'
+description: 'Tutorial about PyGame Cycles'
+---
+
+::TextH4 
+Žaidimo ciklai
+::
+
+::TextBody1
+(angl. game loop)
+::
+
+::TextH6
+PyGame dokumentacija
+::
+
+::TextBody1
+Jau pasiruošėme pradėti programuoti žaidimą. Toliau medžiaga remsis PyGame oficialia dokumentacija https://www.pygame.org/docs/. Dokumentacija atlieka labai svarbų vaidmenį kuriant ir prižiūrint programinę įrangą. Joje galima rasti aprašytas bibliotekos galimybes, pamokas, apribojimu, efektyvaus naudojimo patarimų.
+::
+
+::TextH6
+Pirmas žaidimų langas
+::
+
+::TextBody1
+Dabar paleiskime pirmą kodą, kuris pateiktas dokumentacijoje. Šiuo kodo pagalba, mes paleisime žaidimų langą.
+::
+
+```python
+# Example file showing a basic pygame "game loop"
+import pygame
+
+# pygame setup
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+running = True
+
+while running:
+    # poll for events
+    # pygame.QUIT event means the user clicked X to close your window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("purple")
+
+    # RENDER YOUR GAME HERE
+
+    # flip() the display to put your work on screen
+    pygame.display.flip()
+
+    clock.tick(60)  # limits FPS to 60
+
+pygame.quit()
+```
+
+::TextBody1
+Turėjo atsidaryti tuščias purpurinis stačiakampis programos langas. Toliau paanalizuokime šį kodą eilutę po eilutę. Su pirmąją elute kode, mes importuojame pygame biblioteka, kad galėtume ją vėliau panaudoti kode.
+::
+
+```python
+import pygame
+```
+
+::TextBody1
+Toliau inicializuojame pygame su [pygame.init()](https://www.pygame.org/docs/ref/pygame.html#pygame.init). Iškvietus šią funkciją, inicializuojami visi pygame moduliai. Toliau sukuriamas ekrano kintamasis, kaip argumentą pateikiame šio ekrano dydį ([dokumentacija](https://www.pygame.org/docs/ref/display.html#pygame.display.set_mode)). Šį kintamąjį geriau būtų įsivaizduoti, kaip tuščią drobę, kurioje galima piešti figūras, animacinius objektus (ang. sprites) ir tekstą. Reiktų suprasti, kad "piešimą" atliktsime programuodami. Paskutinėje eilutėje sukuriame laikrodžio *Clock* objektą, šis naudojamas "laikui stebėti. Laikrodis taip pat atlieka keletą funkcijų, padedančių valdyti žaidimo kadrų spartą" ([dokumnetacija](https://www.pygame.org/docs/ref/time.html#pygame.time.Clock))
+::
+
+```python
+# pygame setup
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+```
+
+::TextBody1
+Prieš pat ciklą *while*, sukuriame bool tipo kintamąjį *running*, kuris nurodys mums, ar žaidimas vis dar veikia. Toliau seka pagrindinė žaidimo kodo blokas - žaidimo ciklas. Šiame bloke aprašomas kiekvieno žaidimo momento (angl. tick) veiksmai, komandos. Šis ciklas veiks tol, kol *running* kintamasis bus *True*. Ciklai *while* aprašomi taip:
+::
+
+```python
+while sąlyga:
+    veiksmas1()
+    veiksmas2()
+    ...
+    veiksmasN()
+```
+
+::TextBody1
+Žaidimo cikle pirmiausia patikrinami žaidimo įvykis, ar žaidimas išjungiamas (*event.type == pygame.QUIT*). Visus *pygame*  įvykius rasite [dokumentacijoje](https://www.pygame.org/docs/ref/event.html). Kaip yra išjungiamas žaidimo langas (paspaudžias *X* mygtukas), tokiu atveju mes nustatome *running* į False ir taip baigiamas žaidimo ciklas.
+::
+
+```python
+# ...
+running = True
+
+while running:
+    # poll for events
+    # pygame.QUIT event means the user clicked X to close your window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # ...
+```
+
+::TextBody1
+Ryškios spalvos violetinį ekraną padarome su [screen.fill(color, ...)](https://www.pygame.org/docs/ref/surface.html#pygame.Surface.fill) funkcija. Šiuo atveju užpildoma spalva *purple*, kuri yra iš anksto sukurta. Spalvas galima nurodyti iš [sąrašo](https://www.pygame.org/docs/ref/color_list.html) arba nurodydami raudonos, žalios, mėlynos spalvų įverčius iki 255, toks formatas dar vadinamas *RGB*. Pavyzdžiui vietoj *"purple"* įrašę (0, 0, 255), gautume mėlynos spalvos ekraną. Mėlynos spalvos ekraną taip pat galima gauti įrašę vietoj argumento *"blue"*.
+::
+
+```python
+    # ...code before
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("purple")
+
+    # ...code after
+```
+
+::TextBody1
+Braižymas, piešimas žaidimo lange vyksta netiesiogiai. Pirmiausia, visi grafiniai skaičiavimai, vaizdų piešimai vyksta ne ekrane, o ant *surface*. Atlikus visas grafinių vaizdų transformacijas, pokyčius, piešimus, šis *surface* perkeliamas į ekraną ([dokumentacija](https://www.pygame.org/docs/ref/display.html#pygame.display.flip)). Tai padaroma su žemiau pateikta kodo eilute:
+::
+
+```python
+    # ...code before
+
+    # flip() the display to put your work on screen
+    pygame.display.flip()
+    
+    # ...code after
+```
+
+::TextBody1
+
+Žaidimuose vientisas vaizdas gaunamas rodant daug kadrų iš eilės. Atskirų kadrų nematome, kadangi vaizdas atnaujinamas daug kartų per sekundę. Rodiklis rodantis kiek kartų kadrų parodoma per sekundę vadinamas kadrai per sekundę (angl. frames per second, fps). Šį rodiklį, mes limituosime iki 60, kad išvengtume perteklinio kompiuterio resursų, žaidimas būtų stabilesnis.
+
+::
+
+```python
+    # ...code before
+
+    clock.tick(60)  # limits FPS to 60
+    
+    # ...code after
+```
+
+::TextH6
+Pozicija žaidimų lange
+::
+
+::TextBody1
+Prieš nagrinėjant kitą dokumentacijoje pateiktą pavyzdį, aptarsime, kaip nurodoma objektų (primityvių figūrų, paveiksliukų, pelės žymeklio ir kt.) pozicija žaidimo lange. Pasileiskime anksčiau pateiktą, bet modifikuotą pavyzdį:
+::
+
+```python
+# Example file showing a basic pygame "game loop"
+import pygame
+
+# pygame setup
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+running = True
+
+while running:
+    # poll for events
+    # pygame.QUIT event means the user clicked X to close your window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        # Mouse click coordinates
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x = pygame.mouse.get_pos()[0]
+            y = pygame.mouse.get_pos()[1]
+            print(f"(x,y)=({x},{y})")
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("purple")
+
+    # RENDER YOUR GAME HERE
+
+    # flip() the display to put your work on screen
+    pygame.display.flip()
+
+    clock.tick(60)  # limits FPS to 60
+
+pygame.quit()
+```
+
+::TextBody1
+Paspaudinėkite ant žaidimo lango su pelyte, konsolėje turėtumėte pamatyti kažką panašaus į tai *(x,y)=(965,456)*. Modifikacija leidžia paspaudus ant kažkurios vietos lange, konsoliniame lange parodo, kurioje pozicijoje buvo paspausta su pelyte. Ši pozicija nurodoma dviem reikšmėmis: *x* ir *y* koordinatėmis. Koordinatė x nurodo, kiek objektas (šiuo atveju pelės žymeklis paspaudimo metu) nutolęs nuo kairiojo lango krašto, tai nepriklauso nuo to, kaip žemai, ar aukštai tas objektas tas yra. Koordinatė y nurodo, kiek objektas nutolęs nuo viršutiniojo lango krašto, tai nepriklauso, kiek kairėn ar dešinėn tas objektas yra. Kuo didesnė x koordinatės reikšmė, tuo objektas yra labiau dešinėje. Kuo didesnė y koordinatės reikšmė, tuo objektas yra žemiau. Tokius x ir y koordinačių pokyčius galima atvaizduoti su koordinačių plokštuma. Ši šiek tiek skiriasi nuo tos, kurios mokoma mokyklos kurse (stačiakampės koordinačių sistemos, dekarto plokštumos). Šią vaizduosime konkrečiu atveju -  dabartinės žaidimo lango, kuris yra 1280 pikselių ilgio ir 720 pikselių pločio. Tik pakeisime žaidimo fono spalvą į pilką.
+::
+
+<!-- markdownlint-disable -->
+<img src="/content_images/coordinate_system_window.png" alt="descriptive text" style="max-width: 100%; height: auto;" />
+
+::TextBody1
+Jau turėtumėte žinoti, kad daugelis dalykų programavime skaičiuojami nuo nulio. Koordinačių reikšmės taip pat prasideda nuo nulio. Todėl galinės koordinačių reikšmės yra vienu mažesnės negu nustatytos reikšmės. Nustatėme, kad lango ilgis būtų 1280 pikselių ilgio, bet dešiniausios koordinatės x reikšmė yra 1279. Jeigu daug išbandinėjote spaudinėjimą ant žaidimo lango ir stebėjote, kaip keičiaisi koordinatės, galėjote pastebėti, kad tiek x, tiek y reikšmės visada būna sveiki skaičiai. Jeigu bandysite nustatyti objekto koordinates su trupmeniniu skaičiu, tai šio skaičiaus dalis po kablelio bus ignoruojama, pašalinama (angl. truncated). Pavyzdžiui 1,5 taps 1, 1945,5 taps 1945 ir t.t. 
+::
+
+::TextBody1
+Objektas gali turėti ir neigiamas koordinates arba tokias, kurios yra didesnės negu lango ilgis ir plotis. Tokiu atveju objektas bus piešiamas kažkur tai už lango. Tokį atvejį mes pamatysime vėliau. Dabar paannalizuokime kitą dokumentacijoje esantį kodo pavyzdį.
+::
+
+::TextH6
+Įvesties įvykiai ir jų apdorojimas
+::
+
+::TextBody1
+Pirmiausia kodas, kurį analizuosime: 
+::
+
+```python
+# Example file showing a circle moving on screen
+import pygame
+
+# pygame setup
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+running = True
+dt = 0
+
+player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+
+while running:
+    # poll for events
+    # pygame.QUIT event means the user clicked X to close your window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("purple")
+
+    pygame.draw.circle(screen, "red", player_pos, 40)
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        player_pos.y -= 300 * dt
+    if keys[pygame.K_s]:
+        player_pos.y += 300 * dt
+    if keys[pygame.K_a]:
+        player_pos.x -= 300 * dt
+    if keys[pygame.K_d]:
+        player_pos.x += 300 * dt
+
+    # flip() the display to put your work on screen
+    pygame.display.flip()
+
+    # limits FPS to 60
+    # dt is delta time in seconds since last frame, used for framerate-
+    # independent physics.
+    dt = clock.tick(60) / 1000
+
+pygame.quit()
+
+```
+
+::TextBody1
+Pasileiskite, turėtumėte pamatyti apskritimą viduryje ekrano, pasinaudojus WASD klavišais turėtumėte galėti jį valdyti.
+::
+
+
+<!-- markdownlint-disable -->
+<img src="/content_images/moving_circle.gif" alt="descriptive text" style="max-width: 100%; height: auto;" />   
