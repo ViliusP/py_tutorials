@@ -13,13 +13,18 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        # Mouse click coordinates
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x = pygame.mouse.get_pos()[0]
+            y = pygame.mouse.get_pos()[1]
+            print(f"(x,y)=({x},{y})")
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("grey")
 
     # RENDER YOUR GAME HERE
 
-    # # flip() the display to put your work on screen
+    # flip() the display to put your work on screen
     pygame.display.flip()
 
     clock.tick(60)  # limits FPS to 60
