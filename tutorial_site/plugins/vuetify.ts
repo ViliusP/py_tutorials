@@ -23,7 +23,7 @@ const myCustomLightTheme: ThemeDefinition = {
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     ssr: true,
-    components,
+		components,
     directives,
     icons: {
       defaultSet: "mdi",

@@ -114,9 +114,15 @@ Material body 2
 ::
 
 ::TextSubtitle1
-Material subtitle 1
+Material subtitle 1 
 ::
 
 ::TextSubtitle2
 Material subtitle 2
 ::
+
+```js [file.js]{4-6,7} meta-info=val
+export default () => {
+    console.log('Code block')
+}
+```
