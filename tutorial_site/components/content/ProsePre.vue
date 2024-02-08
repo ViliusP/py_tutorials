@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto" width="400" elevation="2">
-    <v-btn density="compact" icon class="ma-2" style="position: absolute; right: 0; top: 0;" @click="copyContent">
+  <v-card class="" width="400" elevation="2">
+    <v-btn icon variant="plain" style="position: absolute; right: 0; top: 0;" @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
     </v-btn>
     <v-card-text>
