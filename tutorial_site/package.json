@@ -1,6 +1,5 @@
 {
-  "name": "nuxt-app",
-  "packageManager": "yarn@1.22.21",
+  "name": "asteroids-game-tutorial-site",
   "private": true,
   "type": "module",
   "scripts": {
