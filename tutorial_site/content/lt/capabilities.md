@@ -101,7 +101,7 @@ pygame.quit()
 
 ## Javascript code
 
-```js [file.js]{4-6,7} meta-info=val
+```js [file.js]{4-6,7} min-width=0
 export default () => {
 console.log('Code block')
 }
@@ -149,7 +149,7 @@ Material subtitle 1
 Material subtitle 2
 ::
 
-```js [file.js]{4-6,7} meta-info=val
+```js [file.js]{4-6,7} min-width=0
 export default () => {
     console.log('Code block')
 }
