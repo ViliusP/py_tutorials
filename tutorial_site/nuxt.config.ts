@@ -1,29 +1,20 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import { resolve, dirname } from "node:path";
-// import { fileURLToPath } from "url";
-// import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
+import { fileURLToPath } from "url";
+import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
 
 export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
-    '@nuxtjs/i18n',
-    'vuetify-nuxt-module',
-    // async (options, nuxt) => {
-    //   // @ts-ignore
-    //   nuxt.hooks.hook("vite:extendConfig", (config) =>
-    //     // @ts-ignore
-    //     config.plugins?.push(vuetify())
-    //   );
-    // },
-  ],
-  vuetify: {
-    moduleOptions: {
-      /* module specific options */
+    "@nuxtjs/i18n",
+    async (options, nuxt) => {
+      // @ts-ignore
+      nuxt.hooks.hook("vite:extendConfig", (config) =>
+        // @ts-ignore
+        config.plugins?.push(vuetify())
+      );
     },
-    vuetifyOptions: {
-      directives: 'Ripple' // or ['Ripple']
-    }
-  },
+  ],
   content: {
     // documentDriven: true
     highlight: {
@@ -38,8 +29,7 @@ export default defineNuxtConfig({
         'python',
         'md',
         'diff',
-        'json',
-        'js'
+        'json'
       ]
     },
     markdown: {
@@ -60,11 +50,8 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify", "vue-i18n"],
   },
-  // disable sourcemap so the terminal warnings go away
-  sourcemap: {
-    client: false,
-    server: false,
-  },
+
+
   i18n: {
     strategy: 'no_prefix', // No path changes for locales
     locales: [
@@ -81,21 +68,21 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts'
   },
   vite: {
-    // ssr: {
-    //   noExternal: ["vuetify"],
-    // },
-    // plugins: [
-    //   VueI18nVitePlugin({
-    //     include: [
-    //       resolve(dirname(fileURLToPath(import.meta.url)), "./locales/*.json"),
-    //     ],
-    //   }),
-    // ],
-    // vue: {
-    //   template: {
-    //     transformAssetUrls,
-    //   },
-    // },
+    ssr: {
+      noExternal: ["vuetify"],
+    },
+    plugins: [
+      VueI18nVitePlugin({
+        include: [
+          resolve(dirname(fileURLToPath(import.meta.url)), "./locales/*.json"),
+        ],
+      }),
+    ],
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
   },
   devtools: { enabled: true },
 });
