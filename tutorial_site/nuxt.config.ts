@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     families: {
       "Noto Sans": {
         wght: [300, 400, 700],
-        ital: [700]
+        ital: [300, 400, 700]
       },
       'Noto Sans Mono': {
         wght: [400, 700],
