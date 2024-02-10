@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       "Noto Sans": {
-        wght: [400, 700],
+        wght: [300, 400, 700],
         ital: [700]
       },
       'Noto Sans Mono': {
