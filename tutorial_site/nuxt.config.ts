@@ -21,9 +21,9 @@ export default defineNuxtConfig({
       // Theme used in all color schemes.
       theme: {
         // Default theme (same as single string)
-        default: 'github-dark',
+        default: 'material-theme-darker',
         // Theme used if `html.dark`
-        dark: 'github-dark',
+        dark: 'material-theme-darker',
       },
       preload: [
         'python',
