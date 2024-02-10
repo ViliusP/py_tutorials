@@ -3,8 +3,8 @@
     <v-btn icon variant="plain" style="position: absolute; right: 0; top: 0;" @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
     </v-btn>
-    <v-card-text>
-      <pre :class="$props.class"><slot/></pre>
+    <v-card-text class="custom-font">
+      <pre :class="['custom-font', $props.class]"><slot/></pre>
     </v-card-text>
   </v-card>
 </template>
@@ -77,3 +77,10 @@ const minWidth = computed(() => {
   return minWidthValue ? `${minWidthValue}px` : '960px';
 });
 </script> 
+
+<style>
+.custom-font *
+{
+  font-family: 'Noto Sans Mono', 'monospace';
+}
+</style>
