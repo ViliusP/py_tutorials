@@ -128,3 +128,7 @@ Here is a paragraph above the image. Below there is a image with a caption.
 ![Colored placehold 600x400 image from https://placehold.co/](https://placehold.co/600x400/orange/white)
 
 Here is a paragraph below the image. Above there is a image with a caption.
+
+## Link
+
+Lorem ipsum text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt turpis tellus, porttitor sagittis elit interdum nec. Cras lorem mauris, porta non augue in, maximus porttitor eros. Donec pulvinar tortor odio, ut aliquam mauris aliquet quis. Now link: [google](http://google.com) . Now lorem ipsum again. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat felis nec ipsum imperdiet, id bibendum ipsum congue. Maecenas ut vestibulum felis. Nullam vehicula eleifend ligula ac imperdiet. Nam consectetur ornare felis. 
