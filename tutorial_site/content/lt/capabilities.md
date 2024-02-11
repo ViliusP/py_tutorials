@@ -120,3 +120,11 @@ export default () => {
 ```
 
 Inline code `print("Hello, Python")`{lang="python"} tristique maximus, nisl libero accumsan nibh, in sagittis quam lacus a sem. Nam molestie felis justo, in auctor nulla dapibus placerat. Proin eget metus sem. Proin sit amet feugiat felis, eget ultrices lorem. Nullam nibh metus, sodales in pellentesque et, lacinia eu elit. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat feli
+
+## Image 
+
+Here is a paragraph above the image. Below there is a image with a caption.
+
+![Colored placehold 600x400 image from https://placehold.co/](https://placehold.co/600x400/orange/white)
+
+Here is a paragraph below the image. Above there is a image with a caption.
