@@ -66,7 +66,7 @@ import pygame
 ```
 
 ::TextBody1
-Toliau inicializuojame pygame su [pygame.init()](https://www.pygame.org/docs/ref/pygame.html#pygame.init). Iškvietus šią funkciją, inicializuojami visi pygame moduliai. Toliau sukuriamas ekrano kintamasis, kaip argumentą pateikiame šio ekrano dydį ([dokumentacija](https://www.pygame.org/docs/ref/display.html#pygame.display.set_mode)). Šį kintamąjį geriau būtų įsivaizduoti, kaip tuščią drobę, kurioje galima piešti figūras, animacinius objektus (ang. sprites) ir tekstą. Reiktų suprasti, kad "piešimą" atliktsime programuodami. Paskutinėje eilutėje sukuriame laikrodžio *Clock* objektą, šis naudojamas "laikui stebėti. Laikrodis taip pat atlieka keletą funkcijų, padedančių valdyti žaidimo kadrų spartą" ([dokumnetacija](https://www.pygame.org/docs/ref/time.html#pygame.time.Clock))
+Toliau inicializuojame pygame su [pygame.init()](https://www.pygame.org/docs/ref/pygame.html#pygame.init). Iškvietus šią funkciją, inicializuojami visi pygame moduliai. Toliau sukuriamas ekrano kintamasis, kaip argumentą pateikiame šio ekrano dydį ([dokumentacija](https://www.pygame.org/docs/ref/display.html#pygame.display.set_mode)). Šį kintamąjį geriau būtų įsivaizduoti, kaip tuščią drobę, kurioje galima piešti figūras, animacinius objektus (ang. sprites) ir tekstą. Reiktų suprasti, kad "piešimą" atliktsime programuodami. Paskutinėje eilutėje sukuriame laikrodžio *Clock* objektą, šis naudojamas "laikui stebėti. Laikrodis taip pat atlieka keletą funkcijų, padedančių valdyti žaidimo kadrų spartą" ([dokumentacija](https://www.pygame.org/docs/ref/time.html#pygame.time.Clock))
 ::
 
 ```python
