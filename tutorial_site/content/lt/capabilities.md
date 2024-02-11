@@ -19,11 +19,11 @@ H3 heading
 
 #### H4 heading
 
-H4 heading
-
 ##### H5 Heading
 
-H5 Heading
+###### H6 Heading
+
+H4 H5 H6 headings shouldn't be used
 
 ## Divider 
 
