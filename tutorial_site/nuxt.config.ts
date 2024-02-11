@@ -8,11 +8,12 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/i18n",
     "@nuxtjs/google-fonts",
+    '@nuxt/image',
     async (options, nuxt) => {
       // @ts-ignore
       nuxt.hooks.hook("vite:extendConfig", (config) =>
         // @ts-ignore
-        config.plugins?.push(vuetify())
+        config.plugins?.push(vuetify({ autoImport: true }))
       );
     },
   ],
