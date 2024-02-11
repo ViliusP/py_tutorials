@@ -12,5 +12,7 @@
     letter-spacing: 0.002em !important;
     font-family: "Noto Sans", "Roboto", sans-serif;
     text-transform: none !important;
+    margin-top: 1.375rem;
+    margin-bottom: 1.375rem;
 }
 </style>
