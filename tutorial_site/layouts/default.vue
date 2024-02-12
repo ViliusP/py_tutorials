@@ -1,11 +1,11 @@
 <template>
   <v-layout>
       <v-app-bar>
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <!-- <v-app-bar-nav-icon ></v-app-bar-nav-icon> -->
           <v-toolbar-title>{{ $t('hello.world') }}</v-toolbar-title>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" :floating="mdAndUp">
+      <!-- <v-navigation-drawer >
 
 
       <v-list
@@ -30,7 +30,7 @@
 
 
 
-      </v-navigation-drawer>
+      </v-navigation-drawer> -->
 
       <v-main class="d-flex align-center justify-left" style="min-height: 300px;">
           <slot />
