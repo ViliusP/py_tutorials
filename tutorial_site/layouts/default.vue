@@ -1,11 +1,12 @@
 <template>
-  <v-layout>
-      <v-app-bar>
-          <!-- <v-app-bar-nav-icon ></v-app-bar-nav-icon> -->
-          <v-toolbar-title>{{ $t('hello.world') }}</v-toolbar-title>
-      </v-app-bar>
+  <v-app>
 
-      <!-- <v-navigation-drawer >
+    <v-app-bar>
+      <!-- <v-app-bar-nav-icon ></v-app-bar-nav-icon> -->
+      <v-toolbar-title>{{ $t("hello.world") }}</v-toolbar-title>
+    </v-app-bar>
+
+    <!-- <v-navigation-drawer >
 
 
       <v-list
@@ -32,30 +33,31 @@
 
       </v-navigation-drawer> -->
 
-      <v-main class="d-flex align-center justify-left" style="min-height: 300px;">
-          <slot />
-      </v-main>
-  </v-layout>
+    <v-main>
+      <v-container fluid class="py-8 px-6">
+        <slot />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useDisplay } from 'vuetify'
+import { ref } from "vue";
+import { useDisplay } from "vuetify";
 
-const { mdAndUp } = useDisplay()
+const { mdAndUp } = useDisplay();
 
-const { locale } = useI18n()
+const { locale } = useI18n();
 
-const drawer = ref(true)
+const drawer = ref(true);
 
 const items = [
-  { text: 'My Files', icon: 'mdi-folder' },
-  { text: 'Shared with me', icon: 'mdi-account-multiple' },
-  { text: 'Starred', icon: 'mdi-star' },
-  { text: 'Recent', icon: 'mdi-history' },
-  { text: 'Offline', icon: 'mdi-check-circle' },
-  { text: 'Uploads', icon: 'mdi-upload' },
-  { text: 'Backups', icon: 'mdi-cloud-upload' },
-]
-
+  { text: "My Files", icon: "mdi-folder" },
+  { text: "Shared with me", icon: "mdi-account-multiple" },
+  { text: "Starred", icon: "mdi-star" },
+  { text: "Recent", icon: "mdi-history" },
+  { text: "Offline", icon: "mdi-check-circle" },
+  { text: "Uploads", icon: "mdi-upload" },
+  { text: "Backups", icon: "mdi-cloud-upload" },
+];
 </script>
