@@ -45,7 +45,7 @@ export default defineNuxtConfig({
       // @ts-ignore
       remarkPlugins: {
         "remark-gfm": true,
-        'remark-unwrap-images': true,
+        "remark-unwrap-images": true,
       },
     },
   },
