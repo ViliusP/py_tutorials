@@ -2,7 +2,7 @@ import 'vuetify/styles'
 import { createVuetify, type ThemeDefinition } from "vuetify";
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-
+import "@/assets/variables.scss";
 
 const myCustomLightTheme: ThemeDefinition = {
   dark: false,
@@ -35,5 +35,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     },
   });
+  // @ts-ignore
   nuxtApp.vueApp.use(vuetify);
 });
