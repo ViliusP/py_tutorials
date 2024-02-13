@@ -2,9 +2,7 @@
 </script>
 
 <template>
-  <main>
-    <ContentDoc path="/index" />
-  </main>
+  <ContentDoc path="/index" />
 </template>
 
 
