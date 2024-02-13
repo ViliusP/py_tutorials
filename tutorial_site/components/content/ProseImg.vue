@@ -3,11 +3,12 @@
   <v-img
     :src="img(src, { intHeight, quality: 80 })"
     :max-height="height"
+    max-width="100%"
     :alt="alt"
     :srcset="_srcset.srcset"
     :sizes="_srcset.sizes"
     position="left center"
-    cov
+    contain
   ></v-img>
   <figcaption v-if="props.title" class="text-caption image-caption">
     {{ props.title }}
@@ -16,6 +17,7 @@
 
 <script setup lang="ts">
 import { computed, useImage } from "#imports";
+import type { ImageModifiers } from "@nuxt/image";
 
 const props = defineProps({
   src: {
@@ -36,25 +38,28 @@ const props = defineProps({
   },
   height: {
     type: [String, Number],
-    default: 400,
+    default: undefined,
   },
+  format: {
+    type: String,
+    default: "webp",
+  }
 });
 
 const img = useImage();
 
 const _srcset = computed(() => {
+
+  // Assuming ImageModifiers is the correct type, directly use Partial<ImageModifiers>
+    let modifiers: Partial<ImageModifiers> = {
+    format: props.format,
+    quality: 70,
+  };
+
   return img.getSizes(props.src, {
     sizes: "xs:100vw sm:90vw md:70vw lg:60vw xl:50vw",
-    modifiers: {
-      format: "webp",
-      quality: 70,
-      height: intVal(props.height),
-    },
+    modifiers: modifiers
   });
-});
-
-const intHeight = computed(() => {
-  return intVal(props.height);
 });
 
 function intVal(n: number | string): number {
