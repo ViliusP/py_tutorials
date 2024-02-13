@@ -3025,7 +3025,7 @@ __metadata:
     vue: "npm:3.4.17"
     vue-router: "npm:^4.2.5"
     vue-tsc: "npm:^1.8.27"
-    vuetify: "npm:^3.5.2"
+    vuetify: "npm:^3.5.3"
   languageName: unknown
   linkType: soft
 
@@ -9905,7 +9905,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vuetify@npm:^3.5.2":
+"vuetify@npm:^3.5.3":
   version: 3.5.3
   resolution: "vuetify@npm:3.5.3"
   peerDependencies:
