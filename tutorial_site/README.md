@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a81def38-4e1d-4e20-964e-5508cd98f65a/deploy-status)](https://app.netlify.com/sites/viliusp-pygame/deploys)
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
