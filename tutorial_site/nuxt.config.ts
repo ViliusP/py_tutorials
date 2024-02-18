@@ -4,11 +4,14 @@ import { fileURLToPath } from "url";
 import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
 
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: 'fade', mode: 'out-in' }
+  },
   modules: [
     "@nuxt/content",
     "@nuxtjs/i18n",
     "@nuxtjs/google-fonts",
-    '@nuxt/image',
+    "@nuxt/image",
     async (options, nuxt) => {
       // @ts-ignore
       nuxt.hooks.hook("vite:extendConfig", (config) =>
@@ -21,25 +24,22 @@ export default defineNuxtConfig({
     families: {
       "Noto Sans": {
         wght: [200, 300, 400, 700],
-        ital: [300, 400, 700]
+        ital: [300, 400, 700],
       },
-      'Noto Sans Mono': {
+      "Noto Sans Mono": {
         wght: [400, 700],
-      }
+      },
     },
   },
   nitro: {
     prerender: {
       crawlLinks: true,
-      failOnError: false, 
+      failOnError: false,
     },
   },
   content: {
     defaultLocale: "lt",
-    locales: [
-      "lt",
-      "en"
-    ],
+    locales: ["lt", "en"],
     highlight: {
       // Theme used in all color schemes.
       theme: {
