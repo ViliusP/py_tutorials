@@ -1,13 +1,10 @@
 ---
 title: 'Capabilities'
-description: 'Here we test capabilities of our site'
+description: 'Here we test the capabilities of our site'
+draft: true
 ---
 
-<!-- Content of the page -->
-
-# Capabilities 
-
-This should be H1;
+Above, you should see the title in H1 tags. This text is considered a description, so it has a different style than a prose paragraph.
 
 ## H2 heading
 
@@ -23,9 +20,9 @@ H3 heading
 
 ###### H6 Heading
 
-H4 H5 H6 headings shouldn't be used
+H4 H5 H6 headings shouldn't be used.
 
-## Divider 
+## Divider
 
 Divider under
 
@@ -33,7 +30,7 @@ Divider under
 
 Divider above
 
-## Just an unordered list 
+## Just an unordered list
 
 - Just
 - An
@@ -56,9 +53,9 @@ Just a paragraph.
 
 ## Italic paragraph
 
-Not italic, _an italic part of paragraph._ This one is also not italic
+Not italic, _an italic part of the paragraph_. This one is also not italic.
 
-## Table 
+## Table
 
 | Key | Type      | Description |
 | --- | --------- | ----------- |
@@ -112,16 +109,16 @@ Material body 1. :keyboard-shortcut{:keys='["ctrl", "/"]'}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt turpis tellus, porttitor sagittis elit interdum nec. Cras lorem mauris, porta non augue in, maximus porttitor eros. Donec pulvinar tortor odio, ut aliquam mauris aliquet quis. Curabitur facilisis aliquet aliquet. Sed condimentum, leo ut tristique maximus, nisl libero accumsan nibh, in sagittis quam lacus a sem. Nam molestie felis justo, in auctor nulla dapibus placerat. Proin eget metus sem. Proin sit amet feugiat felis, eget ultrices lorem. Nullam nibh metus, sodales in pellentesque et, lacinia eu elit. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat felis nec ipsum imperdiet, id bibendum ipsum congue. Maecenas ut vestibulum felis. Nullam vehicula eleifend ligula ac imperdiet. Nam consectetur ornare felis. 
 
-Inline code `print("Hello, Python")`{lang="python"} tristique maximus, nisl libero accumsan nibh, in sagittis quam lacus a sem. Nam molestie felis justo, in auctor nulla dapibus placerat. Proin eget metus sem. Proin sit amet feugiat felis, eget ultrices lorem. Nullam nibh metus, sodales in pellentesque et, lacinia eu elit. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat feli
+Inline code `print("Hello, Python")`{lang="python"} tristique maximus, nisl libero accumsan nibh, in sagittis quam lacus a sem. Nam molestie felis justo, in auctor nulla dapibus placerat. Proin eget metus sem. Proin sit amet feugiat felis, eget ultrices lorem. Nullam nibh metus, sodales in pellentesque et, lacinia eu elit. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat feli.
 
 ## Image 
 
-Here is a paragraph above the image. Below there is a image with a caption.
+Here is a paragraph above the image. Below, there is an image with a caption.
 
 ![Colored placehold 600x400 image from https://placehold.co/](https://placehold.co/600x400/orange/white "Colored placehold 600x400 image from https://placehold.co/"){ width=600 height=400}
 
-Here is a paragraph below the image. Above there is a image with a caption.
+Here is a paragraph below the image. Above, there is an image with a caption.
 
 ## Link
 
-Lorem ipsum text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt turpis tellus, porttitor sagittis elit interdum nec. Cras lorem mauris, porta non augue in, maximus porttitor eros. Donec pulvinar tortor odio, ut aliquam mauris aliquet quis. Now link: [google](http://google.com) . Now lorem ipsum again. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat felis nec ipsum imperdiet, id bibendum ipsum congue. Maecenas ut vestibulum felis. Nullam vehicula eleifend ligula ac imperdiet. Nam consectetur ornare felis. 
+Lorem ipsum text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt turpis tellus, porttitor sagittis elit interdum nec. Cras lorem mauris, porta non augue in, maximus porttitor eros. Donec pulvinar tortor odio, ut aliquam mauris aliquet quis. Now link: [google](http://google.com) . Now lorem ipsum again. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat felis nec ipsum imperdiet, id bibendum ipsum congue. Maecenas ut vestibulum felis. Nullam vehicula eleifend ligula ac imperdiet. Nam consectetur ornare felis.
