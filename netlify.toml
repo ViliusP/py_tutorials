@@ -1,6 +1,5 @@
 # The build part for Netlify with a Nuxt project
 [build]
-    base='./tutorial-site'
     publish='dist'
     command='nuxt generate'
     environment = { NODE_VERSION = "20.9.0" }
