@@ -35,7 +35,11 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    // documentDriven: true
+    defaultLocale: "lt",
+    locales: [
+      "lt",
+      "en"
+    ],
     highlight: {
       // Theme used in all color schemes.
       theme: {
