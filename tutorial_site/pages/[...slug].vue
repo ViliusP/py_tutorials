@@ -11,6 +11,6 @@
 
 <style>
 .prose {
-  max-width: 80ch;
+  max-width: 96ch;
 }
 </style>
