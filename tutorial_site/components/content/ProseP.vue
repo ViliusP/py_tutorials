@@ -14,5 +14,6 @@
     text-transform: none !important;
     margin-top: 1.375rem;
     margin-bottom: 1.375rem;
+    max-width: 80ch;
 }
 </style>
