@@ -1,5 +1,13 @@
 <template>
-  <v-list color="primary" bg-color="transparent" density="compact" nav v-if="links?.length" variant="outlined">
+  <v-list
+    color="primary"
+    bg-color="transparent"
+    density="compact"
+    nav
+    v-if="links?.length"
+    variant="outlined"
+    :class="props.class"
+  >
     <v-list-item
       :active="activeHeadings.includes(link.id)"
       active-class="text-primary"
@@ -21,7 +29,7 @@ import type { TocLink } from "@nuxt/content/dist/runtime/types";
 import { useScrollObserver } from "~/composables/ScrollObserver";
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: true,
 });
 
 const props = defineProps({
@@ -41,12 +49,12 @@ const router = useRouter();
 const nuxtApp = useNuxtApp();
 const { activeHeadings, updateHeadings } = useScrollObserver();
 
-nuxtApp.hooks.hookOnce("page:finish", () => {
+onMounted(() => {
   updateHeadings([
     ...document.querySelectorAll("h2"),
     ...document.querySelectorAll("h3"),
   ]);
-});
+})
 
 const scrollToHeading = (id: string) => {
   const encodedId = encodeURIComponent(id);

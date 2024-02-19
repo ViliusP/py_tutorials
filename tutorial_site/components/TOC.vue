@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <span>Turinys</span>
-    <TocLinks :links="links" :class="[true ? 'lg:block' : 'hidden lg:block']" />
+  <nav>
+    <span class="text-h6 font-weight-light">Turinys</span>
+    <TocLinks :links="links" class="toc-links" />
 
-  </div>
+  </nav>
 </template>
   
 <script setup lang="ts">
@@ -21,3 +21,10 @@ const props = defineProps({
   }
 })
 </script>
+
+<style>
+/* .toc-links {
+  border-left: 1px solid rgb(var(--v-theme-on-surface-variant));
+} */
+
+</style>

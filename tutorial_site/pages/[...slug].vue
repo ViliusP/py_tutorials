@@ -32,7 +32,7 @@ const { smAndUp } = useDisplay();
       </v-col>
 
       <!-- TOC Column with alignment at the start, shown only on md and up screens -->
-      <v-col v-if="smAndUp" cols="auto" class="toc-column">
+      <v-col cols="auto" class="toc-column">
         <!-- @vue-skip -->
         <TOC class="toc" :links="page.body?.toc?.links"></TOC>
       </v-col>
