@@ -1,9 +1,19 @@
 <template>
   <v-app>
+    <v-app-bar flat>
+      <v-avatar class="ml-2" size="large" v-ripple @click="router.push({ path: '/' })">
+        <v-img
+          draggable="false"
+          src="~/assets/images/icon.png"
+          content-class="aaa"
+          alt="Site icon"
+        />
+      </v-avatar>
 
-    <v-app-bar>
       <!-- <v-app-bar-nav-icon ></v-app-bar-nav-icon> -->
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
     </v-app-bar>
 
     <!-- <v-navigation-drawer >
@@ -43,5 +53,5 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
-
+const router = useRouter()
 </script>
