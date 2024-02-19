@@ -9,8 +9,6 @@
   </v-card>
 </template>
 
-
-<!-- style="position: absolute; right: 0; top: 0" -->
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 
