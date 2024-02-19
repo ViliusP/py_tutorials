@@ -3,7 +3,7 @@
 
     <v-app-bar>
       <!-- <v-app-bar-nav-icon ></v-app-bar-nav-icon> -->
-      <v-toolbar-title>{{ $t("hello.world") }}</v-toolbar-title>
+      <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
     </v-app-bar>
 
     <!-- <v-navigation-drawer >
@@ -41,23 +41,7 @@
   </v-app>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { useDisplay } from "vuetify";
+<script setup lang="ts">
+const { t } = useI18n();
 
-const { mdAndUp } = useDisplay();
-
-const { locale } = useI18n();
-
-const drawer = ref(true);
-
-const items = [
-  { text: "My Files", icon: "mdi-folder" },
-  { text: "Shared with me", icon: "mdi-account-multiple" },
-  { text: "Starred", icon: "mdi-star" },
-  { text: "Recent", icon: "mdi-history" },
-  { text: "Offline", icon: "mdi-check-circle" },
-  { text: "Uploads", icon: "mdi-upload" },
-  { text: "Backups", icon: "mdi-cloud-upload" },
-];
 </script>
