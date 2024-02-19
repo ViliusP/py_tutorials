@@ -1,5 +1,5 @@
 <template>
-  <v-list density="compact" nav v-if="links?.length" variant="outlined">
+  <v-list color="primary" bg-color="transparent" density="compact" nav v-if="links?.length" variant="outlined">
     <v-list-item
       :active="activeHeadings.includes(link.id)"
       active-class="text-primary"
