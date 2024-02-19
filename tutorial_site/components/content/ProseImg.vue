@@ -1,7 +1,7 @@
 <template>
   <!-- @vue-ignore -->
   <v-img
-    :src="img(src, { intHeight, quality: 80 })"
+    :src="img(src, { quality: 80 })"
     :max-height="height"
     max-width="100%"
     :alt="alt"
