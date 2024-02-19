@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDisplay } from "vuetify";
+
 const route = useRoute();
 
 const { data: page } = await useAsyncData(route.path, () =>
@@ -11,29 +13,32 @@ if (!page.value) {
     fatal: true,
   });
 }
+
+const { smAndUp } = useDisplay();
 </script>
 
 <template>
-  <v-container>
-    <v-row no-gutters>
-      <v-col>
+  <v-container fluid class="pa-0">
+    <v-row justify="center">
+
+      <!-- Content Column with alignment at the end -->
+      <v-col cols="auto" >
         <ContentDoc v-slot="{ doc }">
-          <article class="prose">
+          <article class="prose ml-auto">
             <ProseH1>{{ doc.title }}</ProseH1>
             <ContentRenderer :value="doc" />
           </article>
         </ContentDoc>
       </v-col>
-      <v-col cols="2" no-gutters>
 
-        <!-- <v-navigation-drawer floating permanent location="right"> -->
-        <!-- @vue-ignore -->
-        <TOC class="toc" :links="page.body?.toc?.links"> </TOC>
-        <!-- </v-navigation-drawer> -->
+      <!-- TOC Column with alignment at the start, shown only on md and up screens -->
+      <v-col v-if="smAndUp" cols="auto" class="toc-column">
+        <!-- @vue-skip -->
+        <TOC class="toc" :links="page.body?.toc?.links"></TOC>
       </v-col>
+
     </v-row>
-
-
+    
   </v-container>
 </template>
 
@@ -42,7 +47,10 @@ if (!page.value) {
   max-width: 96ch;
 }
 
-.toc {
-  position: fixed;
+.toc-column .toc {
+  position: sticky;
+  top: 100px; /* Adjust based on desired top margin */
+  max-height: 100vh; /* Adjust based on viewport height */
+  overflow-y: auto;
 }
 </style>
