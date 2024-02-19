@@ -14,15 +14,15 @@ if (!page.value) {
   });
 }
 
-const { smAndUp } = useDisplay();
+const { smAndUp: showToc } = useDisplay();
 </script>
 
 <template>
-  <v-container fluid class="pa-0">
-    <v-row justify="center">
+  <v-container class="pa-0">
+    <v-row class="flex-nowrap" justify="center">
 
       <!-- Content Column with alignment at the end -->
-      <v-col cols="auto" >
+      <v-col class="flex-shrink-1" cols="auto" >
         <ContentDoc v-slot="{ doc }">
           <article class="prose ml-auto">
             <ProseH1>{{ doc.title }}</ProseH1>
@@ -32,7 +32,7 @@ const { smAndUp } = useDisplay();
       </v-col>
 
       <!-- TOC Column with alignment at the start, shown only on md and up screens -->
-      <v-col cols="auto" class="toc-column">
+      <v-col v-if="showToc" cols="4" md="3" xl="2" class="toc-column">
         <!-- @vue-skip -->
         <TOC class="toc" :links="page.body?.toc?.links"></TOC>
       </v-col>
