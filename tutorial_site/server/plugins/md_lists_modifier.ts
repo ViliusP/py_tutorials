@@ -9,8 +9,6 @@ export default defineNitroPlugin((nitroApp) => {
           (node: any) => {
             node.children.forEach((liNode: any, index: number) => {
               if (liNode.tag === 'li') {
-                console.log(liNode);
-
                 liNode.props = liNode.props || {};
                 // Add or modify properties here
                 liNode.props.index = index
