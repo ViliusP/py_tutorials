@@ -86,6 +86,12 @@ export default defineNuxtConfig({
       remarkPlugins: {
         "remark-gfm": true,
         "remark-unwrap-images": true,
+        "remark-math": true,
+      },
+      rehypePlugins: {
+        "rehype-katex": {
+          output: "html", // the default value is 'htmlAndMathml'
+        },
       },
     },
   },
