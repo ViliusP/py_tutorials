@@ -40,7 +40,6 @@ function splitToDigits(n: number): number[] {
   return digits;
 }
 
-console.log(props.index);
 </script>
 
 <style>

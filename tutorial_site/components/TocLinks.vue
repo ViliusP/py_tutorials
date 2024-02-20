@@ -58,7 +58,6 @@ onMounted(() => {
     ...document.querySelectorAll("h2"),
     ...document.querySelectorAll("h3"),
   ]);
-  console.log(JSON.stringify(props.links));
 });
 
 const scrollToHeading = (id: string) => {

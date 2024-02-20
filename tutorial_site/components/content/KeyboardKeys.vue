@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<{
   color: rgb(var(--v-theme-on-kbd));
   border-radius: 3px;
   display: inline;
-  font-size: 85%;
+  font-size: 85%; 
   letter-spacing: 0;
   font-weight: normal;
   padding: 0.2em 0.4rem;
