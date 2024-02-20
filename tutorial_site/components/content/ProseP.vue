@@ -15,4 +15,9 @@
     margin-top: 1.375rem;
     margin-bottom: 1.375rem;
 }
+
+.prose-p + ul, .prose-p ol {
+    margin-top: -1.375rem;
+    margin-bottom: -0.375;
+}
 </style>
