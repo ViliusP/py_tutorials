@@ -18,8 +18,8 @@ useHead({
 
 <style>
 .katex {
-  font-size: 1.05em;
-  line-height: inherit;
+  font-size: 1.1em;
+  line-height: 1;
 }
 
 .fade-enter-active,

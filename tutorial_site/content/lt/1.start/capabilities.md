@@ -139,3 +139,28 @@ Here is a paragraph below the image. Above, there is an image with a caption.
 ## Link
 
 Lorem ipsum text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt turpis tellus, porttitor sagittis elit interdum nec. Cras lorem mauris, porta non augue in, maximus porttitor eros. Donec pulvinar tortor odio, ut aliquam mauris aliquet quis. Now link: [google](http://google.com) . Now lorem ipsum again. Maecenas et metus quis dolor fermentum convallis luctus sed erat. Pellentesque volutpat felis nec ipsum imperdiet, id bibendum ipsum congue. Maecenas ut vestibulum felis. Nullam vehicula eleifend ligula ac imperdiet. Nam consectetur ornare felis.
+
+## Math
+
+Below is a nonsensical math equation, but it looks cool though:
+
+$$
+\oint_{\mathcal{C}} \left( \frac{\partial \mathbf{F}}{\partial x} - \frac{y}{z} \sum_{n=0}^{\infty} \frac{e^{-nx}}{n!} \right) \cdot \left( \int_{-\infty}^{\infty} \sin(\pi x) e^{ix} \,dx \right) \,dz = \left| \begin{array}{cc} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{array} \right| \cdot \left( \prod_{k=1}^{n} k^{\frac{1}{k}} \right)^{-\frac{2}{3}\pi}
+$$
+
+
+### The Riemann Zeta Function
+
+A function of complex variable ss that is a sum over all natural numbers to the power of −s−s. It has deep implications in number theory, particularly in the distribution of prime numbers.
+
+$$
+\zeta(s) = \frac{1}{\Gamma(s)} \int_{0}^{\infty} \frac{x^{s-1}}{e^x - 1} \,dx = 2^{s-1} \pi^{s-2} \sin\left(\frac{\pi s}{2}\right) \Gamma(1-s) \zeta(1-s)
+$$
+
+### The Fourier Transform
+
+This equation defines the Fourier transform $$F(x)$$ of a function $$f$$, which is a critical tool in signal processing, physics, and engineering. It transforms a function from the time (or spatial) domain to the frequency domain, revealing the frequency components of the original function.
+
+$$
+F(x) = \int_{-\infty}^{\infty} f(\mathbf{\xi}) e^{-2 \pi i \mathbf{\xi} \cdot \mathbf{x}} \,d\mathbf{\xi}
+$$
