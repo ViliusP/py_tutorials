@@ -1,11 +1,11 @@
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "url";
 import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "url";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineNuxtConfig({
   app: {
-    pageTransition: { name: 'fade', mode: 'out-in' },
+    pageTransition: { name: "fade", mode: "out-in" },
     head: {
       title: "Pygame pamokos",
       meta: [
@@ -34,8 +34,15 @@ export default defineNuxtConfig({
           rel: "manifest",
           href: "/site.webmanifest",
         },
+        {
+          rel: "stylesheet",
+          href: "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
+          integrity:
+            "sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV",
+          crossorigin: "anonymous",
+        },
       ],
-    }
+    },
   },
   modules: [
     "@nuxt/content",
@@ -78,7 +85,15 @@ export default defineNuxtConfig({
         // Theme used if `html.dark`
         dark: "material-theme-darker",
       },
-      preload: ["python", "md", "json", "markdown", "powershell", "shell", "shellsession"],
+      preload: [
+        "python",
+        "md",
+        "json",
+        "markdown",
+        "powershell",
+        "shell",
+        "shellsession",
+      ],
     },
     markdown: {
       // Object syntax can be used to override default options
