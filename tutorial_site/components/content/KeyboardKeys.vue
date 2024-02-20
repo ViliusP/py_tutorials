@@ -12,7 +12,7 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   keys?: string[] | null;
-  any: boolean;
+  any?: boolean;
 }>(), {
   keys: () => [] as string[], // Providing a default value as an empty array
   any: false, // Default value for keysTriggerMode
