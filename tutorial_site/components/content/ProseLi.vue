@@ -47,7 +47,7 @@ console.log(props.index);
 .list-item {
   font-size: 1.375rem !important;
   font-weight: 300;
-  line-height: 2rem;
+  line-height: 1.75rem;
   letter-spacing: 0.002em !important;
   font-family: "Noto Sans", "Roboto", sans-serif;
   text-transform: none !important;
