@@ -148,7 +148,6 @@ $$
 \oint_{\mathcal{C}} \left( \frac{\partial \mathbf{F}}{\partial x} - \frac{y}{z} \sum_{n=0}^{\infty} \frac{e^{-nx}}{n!} \right) \cdot \left( \int_{-\infty}^{\infty} \sin(\pi x) e^{ix} \,dx \right) \,dz = \left| \begin{array}{cc} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{array} \right| \cdot \left( \prod_{k=1}^{n} k^{\frac{1}{k}} \right)^{-\frac{2}{3}\pi}
 $$
 
-
 ### The Riemann Zeta Function
 
 A function of complex variable ss that is a sum over all natural numbers to the power of −s−s. It has deep implications in number theory, particularly in the distribution of prime numbers.
