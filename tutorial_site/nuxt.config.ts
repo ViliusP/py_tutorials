@@ -78,7 +78,7 @@ export default defineNuxtConfig({
         // Theme used if `html.dark`
         dark: "material-theme-darker",
       },
-      preload: ["python", "md", "json", "markdown", "powershell", "shell"],
+      preload: ["python", "md", "json", "markdown", "powershell", "shell", "shellsession"],
     },
     markdown: {
       // Object syntax can be used to override default options
