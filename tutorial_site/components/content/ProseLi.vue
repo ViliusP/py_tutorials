@@ -15,13 +15,13 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  index?: { type: number | null; default: null };
+  index?: number | null;
 }>();
 
 const icons = computed(() => {
   if (props.index == null || props.index == undefined)
     return ["mdi-circle-medium"];
-  // @ts-ignore
+  
   const adjustedIndex = props.index + 1;
   if (adjustedIndex <= 10) {
     return [`mdi-numeric-${adjustedIndex}`];
@@ -39,7 +39,6 @@ function splitToDigits(n: number): number[] {
   digits.reverse();
   return digits;
 }
-
 </script>
 
 <style>
