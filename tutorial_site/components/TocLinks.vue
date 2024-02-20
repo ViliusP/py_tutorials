@@ -11,27 +11,29 @@
     <v-list-item
       :active="activeHeadings.includes(link.id)"
       active-class="text-primary"
-      v-for="link in links"
+      v-for="link in flattenedLinks"
       :key="link.text"
-      :slim="true"
+      :class="{
+       'h3-toc-link': link.depth === 3,
+       'ml-8': link.depth === 3,
+      }"
       @click.prevent="scrollToHeading(link.id)"
-      :class="[link.depth === 3 && 'pl-2']"
     >
       <v-list-item-title v-text="link.text"></v-list-item-title>
-      <a v-if="link.children" :links="link.children" />
+      <!-- <a v-if="link.children" :links="link.children" /> -->
     </v-list-item>
   </v-list>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from "vue";
-import type { TocLink } from "@nuxt/content/dist/runtime/types";
-import { useScrollObserver } from "~/composables/ScrollObserver";
+import { defineProps, type PropType } from 'vue';
+import type { TocLink } from '@nuxt/content/dist/runtime/types';
+import { useRouter } from 'vue-router';
+import { useNuxtApp } from '#app';
+import { onMounted } from 'vue';
+import { useScrollObserver } from '~/composables/ScrollObserver';
 
-defineOptions({
-  inheritAttrs: true,
-});
-
+// Define props using defineProps
 const props = defineProps({
   links: {
     type: Array as PropType<TocLink[]>,
@@ -43,22 +45,48 @@ const props = defineProps({
   },
 });
 
+// The rest of your setup code goes here
 const emit = defineEmits(["move"]);
-
 const router = useRouter();
 const nuxtApp = useNuxtApp();
 const { activeHeadings, updateHeadings } = useScrollObserver();
+
+const flattenedLinks = computed(() => flattenArray(props.links));
 
 onMounted(() => {
   updateHeadings([
     ...document.querySelectorAll("h2"),
     ...document.querySelectorAll("h3"),
   ]);
-})
+  console.log(JSON.stringify(props.links));
+});
 
 const scrollToHeading = (id: string) => {
   const encodedId = encodeURIComponent(id);
   router.push(`#${encodedId}`);
   emit("move", id);
 };
+
+function flattenArray(items: TocLink[]) : TocLink[] {
+  const flat: TocLink[] = [];
+
+  items.forEach(item => {
+      flat.push({
+          id: item.id,
+          depth: item.depth,
+          text: item.text
+      });
+      if (item.children) {
+          flat.push(...flattenArray(item.children)); // Recursively flatten children
+      }
+  });
+
+  return flat;
+}
 </script>
+
+<style>
+.h3-toc-link {
+  min-height: 30px !important;
+}
+</style>

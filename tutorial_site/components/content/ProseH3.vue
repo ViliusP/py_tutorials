@@ -1,5 +1,5 @@
 <template>
-    <h3 :id="id" class="prose-h3 pb-4">
+    <h3 :id="id" class="prose-h3 mt-6 mb-2">
         <a v-if="id && generate" :href="`#${id}`">
             <slot />
         </a>
