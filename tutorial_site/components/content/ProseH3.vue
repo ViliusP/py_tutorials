@@ -1,5 +1,5 @@
 <template>
-    <h3 :id="id" class="prose-h3 mt-6 mb-2">
+    <h3 :id="id" class="prose-h3 mt-8 mb-4">
         <a v-if="id && generate" :href="`#${id}`">
             <slot />
         </a>
@@ -19,9 +19,9 @@ const generate = computed(() => props.id && headings?.anchorLinks?.h3)
 <style>
 .prose-h3 {
 	font-size: 1.5rem !important;
-	font-weight: 400;
-	line-height: 1.5rem;
-	letter-spacing: 0 !important;
+	font-weight: 600;
+	line-height: 1.625rem;
+	letter-spacing: 0,0073529412em !important;
 	font-family: "Noto Sans", "Roboto", sans-serif;
 	text-transform: none !important;
 }
