@@ -3,7 +3,7 @@
     <template v-if="props.keys && props.keys.length > 0">
       <template v-for="(key, index) in props.keys" :key="index">
         <kbd>{{ key }}</kbd>
-        <span v-if="index < props.keys.length - 1 && !any">+</span>
+        <v-icon v-if="index < props.keys.length - 1 && !any" icon="mdi-plus" size="x-small"/>
       </template>
     </template>
   </span>
@@ -39,5 +39,12 @@ const props = withDefaults(defineProps<{
 
 .keyboard-keys :not(:last-child) + kbd {
   margin-left: 2px; /* Adjust the value as needed */
+}
+
+.keyboard-keys i {
+  min-width: 0.7em;
+  width: 0.7em;
+  height: 0.7em;
+  --v-icon-size-multiplier: 0.75;
 }
 </style>
