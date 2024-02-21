@@ -1,6 +1,6 @@
 <template>
   <v-card :style="{ 'max-width': maxWidth }" class="overflow-x-auto d-flex" elevation="2">
-    <v-btn icon variant="plain" style="position: absolute; right: 0; top: 0;" @click="copyContent">
+    <v-btn icon variant="plain" style="position: absolute; right: 2.5px; top: 2.5px;" @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
     </v-btn>
     <v-card-text>
@@ -9,8 +9,6 @@
   </v-card>
 </template>
 
-
-<!-- style="position: absolute; right: 0; top: 0" -->
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 

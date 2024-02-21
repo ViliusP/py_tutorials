@@ -19,12 +19,12 @@ const generate = computed(() => props.id && headings?.anchorLinks?.h1)
 
 <style>
 .prose-h1 {
-	font-size: 5.25rem !important;
-	font-weight: 400;
-	line-height: 5.75rem;
-	letter-spacing: 0 !important;
-	font-family: "Noto Sans", "Roboto", sans-serif;
-	text-transform: none !important;
+    font-size: 5.25rem !important;
+    font-weight: 400;
+    line-height: 5.75rem;
+    letter-spacing: 0 !important;
+    font-family: "Noto Sans", "Roboto", sans-serif;
+    text-transform: none !important;
 }
 
 .prose-h1 a {
@@ -32,5 +32,11 @@ const generate = computed(() => props.id && headings?.anchorLinks?.h1)
     pointer-events: none;
     cursor: default;
     text-decoration: none;
+}
+
+.prose-h1 + div > p:first-child {
+    font-weight: 200;
+    margin-top: 0;
+    margin-top: 0;
 }
 </style>
