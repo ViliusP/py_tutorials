@@ -15,13 +15,12 @@ def draw_speed_indicator(screen: pygame.Surface, speed_level: int):
     spacing_between_indicators = 20
     
     # Calculate the top-left corner's position
-    init_top_left_x = top_right_x - side_length
+    top_left_x = top_right_x - side_length
     init_top_left_y = top_right_y
             
     for i in range(0, speed_level):
         top_left_y = init_top_left_y + (2*i*spacing_between_indicators)
-        rect = pygame.draw.rect(screen, (0, 0, 0), (init_top_left_x, top_left_y , side_length, side_length))
-
+        rect = pygame.draw.rect(screen, (0, 0, 0), (top_left_x, top_left_y , side_length, side_length))
 
 
 # pygame setup
