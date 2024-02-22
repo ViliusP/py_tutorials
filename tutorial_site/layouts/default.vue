@@ -13,8 +13,8 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="toggleLightMode"> 
-        <layout-theme-toggle :toggled="!lightMode" />
+      <v-app-bar-nav-icon @click="toggleTheme"> 
+        <layout-theme-toggle :toggled="!theme.global.current.value.dark" />
       </v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -27,13 +27,15 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from 'vuetify'
+
 const { t } = useI18n();
 const router = useRouter()
 
-const lightMode = ref(false)
+const theme = useTheme()
 
-function toggleLightMode() {
-  lightMode.value = !lightMode.value;
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 
 </script>
