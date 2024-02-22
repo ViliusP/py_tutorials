@@ -71,8 +71,6 @@
 const route = useRoute();
 const router = useRouter();
 
-console.log(route.path);
-
 const { data } = await useAsyncData(`surround_${route.path}`, () =>
   queryContent().only(["_path", "title"]).findSurround(route.path)
 );
