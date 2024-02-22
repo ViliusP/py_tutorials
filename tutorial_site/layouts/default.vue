@@ -14,7 +14,7 @@
 
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click="toggleTheme"> 
-        <layout-theme-toggle :toggled="!theme.global.current.value.dark" />
+        <layout-theme-toggle :toggled="theme.global.current.value.dark" />
       </v-app-bar-nav-icon>
     </v-app-bar>
 
