@@ -34,11 +34,14 @@ const { smAndUp: showToc } = useDisplay();
       <!-- TOC Column with alignment at the start, shown only on md and up screens -->
       <v-col v-if="showToc" cols="4" md="3" xl="2" class="toc-column">
         <!-- @vue-skip -->
-        <TOC class="toc" :links="page.body?.toc?.links"></TOC>
+        <TOC class="toc" :links="page.body?.toc?.links"/>
       </v-col>
 
     </v-row>
-    
+    <v-divider class="my-4" />
+    <v-row justify="space-between"> 
+      <HorizontalDocsNav />
+    </v-row>
   </v-container>
 </template>
 

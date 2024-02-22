@@ -52,7 +52,15 @@ export default <RouterConfig>{
       })
     }
 
+    console.log(to.fullPath)
+
     // Scroll to top of window
-    return { top: 0 }
+    return new Promise(resolve => {
+      const nuxtApp = useNuxtApp();
+      nuxtApp.hooks.hookOnce('page:transition:finish', () => {
+        // Small delay to ensure the page is ready
+        setTimeout(() => resolve({ top: 0 }), 50);
+      });
+    });
   }
 }
