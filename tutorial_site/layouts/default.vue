@@ -13,6 +13,9 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click="toggleLightMode"> 
+        <layout-theme-toggle :toggled="!lightMode" />
+      </v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-main>
@@ -26,4 +29,11 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const router = useRouter()
+
+const lightMode = ref(false)
+
+function toggleLightMode() {
+  lightMode.value = !lightMode.value;
+}
+
 </script>
