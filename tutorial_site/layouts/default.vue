@@ -35,8 +35,10 @@ const router = useRouter()
 const theme = useTheme()
 
 function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-  document.documentElement.classList.toggle('dark', theme.global.current.value.dark);
+  const turnTheDark = !theme.global.current.value.dark
+  theme.global.name.value = turnTheDark ? 'dark' : 'light'
+  document.documentElement.classList.toggle('dark', turnTheDark);
+  window.localStorage.setItem('dark-theme', turnTheDark.toString());
 }
 
 </script>
