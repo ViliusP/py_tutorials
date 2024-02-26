@@ -3,25 +3,24 @@ import { createVuetify, type ThemeDefinition } from "vuetify";
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import "@/assets/variables.scss";
-// import { md3 } from 'vuetify/blueprints'
 
 const primaryPallete = {
-  "primary-variant-0": "#000000", 
-  "primary-variant-10": "#0f2000",
-  "primary-variant-20": "#1e3700",
-  "primary-variant-25": "#264300",
-  "primary-variant-30": "#2e4f00",
-  "primary-variant-35": "#385c06",
-  "primary-variant-40": "#436914",
-  "primary-variant-50": "#5b822c",
-  "primary-variant-60": "#749d44",
-  "primary-variant-70": "#8db85b",
-  "primary-variant-80": "#a8d474",
-  "primary-variant-90": "#c3f18d",
-  "primary-variant-95": "#d2ff9c",
-  "primary-variant-98": "#f0ffd7",
-  "primary-variant-99": "#f8ffe9",
-  "primary-variant-100": "#ffffff",
+  'primary-variant-0': '#000000', 
+  'primary-variant-10': '#0f2000',
+  'primary-variant-20': '#1e3700',
+  'primary-variant-25': '#264300',
+  'primary-variant-30': '#2e4f00',
+  'primary-variant-35': '#385c06',
+  'primary-variant-40': '#436914',
+  'primary-variant-50': '#5b822c',
+  'primary-variant-60': '#749d44',
+  'primary-variant-70': '#8db85b',
+  'primary-variant-80': '#a8d474',
+  'primary-variant-90': '#c3f18d',
+  'primary-variant-95': '#d2ff9c',
+  'primary-variant-98': '#f0ffd7',
+  'primary-variant-99': '#f8ffe9',
+  'primary-variant-100': '#ffffff',
 }
 
 
