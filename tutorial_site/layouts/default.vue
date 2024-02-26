@@ -41,4 +41,24 @@ function toggleTheme () {
   window.localStorage.setItem('dark-theme', turnTheDark.toString());
 }
 
+onMounted(() => {
+  const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const isLocalStorageThemeSet = window.localStorage.hasOwnProperty('dark-theme')
+
+  if(prefersDarkTheme && !isLocalStorageThemeSet) {
+    window.localStorage.setItem('dark-theme', 'true');
+  }
+
+  const prefersLightTheme = window.matchMedia('(prefers-color-scheme: light)');
+  if(prefersLightTheme && !isLocalStorageThemeSet) {
+    window.localStorage.setItem('dark-theme', 'false');
+  }
+
+  const turnTheDark = window.localStorage.getItem('dark-theme') === 'true'
+  if(turnTheDark) {
+    theme.global.name.value = turnTheDark ? 'dark' : 'light'
+    document.documentElement.classList.toggle('dark', turnTheDark);
+  }
+})
+
 </script>
