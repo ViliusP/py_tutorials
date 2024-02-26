@@ -52,8 +52,6 @@ export default <RouterConfig>{
       })
     }
 
-    console.log(to.fullPath)
-
     // Scroll to top of window
     return new Promise(resolve => {
       const nuxtApp = useNuxtApp();
