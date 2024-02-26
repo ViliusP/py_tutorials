@@ -9,7 +9,8 @@
       hover
       :title="prev.title"
       subtitle="ankstesnė pamoka"
-      @click="router.push({ path: prev._path })"
+      nuxt
+      :to="({ path: prev._path })"
       v-ripple
     >
       <template v-slot:prepend>
@@ -43,7 +44,8 @@
       max-width="400"
       :title="next.title"
       subtitle="sekanti pamoka"
-      @click="router.push({ path: next._path })"
+      nuxt
+      :to="({ path: next._path })"
       v-ripple
     >
       <template v-slot:append>
@@ -74,7 +76,7 @@ const router = useRouter();
 const { data } = await useAsyncData(`surround_${route.path}`, () =>
   queryContent().only(["_path", "title"]).findSurround(route.path)
 );
-
+console.log(data.value)
 const [prev, next] = data.value;
 </script>
 
