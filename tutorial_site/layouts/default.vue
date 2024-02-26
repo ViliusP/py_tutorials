@@ -41,7 +41,7 @@ function toggleTheme () {
   window.localStorage.setItem('dark-theme', turnTheDark.toString());
 }
 
-onMounted(() => {
+onNuxtReady(() => {
   const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
   const isLocalStorageThemeSet = window.localStorage.hasOwnProperty('dark-theme')
 
