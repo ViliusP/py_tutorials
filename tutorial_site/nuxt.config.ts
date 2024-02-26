@@ -41,6 +41,10 @@ export default defineNuxtConfig({
             "sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV",
           crossorigin: "anonymous",
         },
+        {
+          rel: "stylesheet",
+          href: "https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/expand.min.css",
+        },
       ],
     },
   },
@@ -80,9 +84,7 @@ export default defineNuxtConfig({
     highlight: {
       // Theme used in all color schemes.
       theme: {
-        // Default theme (same as single string)
-        default: "material-theme-darker",
-        // Theme used if `html.dark`
+        default: "catppuccin-latte",
         dark: "material-theme-darker",
       },
       preload: [
