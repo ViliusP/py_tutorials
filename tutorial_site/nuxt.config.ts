@@ -84,9 +84,7 @@ export default defineNuxtConfig({
     highlight: {
       // Theme used in all color schemes.
       theme: {
-        // Default theme (same as single string)
-        default: "material-theme-darker",
-        // Theme used if `html.dark`
+        default: "catppuccin-latte",
         dark: "material-theme-darker",
       },
       preload: [

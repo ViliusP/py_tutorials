@@ -17,6 +17,7 @@ const darkTheme: ThemeDefinition = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
+    'shiki-bg': '#212121',
   },
 }
 
@@ -33,7 +34,7 @@ const lightTheme: ThemeDefinition = {
     // info: '#2196F3',
     // success: '#4CAF50',
     // warning: '#FB8C00',
-    'shiki-bg': '#292D3E',
+    'shiki-bg': '#EFF1F5',
   },
 }
 

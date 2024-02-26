@@ -1,5 +1,5 @@
 <template>
-  <v-card :style="{ 'max-width': maxWidth }" class="overflow-x-auto d-flex" elevation="2">
+  <v-card :style="{ 'max-width': maxWidth }" class="overflow-x-auto d-flex" elevation="1" color="shiki-bg">
     <v-btn icon variant="plain" style="position: absolute; right: 2.5px; top: 2.5px;" @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
     </v-btn>
