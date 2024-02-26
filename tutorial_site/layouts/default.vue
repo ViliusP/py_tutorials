@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar flat>
+    <v-app-bar color="surface-variant" scroll-behavior="elevate">
       <v-avatar class="ml-2" size="large" v-ripple @click="router.push({ path: '/' })">
         <v-img
           draggable="false"
