@@ -63,7 +63,7 @@ const darkTheme: ThemeDefinition = {
     error: '#ffb4ab',
     'on-error': '#690005',
     background: '#1b1c18',
-    "on-background": '#e3e3db',
+    'on-background': '#e3e3db',
     surface: '#1b1c18',
     'on-surface': '#e3e3db',
     'surface-variant': '#44483d',
@@ -83,18 +83,18 @@ export default defineNuxtPlugin((nuxtApp) => {
     components,
     directives,
     icons: {
-      defaultSet: "mdi",
+      defaultSet: 'mdi',
     },
     theme: {
       defaultTheme: 'light',
       themes: {
-        "dark": darkTheme,
-        "light": lightTheme,
+        'dark': darkTheme,
+        'light': lightTheme,
       },
     },
     defaults: {
       VDivider :{
-        color: "outline"
+        color: 'outline-variant'
       }
     }
   });
