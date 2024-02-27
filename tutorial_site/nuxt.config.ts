@@ -72,6 +72,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  routeRules: {
+    "/api/**": { isr: false },
+  },
   nitro: {
     prerender: {
       crawlLinks: true,
