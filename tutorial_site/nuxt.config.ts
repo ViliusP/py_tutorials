@@ -72,12 +72,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  routeRules: {
-    "/api/**": { isr: false },
-  },
-  runtimeConfig: {
-    nitro: { envPrefix: "PYGAME_" },
-  },
   nitro: {
     prerender: {
       crawlLinks: true,
