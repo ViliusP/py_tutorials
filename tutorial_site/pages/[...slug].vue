@@ -1,19 +1,11 @@
 <script setup lang="ts">
 import { useDisplay } from "vuetify";
 
-const route = useRoute();
+const { path } = useRoute();
 
-const { data: page } = await useAsyncData(route.path, () =>
-  queryContent(route.path).findOne()
-);
-if (!page.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Page not found",
-    fatal: true,
-  });
-}
-
+const { data } = await useAsyncData(`content-${path}`, () => {
+  return queryContent().where({ _path: path }).findOne()
+})
 const { smAndUp: showToc } = useDisplay();
 </script>
 
@@ -23,18 +15,18 @@ const { smAndUp: showToc } = useDisplay();
 
       <!-- Content Column with alignment at the end -->
       <v-col class="flex-shrink-1" cols="auto" >
-        <ContentDoc v-slot="{ doc }">
-          <article class="prose ml-auto">
-            <ProseH1>{{ doc.title }}</ProseH1>
-            <ContentRenderer :value="doc" />
+        <ContentRenderer :value="data">
+          <article v-if="data" class="prose ml-auto">
+            <ProseH1>{{ data?.title }}</ProseH1>
+            <ContentRendererMarkdown :value="data" />
           </article>
-        </ContentDoc>
+        </ContentRenderer>
       </v-col>
 
       <!-- TOC Column with alignment at the start, shown only on md and up screens -->
       <v-col v-if="showToc" cols="4" md="3" xl="2" class="toc-column">
         <!-- @vue-skip -->
-        <TOC class="toc" :links="page.body?.toc?.links"/>
+        <TOC class="toc" :links="data.body?.toc?.links"/>
       </v-col>
 
     </v-row>

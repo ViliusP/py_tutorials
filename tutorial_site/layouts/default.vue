@@ -1,7 +1,12 @@
 <template>
   <v-app>
     <v-app-bar color="surface-variant" scroll-behavior="elevate">
-      <v-avatar class="ml-2" size="large" v-ripple @click="router.push({ path: '/' })">
+      <v-avatar
+        class="ml-2"
+        size="large"
+        v-ripple
+        @click="router.push({ path: '/' })"
+      >
         <v-img
           draggable="false"
           src="~/assets/images/icon.png"
@@ -13,7 +18,7 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="toggleTheme"> 
+      <v-app-bar-nav-icon @click="toggleTheme">
         <layout-theme-toggle :toggled="theme.global.current.value.dark" />
       </v-app-bar-nav-icon>
     </v-app-bar>
@@ -27,38 +32,38 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify'
+import { useTheme } from "vuetify";
 
 const { t } = useI18n();
-const router = useRouter()
+const router = useRouter();
 
-const theme = useTheme()
+const theme = useTheme();
 
-function toggleTheme () {
-  const turnTheDark = !theme.global.current.value.dark
-  theme.global.name.value = turnTheDark ? 'dark' : 'light'
-  document.documentElement.classList.toggle('dark', turnTheDark);
-  window.localStorage.setItem('dark-theme', turnTheDark.toString());
+function toggleTheme() {
+  const turnTheDark = !theme.global.current.value.dark;
+  theme.global.name.value = turnTheDark ? "dark" : "light";
+  document.documentElement.classList.toggle("dark", turnTheDark);
+  window.localStorage.setItem("dark-theme", turnTheDark.toString());
 }
 
-onMounted(() => {
-  const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
-  const isLocalStorageThemeSet = window.localStorage.hasOwnProperty('dark-theme')
+onNuxtReady(() => {
+  const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+  const isLocalStorageThemeSet =
+    window.localStorage.hasOwnProperty("dark-theme");
 
-  if(prefersDarkTheme && !isLocalStorageThemeSet) {
-    window.localStorage.setItem('dark-theme', 'true');
+  if (prefersDarkTheme && !isLocalStorageThemeSet) {
+    window.localStorage.setItem("dark-theme", "true");
   }
 
-  const prefersLightTheme = window.matchMedia('(prefers-color-scheme: light)');
-  if(prefersLightTheme && !isLocalStorageThemeSet) {
-    window.localStorage.setItem('dark-theme', 'false');
+  const prefersLightTheme = window.matchMedia("(prefers-color-scheme: light)");
+  if (prefersLightTheme && !isLocalStorageThemeSet) {
+    window.localStorage.setItem("dark-theme", "false");
   }
 
-  const turnTheDark = window.localStorage.getItem('dark-theme') === 'true'
-  if(turnTheDark) {
-    theme.global.name.value = turnTheDark ? 'dark' : 'light'
-    document.documentElement.classList.toggle('dark', turnTheDark);
+  const turnTheDark = window.localStorage.getItem("dark-theme") === "true";
+  if (turnTheDark) {
+    theme.global.name.value = turnTheDark ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", turnTheDark);
   }
-})
-
+});
 </script>
