@@ -7,6 +7,7 @@ const { data: navigation } = await useAsyncData("navigation", () =>
 <template>
   <v-card class="mx-auto" max-width="300">
     <v-list density="compact" nav>
+      <!-- @vue-skip -->
       <template
         v-for="navigationItem in navigation"
         :key="navigationItem._path"
