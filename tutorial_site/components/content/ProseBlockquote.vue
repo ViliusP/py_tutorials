@@ -1,0 +1,22 @@
+<template>
+  <VAlert
+    class="prose-v-alert my-4"
+    variant="tonal"
+    border="start"
+    border-color="primary-variant-10"
+  >
+    <blockquote>
+      <slot />
+    </blockquote>
+  </VAlert>
+</template>
+
+<style>
+.prose-v-alert p {
+  font-weight: 200;
+}
+
+.prose-v-alert p {
+  margin: 0;
+}
+</style>
