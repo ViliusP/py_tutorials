@@ -169,3 +169,55 @@ $$
 > You have power over your mind - not outside events. Realize this, and you will find strength.
 >  
 > \- Marcus Aurelius, Meditations
+
+## Alert
+
+### Default alert
+
+::ProseAlert{ icon="mdi-lightbulb-cfl"}
+
+Icon is defined with "icon" prop. More at https://content.nuxt.com/usage/markdown.
+
+#title
+Title is defined with #title slot 
+::
+
+### success
+
+::ProseAlert{ type="success" }
+
+type can be set with "type" prop same as in vuetify. Currently, it has default "success" icon.
+
+#title
+Success alert
+::
+
+### error
+
+::ProseAlert{ type="error" }
+
+type can be set with "type" prop same as in vuetify. Currently, it has default "error" icon.
+
+#title
+Error alert
+::
+
+### info
+
+::ProseAlert{ type="info" icon="mdi-alien-outline"}
+
+type can be set with "type" prop same as in vuetify. For your information, different than default icon can be set using "icon" prop. Currently it is set as "mdi-alien-outline"
+
+#title
+Info alert
+::
+
+### warning
+
+::ProseAlert{ type="warning" }
+
+type can be set with "type" prop same as in vuetify. Currently, it has default "warning" icon.
+
+#title
+Warning alert
+::
