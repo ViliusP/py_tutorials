@@ -12,7 +12,7 @@ const { data: navigation } = await useAsyncData("navigation", () =>
         v-for="navigationItem in navigation"
         :key="navigationItem._path"
         v-if="navigation && Array.isArray(navigation)"
-      >
+      >  
         <v-list-subheader class="text-uppercase" v-if="navigationItem.children.length != 0">{{
           navigationItem.title
         }}</v-list-subheader>
