@@ -163,3 +163,9 @@ This equation defines the Fourier transform $$F(x)$$ of a function $$f$$, which 
 $$
 F(x) = \int_{-\infty}^{\infty} f(\mathbf{\xi}) e^{-2 \pi i \mathbf{\xi} \cdot \mathbf{x}} \,d\mathbf{\xi}
 $$
+
+## Blockquote
+
+> You have power over your mind - not outside events. Realize this, and you will find strength.
+>  
+> \- Marcus Aurelius, Meditations
