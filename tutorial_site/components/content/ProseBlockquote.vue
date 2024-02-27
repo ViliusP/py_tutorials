@@ -4,6 +4,8 @@
     variant="tonal"
     border="start"
     border-color="primary-variant-10"
+    icon="mdi-format-quote-close-outline"
+    density="compact"
   >
     <blockquote>
       <slot />
