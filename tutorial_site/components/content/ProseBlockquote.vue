@@ -18,7 +18,8 @@
   font-weight: 200;
 }
 
-.prose-v-alert p {
-  margin: 0;
+.prose-v-alert p:not(:last-child) {
+  margin-bottom: 8px; /* Adjust the value as needed */
 }
+
 </style>
