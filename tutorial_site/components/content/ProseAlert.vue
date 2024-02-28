@@ -1,6 +1,6 @@
 <template>
   <VAlert
-    class="prose-v-alert my-4"
+    class="prose-v-alert"
     variant="outlined"
     density="compact"
     :type="type"
@@ -33,11 +33,22 @@ defineProps({
 </script>
 
 <style>
+.prose-v-alert {
+  margin-top: 1.375rem;
+  margin-bottom: 1.375rem;
+}
+
 .prose-v-alert p {
   font-weight: 200;
 }
 
-.prose-v-alert p {
-  margin: 0;
+.prose-v-alert p:not(:last-child) {
+  margin-bottom: 8px; /* Adjust the value as needed */
+  margin-top: 0px; /* Adjust the value as needed */
+}
+
+.prose-v-alert p:last-child {
+  margin-bottom: 8px; /* Adjust the value as needed */
+  margin-top: 0px; /* Adjust the value as needed */
 }
 </style>
