@@ -34,3 +34,7 @@ logs
 
 # Local Netlify folder
 .netlify
+
+# Graph generation
+graphs_generation/*.png
+graphs_generation/*.pdf
