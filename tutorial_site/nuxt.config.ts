@@ -61,6 +61,9 @@ export default defineNuxtConfig({
       );
     },
   ],
+  ignore: [
+    "python_graph_drawing/**"
+  ],
   googleFonts: {
     families: {
       "Noto Sans": {

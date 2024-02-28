@@ -10,14 +10,13 @@
     position="left center"
     contain
   ></v-img>
-  <figcaption v-if="props.title" class="text-caption image-caption">
-    {{ props.title }}
-  </figcaption>
+  <figcaption v-if="props.title" class="text-caption image-caption" v-html="processedHtml" />
 </template>
 
 <script setup lang="ts">
 import { computed, useImage } from "#imports";
 import type { ImageModifiers } from "@nuxt/image";
+import { processLatexString } from '~/utils/processLatexString';
 
 const props = defineProps({
   src: {
@@ -62,9 +61,12 @@ const _srcset = computed(() => {
   });
 });
 
-function intVal(n: number | string): number {
-  return typeof n === "number" ? n : parseInt(n, 10);
-}
+const processedHtml = ref<string>('');
+
+onMounted(async () => {
+  // @ts-ignore
+  processedHtml.value = await processLatexString(props.title);
+});
 </script>
 
 <style>
