@@ -1,14 +1,15 @@
 <template>
   <v-card
     :style="{ 'max-width': maxWidth }"
-    class="overflow-x-auto d-flex"
+    class="prose-code overflow-x-auto"
     elevation="1"
     color="shiki-bg"
   >
     <v-btn
       icon
       variant="plain"
-      style="position: absolute; right: 2.5px; top: 2.5px"
+      size="small"
+      style="position: absolute; right: 2.5px; top: 2.5px; z-index: 2;"
       @click="copyContent"
     >
       <v-icon>mdi-content-copy</v-icon>
@@ -41,9 +42,14 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-card-text>
+    <div v-if="filename" class="filename ml-2 text-caption text-left">
+      <span class="text-medium-emphasis">{{ filename }}</span>
+      <v-divider class="mr-12" :thickness="1" color="outline"/>
+    </div>
+    <v-card-text :class="{ 'py-2': filename, 'py-3': !filename }">
       <pre :class="['custom-font', $props.class]"><slot /></pre>
     </v-card-text>
+
   </v-card>
 </template>
 
@@ -143,5 +149,9 @@ const maxWidth = computed(() => {
 
 .code-snackbar .v-snackbar__actions {
   margin-inline-end: 0px;
+}
+
+.prose-code .filename {
+  line-height: 1.5rem;
 }
 </style>
