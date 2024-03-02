@@ -4,6 +4,8 @@
         "vilius": "Hello, Vilius."
     },
     "common": {
-        "copy": "copy"
+        "copy": "Copy",
+        "copy_successful": "Copied successfully",
+        "copy_unsuccessful": "Error occurred - copy unsuccessful"
     }
 }
