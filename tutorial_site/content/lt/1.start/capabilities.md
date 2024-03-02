@@ -82,18 +82,18 @@ Not italic, _an italic part of the paragraph_. This one is also not italic.
 
 ## Python code
 
-```python [data/models/game_engine.py]{4-6,7}
+```python [data/models/game_engine.py]{7, 11, 19, 24}
 # Example file showing a basic pygame "game loop"
 
 import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((1280, 720)) # highlighted code
 clock = pygame.time.Clock()
 running = True
 
-while running:
+while running: # highlighted code
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
@@ -101,12 +101,12 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("purple") # highlighted code
 
     # RENDER YOUR GAME HERE
 
     # flip() the display to put your work on screen
-    pygame.display.flip()
+    pygame.display.flip() # highlighted code
 
     clock.tick(60)  # limits FPS to 60
 
@@ -116,7 +116,7 @@ pygame.quit()
 
 ## Javascript code
 
-```js [file.js]{4-6,7} max-width=300
+```js [file.js] max-width=300
 export default () => {
     console.log('Code block')
 }
