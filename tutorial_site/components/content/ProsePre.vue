@@ -21,8 +21,26 @@
         >{{ t("common.copy") }}</v-tooltip
       >
     </v-btn>
+    <v-snackbar
+      v-model="shouldShowSnackbar"
+      content-class="bg-inverse-surface text-inverse-on-surface code-snackbar"
+      timeout="3500"
+    >
+      {{ t(copySuccessful ? "common.copy_successful" : "common.copy_unsuccessful") }}
+      <template v-slot:actions>
+        <v-btn
+          color="text-inverse-on-surface"
+          icon="mdi-close"
+          variant="plain"
+          @click="shouldShowSnackbar = false"
+        >
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-card-text>
-      <pre :class="['custom-font', $props.class]"><slot/></pre>
+      <pre :class="['custom-font', $props.class]">
+    <slot />
+  </pre>
     </v-card-text>
   </v-card>
 </template>
@@ -63,6 +81,37 @@ interface MetaObject {
   [key: string]: string;
 }
 
+// -----------
+// snackbar
+// -----------
+const showSnackbar = ref<boolean>(false);
+const copySuccessful = ref<boolean | null>(null);
+const shouldShowSnackbar = ref(false);
+
+// Watch both `showSnackbar` and `copySuccessful` for changes
+watch([showSnackbar, copySuccessful], ([newShow, newCopySuccess], [_, __]) => {
+  // Update `shouldShowSnackbar` based on the new values
+  shouldShowSnackbar.value = newShow && newCopySuccess !== null;
+});
+
+// Function to copy content to clipboard
+const copyContent = async () => {
+  copySuccessful.value = null;
+  if (props.code) {
+    try {
+      await navigator.clipboard.writeText(props.code);
+      copySuccessful.value = true;
+    } catch (err) {
+      copySuccessful.value = false;
+    } finally {
+      showSnackbar.value = true;
+    }
+  }
+};
+// -----------
+// code highlinting
+// -----------
+
 const parsedMeta = ref<MetaObject>({});
 
 function parseMeta(metaString: string): MetaObject {
@@ -78,17 +127,6 @@ function parseMeta(metaString: string): MetaObject {
 
 parsedMeta.value = parseMeta(props.meta);
 
-// Function to copy content to clipboard
-const copyContent = async () => {
-  if (props.code) {
-    try {
-      await navigator.clipboard.writeText(props.code);
-      // console.log('Content copied to clipboard');
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  }
-};
 
 // Compute the min-width based on the parsed meta, defaulting to 960px if not specified
 const maxWidth = computed(() => {
@@ -100,5 +138,9 @@ const maxWidth = computed(() => {
 <style>
 .custom-font * {
   font-family: "Noto Sans Mono", "monospace";
+}
+
+.code-snackbar .v-snackbar__actions {
+  margin-inline-end: 0px;
 }
 </style>

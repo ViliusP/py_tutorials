@@ -4,6 +4,8 @@
         "vilius": "Labas, Viliau."
     },
     "common": {
-        "copy": "kopijuoti"
+        "copy": "Kopijuoti",
+        "copy_successful": "Nukopijuota",
+        "copy_unsuccessful": "Įvyko klaida - nukopijuoti nepavyko"
     }
 }
