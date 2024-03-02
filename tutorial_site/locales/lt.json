@@ -3,8 +3,7 @@
         "world": "Labas, Pasauli!",
         "vilius": "Labas, Viliau."
     },
-    "about": {
-        "title": "About screen",
-        "description": "That's what this is all about...."
+    "common": {
+        "copy": "kopijuoti"
     }
 }
