@@ -1,7 +1,25 @@
 <template>
-  <v-card :style="{ 'max-width': maxWidth }" class="overflow-x-auto d-flex" elevation="1" color="shiki-bg">
-    <v-btn icon variant="plain" style="position: absolute; right: 2.5px; top: 2.5px;" @click="copyContent">
+  <v-card
+    :style="{ 'max-width': maxWidth }"
+    class="overflow-x-auto d-flex"
+    elevation="1"
+    color="shiki-bg"
+  >
+    <v-btn
+      icon
+      variant="plain"
+      style="position: absolute; right: 2.5px; top: 2.5px"
+      @click="copyContent"
+    >
       <v-icon>mdi-content-copy</v-icon>
+      <v-tooltip
+        activator="parent"
+        content-class="bg-inverse-surface text-inverse-on-surface"
+        location="start"
+        offset="2"
+        close-delay="150"
+        >{{ t("common.copy") }}</v-tooltip
+      >
     </v-btn>
     <v-card-text>
       <pre :class="['custom-font', $props.class]"><slot/></pre>
@@ -10,7 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
+const { t } = useI18n();
 
 const props = defineProps({
   code: {
