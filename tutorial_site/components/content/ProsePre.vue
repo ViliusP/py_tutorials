@@ -26,7 +26,11 @@
       content-class="bg-inverse-surface text-inverse-on-surface code-snackbar"
       timeout="3500"
     >
-      {{ t(copySuccessful ? "common.copy_successful" : "common.copy_unsuccessful") }}
+      {{
+        t(
+          copySuccessful ? "common.copy_successful" : "common.copy_unsuccessful"
+        )
+      }}
       <template v-slot:actions>
         <v-btn
           color="text-inverse-on-surface"
@@ -38,9 +42,7 @@
       </template>
     </v-snackbar>
     <v-card-text>
-      <pre :class="['custom-font', $props.class]">
-    <slot />
-  </pre>
+      <pre :class="['custom-font', $props.class]"><slot /></pre>
     </v-card-text>
   </v-card>
 </template>
@@ -126,7 +128,6 @@ function parseMeta(metaString: string): MetaObject {
 }
 
 parsedMeta.value = parseMeta(props.meta);
-
 
 // Compute the min-width based on the parsed meta, defaulting to 960px if not specified
 const maxWidth = computed(() => {
