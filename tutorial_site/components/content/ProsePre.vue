@@ -42,8 +42,8 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <div v-if="filename" class="filename ml-2 text-overline text-left">
-      <span class="">{{ filename }}</span>
+    <div v-if="filename" class="filename ml-2 text-caption text-left">
+      <span class="text-medium-emphasis">{{ filename }}</span>
       <v-divider class="mr-12" :thickness="1" color="outline"/>
     </div>
     <v-card-text class="py-2">

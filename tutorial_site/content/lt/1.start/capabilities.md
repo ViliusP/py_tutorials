@@ -82,7 +82,7 @@ Not italic, _an italic part of the paragraph_. This one is also not italic.
 
 ## Python code
 
-```python
+```python [data/models/game_engine.py]{4-6,7}
 # Example file showing a basic pygame "game loop"
 
 import pygame
