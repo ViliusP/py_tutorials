@@ -44,6 +44,8 @@ const lightTheme: ThemeDefinition = {
     'on-surface-variant': '#44483d',
     'outline': '#75796c',
     'outline-variant': '#c5c8ba',
+    'inverse-on-surface': '#f2f1e9',
+    'inverse-surface': '#30312c',
     'shadow': '#000000',
     'shiki-bg': '#EFF1F5', // color for shiki highlighting
     ...primaryPallete,
@@ -69,7 +71,9 @@ const darkTheme: ThemeDefinition = {
     'surface-variant': '#44483d',
     'on-surface-variant': '#c5c8ba',
     'outline': '#8e9285',
-    'outline-variant': '#44483d',
+    'outline-variant': '#1b1c18',
+    'inverse-on-surface': '#1b1c18',
+    'inverse-surface': '#e3e3db',
     'shadow': '#000000',
     'shiki-bg': '#212121', // color for shiki highlighting
     ...primaryPallete,
