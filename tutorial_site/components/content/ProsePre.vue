@@ -46,7 +46,7 @@
       <span class="text-medium-emphasis">{{ filename }}</span>
       <v-divider class="mr-12" :thickness="1" color="outline"/>
     </div>
-    <v-card-text class="py-2">
+    <v-card-text :class="{ 'py-2': filename, 'py-3': !filename }">
       <pre :class="['custom-font', $props.class]"><slot /></pre>
     </v-card-text>
 
