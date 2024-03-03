@@ -1,7 +1,7 @@
 <template>
   <v-card
-    :style="{ 'max-width': maxWidth }"
-    class="prose-code overflow-x-auto"
+    :style="{ 'max-width': maxWidth, position: 'relative' }"
+    class="prose-code"
     elevation="1"
     color="shiki-bg"
   >
@@ -23,33 +23,35 @@
       >
     </v-btn>
     <v-snackbar
-      v-model="shouldShowSnackbar"
-      content-class="bg-inverse-surface text-inverse-on-surface code-snackbar"
-      timeout="3500"
-    >
-      {{
-        t(
+        v-model="shouldShowSnackbar"
+        content-class="bg-inverse-surface text-inverse-on-surface code-snackbar"
+        timeout="3500"
+      >
+        {{
+          t(
           copySuccessful ? "common.copy_successful" : "common.copy_unsuccessful"
-        )
-      }}
-      <template v-slot:actions>
-        <v-btn
-          color="text-inverse-on-surface"
-          icon="mdi-close"
-          variant="plain"
-          @click="shouldShowSnackbar = false"
+          )
+        }}
+        <template v-slot:actions>
+          <v-btn
+            color="text-inverse-on-surface"
+            icon="mdi-close"
+            variant="plain"
+            @click="shouldShowSnackbar = false"
         >
         </v-btn>
-      </template>
+        </template>
     </v-snackbar>
-    <div v-if="filename" class="filename ml-2 text-caption text-left">
-      <span class="text-medium-emphasis">{{ filename }}</span>
+    <!-- Scrollable content wrapper -->
+    <div class="overflow-x-auto">
+      <div v-if="filename" class="filename ml-2 text-caption text-left">
+        <span class="text-medium-emphasis">{{ filename }}</span>
       <v-divider class="mr-12" :thickness="1" color="outline"/>
+      </div>
+      <v-card-text :class="{ 'py-2': filename, 'py-3': !filename }">
+        <pre :class="['custom-font', $props.class]"><slot /></pre>
+      </v-card-text>
     </div>
-    <v-card-text :class="{ 'py-2': filename, 'py-3': !filename }">
-      <pre :class="['custom-font', $props.class]"><slot /></pre>
-    </v-card-text>
-
   </v-card>
 </template>
 
@@ -111,7 +113,7 @@ const copyContent = async () => {
       copySuccessful.value = true;
     } catch (err) {
       copySuccessful.value = false;
-    } finally {
+} finally {
       showSnackbar.value = true;
     }
   }
