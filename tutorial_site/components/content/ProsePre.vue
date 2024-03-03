@@ -154,4 +154,26 @@ const maxWidth = computed(() => {
 .prose-code .filename {
   line-height: 1.5rem;
 }
+
+span.line.highlight {
+  transition: background-color .5s;
+  width: calc(100%);
+  display: block;
+  --shiki-default-bg: rgba(101, 117, 133, .16);
+  --shiki-dark-bg: rgba(142, 150, 170, .14);
+
+}
+
+.line.highlight > span {
+  --shiki-default-bg: initial;
+  --shiki-dark-bg: initial;
+  /* Reset or apply new styles as needed */
+}
+
+.shiki code {
+  display: block;
+  width: fit-content;
+  min-width: 100%;
+  transition: color .5s;
+}
 </style>
