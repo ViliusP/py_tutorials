@@ -1,21 +1,20 @@
 # Example file showing a circle moving on screen
 import pygame
 
-from speed_indicator import SpeedIndicator
-
-SCREEN_COLOR = (140, 107, 136)
-SPEED_MULTIPLIERS = [1, 1.1, 1.2, 1.5, 1.7, 2]
-BASE_SPEED = 300
-
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 dt = 0
+
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
-speed_indicator = SpeedIndicator((screen.get_width()-20, 20), initial_speed_level=0)
+# Create a surface with the SRCALPHA flag for per-pixel alpha
+circle_surface = pygame.Surface((80, 80), pygame.SRCALPHA)
+# No need to fill circle_surface with a color here since we want it transparent
+
+pygame.draw.circle(circle_surface, "red", (circle_surface.get_width()/2, circle_surface.get_width()/2), 40)
 
 while running:
     # poll for events
@@ -23,34 +22,23 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_UP] and speed_indicator.level < len(SPEED_MULTIPLIERS)-1:
-                speed_indicator.increase_speed()
-                print(SPEED_MULTIPLIERS[speed_indicator.level])
-            if keys[pygame.K_DOWN] and speed_indicator.level > 0:
-                speed_indicator.decrease_speed()
-
-                print(SPEED_MULTIPLIERS[speed_indicator.level])
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill(SCREEN_COLOR)
-     
-    pygame.draw.circle(screen, "red", player_pos, 40)
-    speed_indicator.draw(screen)
+    screen.fill("purple")
 
-    VELOCITY = BASE_SPEED * SPEED_MULTIPLIERS[speed_indicator.level]
+    circle_pos = circle_surface.get_rect(center = (player_pos))
+    screen.blit(circle_surface, circle_pos)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        player_pos.y -= VELOCITY * dt
+        player_pos.y -= 300 * dt
     if keys[pygame.K_s]:
-        player_pos.y += VELOCITY * dt
+        player_pos.y += 300 * dt
     if keys[pygame.K_a]:
-        player_pos.x -= VELOCITY * dt
+        player_pos.x -= 300 * dt
     if keys[pygame.K_d]:
-        player_pos.x += VELOCITY * dt
- 
+        player_pos.x += 300 * dt
+
     # flip() the display to put your work on screen
     pygame.display.flip()
 
@@ -60,4 +48,3 @@ while running:
     dt = clock.tick(60) / 1000
 
 pygame.quit()
-
