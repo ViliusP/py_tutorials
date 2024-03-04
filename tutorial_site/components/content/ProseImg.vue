@@ -1,6 +1,6 @@
 <template>
   <v-img
-    :class="{ 'v-img__captionless': !props.title }"
+    :class="{ 'v-img__captionless': !props.title, 'prose-image': true }"
     :max-height="height"
     max-width="100%"
     :width="width"
@@ -100,7 +100,7 @@ onMounted(async () => {
 </script>
 
 <style>
-.v-img {
+.prose-image {
   margin-top: 12px;
 }
 
