@@ -1,33 +1,22 @@
 <script setup lang="ts">
+import TutorialTopic from "~/components/TutorialTopic.vue";
+
 const { data: navigation } = await useAsyncData("navigation", () =>
   fetchContentNavigation()
 );
+
+console.log(navigation)
 </script>
 
 <template>
-  <v-card class="mx-auto" max-width="300">
-    <v-list density="compact" nav>
-      <!-- @vue-skip -->
-      <template
-        v-for="navigationItem in navigation"
-        :key="navigationItem._path"
-        v-if="navigation && Array.isArray(navigation)"
-      >  
-        <v-list-subheader class="text-uppercase" v-if="navigationItem.children.length != 0">{{
-          navigationItem.title
-        }}</v-list-subheader>
-        <v-list-item
-          v-for="navigationChildItem in navigationItem.children"
-          :key="navigationChildItem._path"
-          v-if="
-            navigationItem.children && Array.isArray(navigationItem.children)
-          "
-          :title="navigationChildItem.title"
-          :subtitle="navigationChildItem._path"
-          :to="navigationChildItem._path"
-          nuxt
-        />
-      </template>
-    </v-list>
-  </v-card>
+  <div class="d-flex flex-row justify-center">
+    <TutorialTopic
+      class="mx-10"
+      v-for="navigationItem in navigation"
+      :key="navigationItem._path"
+      v-if="navigation && Array.isArray(navigation)"
+      :chapter="navigationItem.title"
+      :tutorials="navigationItem.children || []"
+    />
+  </div>
 </template>
