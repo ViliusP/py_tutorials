@@ -48,8 +48,6 @@ export default defineNitroPlugin((nitroApp) => {
           const thumbHashToBase64 = Buffer.from(binaryThumbHash).toString('base64')
 
           node.props.thumbHash = thumbHashToBase64;
-          console.log(node.props.thumbHash)
-          console.log(node)
         } catch (error) {
           console.error('Error processing image:', error);
         }
