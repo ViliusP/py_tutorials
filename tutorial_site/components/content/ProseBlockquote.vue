@@ -15,6 +15,11 @@
 
 <style>
 .prose-v-alert {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.prose-v-alert {
   padding-top: 12px;
   padding-bottom: 12px;
 }

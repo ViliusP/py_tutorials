@@ -1,5 +1,6 @@
 <template>
   <v-img
+    :class="{ 'v-img__captionless': !props.title }"
     :max-height="height"
     max-width="100%"
     :width="width"
@@ -99,8 +100,17 @@ onMounted(async () => {
 </script>
 
 <style>
+.v-img {
+  margin-top: 12px;
+}
+
+.v-img__captionless {
+  margin-bottom: 12px; 
+}
+
 .image-caption {
   margin-top: 4px;
+  margin-bottom: 12px;
   font-size: 0.875rem !important;
   font-weight: 400;
   line-height: 1.25rem;
