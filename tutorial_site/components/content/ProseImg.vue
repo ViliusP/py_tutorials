@@ -1,22 +1,44 @@
 <template>
-  <!-- @vue-ignore -->
   <v-img
-    :src="img(src, { quality: 80 })"
+    :class="{ 'v-img__captionless': !props.title }"
     :max-height="height"
     max-width="100%"
+    :width="width"
     :alt="alt"
-    :srcset="_srcset.srcset"
+    :src="img(src, { quality: 80 })"
+    :lazy-src="lazySrc"
     :sizes="_srcset.sizes"
     position="left center"
     contain
-  ></v-img>
-  <figcaption v-if="props.title" class="text-caption image-caption" v-html="processedHtml" />
+  >
+    <template v-slot:placeholder>
+      <div class="absolute ma-4">
+        <v-progress-circular
+          size="40"
+          width="4"
+          color="surface"
+          indeterminate
+        ></v-progress-circular>
+      </div>
+    </template>
+  </v-img>
+  <figcaption
+    v-if="props.title"
+    class="text-caption image-caption"
+    v-html="processedHtml"
+  />
 </template>
-
 <script setup lang="ts">
 import { computed, useImage } from "#imports";
 import type { ImageModifiers } from "@nuxt/image";
-import { processLatexString } from '~/utils/processLatexString';
+import { processLatexString } from "~/utils/processLatexString";
+
+const base64ToBinary = (base64: string): Uint8Array =>
+  new Uint8Array(
+    atob(base64)
+      .split("")
+      .map((x) => x.charCodeAt(0))
+  );
 
 const props = defineProps({
   src: {
@@ -33,7 +55,7 @@ const props = defineProps({
   },
   width: {
     type: [String, Number],
-    default: 600,
+    default: undefined,
   },
   height: {
     type: [String, Number],
@@ -42,36 +64,53 @@ const props = defineProps({
   format: {
     type: String,
     default: "webp",
-  }
+  },
+  thumbHash: {
+    type: String,
+    default: undefined,
+  },
 });
 
 const img = useImage();
-
 const _srcset = computed(() => {
-
   // Assuming ImageModifiers is the correct type, directly use Partial<ImageModifiers>
-    let modifiers: Partial<ImageModifiers> = {
+  let modifiers: Partial<ImageModifiers> = {
     format: props.format,
     quality: 70,
   };
 
   return img.getSizes(props.src, {
     sizes: "xs:100vw sm:90vw md:70vw lg:60vw xl:50vw",
-    modifiers: modifiers
+    modifiers: modifiers,
   });
 });
 
-const processedHtml = ref<string>('');
+const processedHtml = ref<string>("");
+const lazySrc = ref<string>("");
 
 onMounted(async () => {
   // @ts-ignore
   processedHtml.value = await processLatexString(props.title);
+
+  if (props.thumbHash) {
+    const thumbHashFromBase64 = base64ToBinary(props.thumbHash);
+    lazySrc.value = thumbHashToDataURL(thumbHashFromBase64).toString();
+  }
 });
 </script>
 
 <style>
+.v-img {
+  margin-top: 12px;
+}
+
+.v-img__captionless {
+  margin-bottom: 12px; 
+}
+
 .image-caption {
   margin-top: 4px;
+  margin-bottom: 12px;
   font-size: 0.875rem !important;
   font-weight: 400;
   line-height: 1.25rem;
