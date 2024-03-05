@@ -1,5 +1,6 @@
 # Example file showing a circle moving on screen
 import pygame
+from src.spacecraft import Spacecraft
 
 # pygame setup
 pygame.init()
@@ -10,11 +11,7 @@ dt = 0
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
-# Create a surface with the SRCALPHA flag for per-pixel alpha
-circle_surface = pygame.Surface((80, 80), pygame.SRCALPHA)
-# No need to fill circle_surface with a color here since we want it transparent
-
-pygame.draw.circle(circle_surface, "red", (circle_surface.get_width()/2, circle_surface.get_width()/2), 40)
+spacecraft = Spacecraft()
 
 while running:
     # poll for events
@@ -23,11 +20,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("black")
 
-    circle_pos = circle_surface.get_rect(center = (player_pos))
-    screen.blit(circle_surface, circle_pos)
+    spacecraft.draw(screen)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
