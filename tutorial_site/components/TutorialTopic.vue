@@ -10,8 +10,6 @@ const props = withDefaults(defineProps<Props>(), {
   chapter: "",
   tutorials: () => [],
 });
-
-console.log(props.chapter)
 </script>
 
 <template>
