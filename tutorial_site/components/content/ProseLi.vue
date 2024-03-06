@@ -43,7 +43,7 @@ function splitToDigits(n: number): number[] {
 
 <style>
 .list-item .v-list-item__prepend {
-  margin-top: 2px;
+  margin-top: 4px;
   align-self: start;
 }
 
