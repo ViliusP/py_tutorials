@@ -42,6 +42,11 @@ function splitToDigits(n: number): number[] {
 </script>
 
 <style>
+.list-item .v-list-item__prepend {
+  margin-top: 4px;
+  align-self: start;
+}
+
 .list-item {
   font-size: 1.375rem !important;
   font-weight: 300;
