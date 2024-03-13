@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { NavItem } from "@nuxt/content/types";
 
+const { t } = useI18n();
+
 interface Props {
   chapter: string;
   tutorials: Array<NavItem>;
@@ -37,7 +39,7 @@ function splitToDigits(n: number): number[] {
   <v-card max-width="300">
     <v-list density="comfortable" nav>
       <v-list-subheader class="text-uppercase">
-        {{ props.chapter }}
+        {{ t(`topics.${props.chapter.toLowerCase()}`) }}
       </v-list-subheader>
       <v-list-item
         v-for="(tutorial, index) in props.tutorials"
