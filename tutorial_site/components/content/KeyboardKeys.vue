@@ -4,7 +4,7 @@
       <template v-for="(key, index) in props.keys" :key="index">
         <v-sheet
           tag="kbd"
-          class="d-inline"
+          class="d-inline bg-transition"
           elevation="1"
           border
           rounded=""
