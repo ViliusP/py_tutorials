@@ -137,8 +137,8 @@ export default defineNuxtConfig({
         name: "English",
       },
     ],
-    defaultLocale: "lt",
-    vueI18n: "./i18n.config.ts",
+      defaultLocale: "lt",
+      vueI18n: "./i18n.config.ts",
   },
   vite: {
     ssr: {

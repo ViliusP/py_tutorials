@@ -10,7 +10,6 @@
         <v-img
           draggable="false"
           src="~/assets/images/icon.png"
-          content-class="aaa"
           alt="Site icon"
         />
       </v-avatar>
@@ -18,6 +17,7 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <layout-locale-changer class="mr-2"/>
       <v-app-bar-nav-icon @click="toggleTheme">
         <layout-theme-toggle :toggled="theme.global.current.value.dark" />
       </v-app-bar-nav-icon>
