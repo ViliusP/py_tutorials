@@ -138,6 +138,7 @@ export default defineNuxtConfig({
       },
     ],
     defaultLocale: "lt",
+    detectBrowserLanguage: false,
     vueI18n: "./i18n.config.ts",
   },
   vite: {

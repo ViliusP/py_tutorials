@@ -26,9 +26,6 @@
 </template>
 
 <script setup lang="ts">
-// Import the ref function from Vue if you need to make the prop reactive
-import { ref } from 'vue';
-
 // Define your props by calling defineProps. TypeScript interface is optional but recommended for type checking.
 interface Props {
   toggled: boolean;
