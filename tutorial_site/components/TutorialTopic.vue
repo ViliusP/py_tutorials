@@ -4,6 +4,7 @@ import type { NavItem } from "@nuxt/content/types";
 const { t } = useI18n();
 
 interface Props {
+  index: number;
   chapter: string;
   tutorials: Array<NavItem>;
 }
@@ -36,15 +37,18 @@ function splitToDigits(n: number): number[] {
 </script>
 
 <template>
-  <v-card max-width="300">
-    <v-list density="comfortable" nav>
-      <v-list-subheader class="text-uppercase">
-        {{ t(`topics.${props.chapter.toLowerCase()}`) }}
-      </v-list-subheader>
+  <v-card class="px-4 py-2" color="secondary" variant="outlined">
+    <v-card-title class="text-uppercase text-overline pl-2">
+      {{ t(`topics.${props.chapter.toLowerCase()}`) }}
+    </v-card-title>
+    <v-divider color="outline" />
+    <v-list density="comfortable" class="bg-transition">
       <v-list-item
+        class="my-1"
         v-for="(tutorial, index) in props.tutorials"
         :key="tutorial._path"
         :to="tutorial._path"
+        rounded="lg"
         nuxt
       >
         <template v-slot:prepend>

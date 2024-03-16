@@ -10,7 +10,7 @@ const { smAndUp: showToc } = useDisplay();
 </script>
 
 <template>
-  <v-container class="pa-0">
+  <v-container class="pa-0 py-8">
     <v-row class="flex-nowrap" justify="center">
 
       <!-- Content Column with alignment at the end -->
