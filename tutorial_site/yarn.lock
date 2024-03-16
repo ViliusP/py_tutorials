@@ -2934,7 +2934,6 @@ __metadata:
     typescript: "npm:^5.3.3"
     vite-plugin-vuetify: "npm:^2.0.1"
     vue: "npm:^3.4.19"
-    vue-country-flag: "npm:^2.3.2"
     vue-router: "npm:^4.3.0"
     vue-tsc: "npm:^1.8.27"
     vuetify: "npm:^3.5.6"
@@ -9856,15 +9855,6 @@ __metadata:
   dependencies:
     ufo: "npm:^1.2.0"
   checksum: 10c0/5d934be095334da4a415384e029302e499f7ba8ead552409ed7d59c342c61302197b8f2dbda428d6edc97a443102f1772ea440c31833587e54f2cba60b29c516
-  languageName: node
-  linkType: hard
-
-"vue-country-flag@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "vue-country-flag@npm:2.3.2"
-  peerDependencies:
-    vue: ^2.6.12
-  checksum: 10c0/0f2cb7f59693ff946aa1f82299b730f130387812bdb1e756e7a2d746944c87f6039cfb6623d0a039791ebce2f11d6ab6ad3dbfe3a55217ffe87d5ecc55d23459
   languageName: node
   linkType: hard
 
