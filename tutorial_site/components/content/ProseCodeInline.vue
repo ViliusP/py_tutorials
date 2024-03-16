@@ -1,5 +1,5 @@
 <template>
-    <code class="px-1 bg-shiki-bg rounded code-inline"><slot /></code>
+    <code class="px-1 bg-shiki-bg rounded code-inline bg-transition"><slot /></code>
 </template>
 
 <style>

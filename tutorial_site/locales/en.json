@@ -7,5 +7,9 @@
         "copy": "Copy",
         "copy_successful": "Copied successfully",
         "copy_unsuccessful": "Error occurred - copy unsuccessful"
+    },
+    "topics": {
+        "start": "Start",
+        "basicdrawing": "About drawing"
     }
 }

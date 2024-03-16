@@ -7,5 +7,9 @@
         "copy": "Kopijuoti",
         "copy_successful": "Nukopijuota",
         "copy_unsuccessful": "Įvyko klaida - nukopijuoti nepavyko"
+    },
+    "topics": {
+        "start": "Pradžia",
+        "basicdrawing": "Piešimo pradmenys"
     }
 }

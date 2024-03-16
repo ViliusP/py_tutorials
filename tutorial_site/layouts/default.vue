@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-app-bar color="surface-variant" scroll-behavior="elevate">
+  <v-app class="bg-transition">
+    <v-app-bar class="bg-transition" color="surface-variant" scroll-behavior="elevate">
       <v-avatar
         class="ml-2"
         size="large"
@@ -24,9 +24,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid class="py-8 px-6">
-        <slot />
-      </v-container>
+      <slot />
     </v-main>
   </v-app>
 </template>
@@ -67,3 +65,9 @@ onNuxtReady(() => {
   }
 });
 </script>
+
+<style>
+.bg-transition {
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
