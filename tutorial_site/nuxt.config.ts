@@ -2,6 +2,7 @@ import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "url";
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import IgnoreDraftsModule from "./modules/ignore_drafts/index.mjs";
 
 export default defineNuxtConfig({
   app: {
@@ -53,6 +54,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/google-fonts",
     "@nuxt/image",
+    IgnoreDraftsModule,
     async (options, nuxt) => {
       // @ts-ignore
       nuxt.hooks.hook("vite:extendConfig", (config) =>
