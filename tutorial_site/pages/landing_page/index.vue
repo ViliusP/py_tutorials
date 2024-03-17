@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import TutorialTopic from "~/components/TutorialTopic.vue";
 
+definePageMeta({
+  path: '/',
+})
+
 const { data: navigation } = await useAsyncData("navigation", () =>
   fetchContentNavigation()
 );
+</script>
+
+<script setup lang="ts">
+
 </script>
 
 <template>
