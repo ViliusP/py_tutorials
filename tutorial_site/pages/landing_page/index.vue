@@ -95,7 +95,7 @@ const { data: navigation } = await useAsyncData("navigation", () =>
         </svg>
       </v-sheet>
     </v-row>
-    <div class="mb-6 px-16 dummy-text-section text-justify">
+    <div class="mb-6 px-lg-16 mx-0 px-sm-4 mr-sm-2 mr-md-10 dummy-text-section text-justify">
       <MaterialH2 class="text-left">Puslapį užpildantis tekstas</MaterialH2>
       <p class="text-justify">
         Puslapis turintis per mažai teksto atrodo nekaip. Šiai problemai
