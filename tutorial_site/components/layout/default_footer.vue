@@ -8,7 +8,7 @@
       <v-col
         align-self="start"
         cols="6" sm="4"
-        class="pl-12 my-2 made-with-love text-start"
+        class="pl-10 my-2 made-with-love text-start"
       >
         <svg
           class="balloon"
@@ -50,10 +50,12 @@
         <!-- <v-card variant="outlined" class="pt-2 pb-4"> -->
           <div class="d-flex flex-row justify-center text-center">
           <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            :icon="icon"
+            v-for="social in socials"
+            :key="social.icon"
+            :href="social.link"
+            :icon="social.icon"
             class="mx-2"
+            target=”_blank”
             variant="text"
           />
         </div>
@@ -72,12 +74,12 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    icons: ["mdi-linkedin", "mdi-github", "mdi-email-outline"],
-  }),
-};
+<script setup lang="ts">
+  const socials = [
+    { icon: "mdi-linkedin", link: "https://www.linkedin.com/in/vilius-paliokas/" },
+    { icon: "mdi-github", link: "https://github.com/ViliusP" },
+    { icon: "mdi-email-outline", link: "mailto:viliuspaliokas@gmail.com" },
+  ]
 </script>
 
 <style>
@@ -106,7 +108,7 @@ export default {
 .made-with-love .text {
   position: absolute;
   bottom: 25px;
-  left: 100px;
+  left: 94px;
   font-size: 1.3rem !important;
   font-weight: 300;
   line-height: 1rem;
