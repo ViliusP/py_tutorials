@@ -1,5 +1,5 @@
 <template>
-  <h1 class="material-h1">
+  <h1 class="material-h1" v-bind="$attrs">
     <slot />
   </h1>
 </template>

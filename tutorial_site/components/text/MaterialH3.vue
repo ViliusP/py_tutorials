@@ -1,7 +1,7 @@
 <template>
-  <h1 class="material-h3">
+  <h3 class="material-h3" v-bind="$attrs">
     <slot />
-  </h1>
+  </h3>
 </template>
 
 <style>

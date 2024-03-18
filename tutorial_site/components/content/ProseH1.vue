@@ -1,5 +1,5 @@
 <template>
-    <MaterialH1 :id="id" class="material-h1 pb-4">
+    <MaterialH1 :id="id" class="pb-4">
         <a v-if="generate" :href="`#${id}`">
             <slot />
         </a>
