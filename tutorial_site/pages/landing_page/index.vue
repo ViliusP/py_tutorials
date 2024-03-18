@@ -41,8 +41,14 @@ const { data: navigation } = await useAsyncData("navigation", () =>
         :elevation="0"
       >
         <v-row align="start" class="d-flex flex-row justify-center">
-          <v-col cols="12" xl="3" xxl="3" md="12" lg="4"
- class="me-auto my-2 my-lg-0">
+          <v-col
+            cols="12"
+            xl="3"
+            xxl="3"
+            md="12"
+            lg="4"
+            class="me-auto my-2 my-lg-0"
+          >
             <EducationImage />
             <MaterialH3 class="text-overline text-center mt-4"
               >Pamokų sąrašas
