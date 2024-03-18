@@ -37,12 +37,12 @@ function splitToDigits(n: number): number[] {
 </script>
 
 <template>
-  <v-card class="px-4 py-2" color="secondary" variant="outlined">
+  <v-card class="px-4 py-2" variant="outlined">
     <v-card-title class="text-uppercase text-overline pl-2">
       {{ t(`topics.${props.chapter.toLowerCase()}`) }}
     </v-card-title>
     <v-divider color="outline" />
-    <v-list density="comfortable" class="bg-transition">
+    <v-list bg-color="transparent"  density="comfortable" class="bg-transition">
       <v-list-item
         class="my-1"
         v-for="(tutorial, index) in props.tutorials"

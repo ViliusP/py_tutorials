@@ -17,6 +17,7 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <layout-dev-breakpoints v-if="dev" />
       <layout-locale-changer class="mr-2"/>
       <v-app-bar-nav-icon @click="toggleTheme">
         <layout-theme-toggle :toggled="theme.global.current.value.dark" />
@@ -26,11 +27,15 @@
     <v-main>
       <slot />
     </v-main>
+    <DefaultFooter />
   </v-app>
 </template>
 
 <script setup lang="ts">
 import { useTheme } from "vuetify";
+import DefaultFooter from "~/components/layout/default_footer.vue";
+
+const dev = process.env.NODE_ENV === 'development'
 
 const { t } = useI18n();
 const router = useRouter();
@@ -67,6 +72,10 @@ onNuxtReady(() => {
 </script>
 
 <style>
+.v-toolbar.bg-transition {
+  transition-property: background-color, height, width, transform, max-width, left, right, top, bottom, box-shadow;
+}
+
 .bg-transition {
   transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
