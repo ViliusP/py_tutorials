@@ -17,6 +17,7 @@
       <v-toolbar-title>{{ t("hello.world") }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <layout-dev-breakpoints v-if="dev" />
       <layout-locale-changer class="mr-2"/>
       <v-app-bar-nav-icon @click="toggleTheme">
         <layout-theme-toggle :toggled="theme.global.current.value.dark" />
@@ -31,6 +32,8 @@
 
 <script setup lang="ts">
 import { useTheme } from "vuetify";
+
+const dev = process.env.NODE_ENV === 'development'
 
 const { t } = useI18n();
 const router = useRouter();
