@@ -105,7 +105,7 @@ export default {
 
 .made-with-love .text {
   position: absolute;
-  bottom: 40px;
+  bottom: 25px;
   left: 100px;
   font-size: 1.3rem !important;
   font-weight: 300;
