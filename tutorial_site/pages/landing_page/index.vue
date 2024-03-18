@@ -34,7 +34,7 @@ const { data: navigation } = await useAsyncData("navigation", () =>
         <HelloImageAlt v-if="sm" />
       </v-col>
     </v-row>
-    <v-row class="ml-sm-n4 ml-2 my-8">
+    <v-row class="ml-sm-n4 my-8">
       <v-sheet
         color="rgba(var(--v-theme-tertiary), 0.15)"
         class="w-100 mr-sm-8 mr-md-16 py-8 px-4 rounded-e-lg tutorial-sheet pattern-container"
