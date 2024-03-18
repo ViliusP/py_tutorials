@@ -34,10 +34,10 @@ const { data: navigation } = await useAsyncData("navigation", () =>
         <HelloImageAlt v-if="sm" />
       </v-col>
     </v-row>
-    <v-row class="ml-n4 mt-8">
+    <v-row class="ml-sm-n4 mt-8">
       <v-sheet
         color="rgba(var(--v-theme-tertiary), 0.15)"
-        class="w-100 mr-16 py-8 px-4 rounded-e-lg pattern-container"
+        class="w-100 mr-sm-8 mr-md-16 py-8 px-4 rounded-e-lg tutorial-sheet pattern-container"
         :elevation="0"
       >
         <v-row align="start" class="d-flex flex-row justify-center">
@@ -66,7 +66,7 @@ const { data: navigation } = await useAsyncData("navigation", () =>
             v-if="navigation && Array.isArray(navigation)"
           >
             <TutorialTopic
-              class="mx-md-2 mx-lg-4"
+              class="mx-md-1 mx-lg-4"
               :chapter="navigationItem.title"
               :tutorials="navigationItem.children || []"
               :index="index"
@@ -99,6 +99,15 @@ const { data: navigation } = await useAsyncData("navigation", () =>
 </template>
 
 <style>
+@media screen and (max-width: 600px) {
+  .pattern-container {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+  }
+}
+
 @media screen and (min-width: 1920px) {
   .landing-page {
     max-width: 1920px;
@@ -139,5 +148,6 @@ const { data: navigation } = await useAsyncData("navigation", () =>
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  transition: border-radius 1s;
 }
 </style>
