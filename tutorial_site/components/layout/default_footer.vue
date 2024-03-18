@@ -4,7 +4,7 @@
     color="surface-variant"
     class="bg-transition footer d-flex text-center flex-column py-2 mr-n4"
   >
-    <v-row class="text-center">
+    <v-row class="text-center" no-gutters>
       <v-col
         align-self="start"
         cols="6" sm="4"
