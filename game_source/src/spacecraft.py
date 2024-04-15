@@ -3,7 +3,7 @@ import pygame
 
 
 class Spacecraft:
-    def __init__(self, initial_position: pygame.Vector2, initial_rotation=0):
+    def __init__(self, initial_position: pygame.Vector2, screen_size: tuple[int, int], initial_rotation=0, ):
         self.position = initial_position
         self.velocity = pygame.Vector2(0, 0)  # Initial velocity is zero
         self.rotation = math.radians(initial_rotation)  # Convert rotation to radians
@@ -12,7 +12,7 @@ class Spacecraft:
         self.speed = 300  # Speed in pixels per secon
         self.friction = 0.99  # Friction coefficient; closer to 1 is less friction, closer to 0 is more friction
         self.braking_friction = 0.975  # Increased friction when braking
-
+        self.screen_size = screen_size
         self.spacecraft_lines_points = Spacecraft.scale_points(self.spacecraft_lines_points, 1.8)
         self.spacecraft_surface = self.create_spacecraft_surface()
 
@@ -20,6 +20,7 @@ class Spacecraft:
     def draw(self, screen: pygame.Surface):
         pivot = Spacecraft.polygon_centroid(self.spacecraft_lines_points)
         Spacecraft.blitRotate(screen, self.spacecraft_surface, tuple(self.position), pivot, math.degrees(self.rotation))
+        self.draw_ghosts(screen)
 
     def blitRotate(surf: pygame.Surface, spacecraft_surface: pygame.Surface, origin: tuple[int, int], pivot: tuple[int, int], angle):
         # offset from pivot to center
@@ -67,6 +68,31 @@ class Spacecraft:
         # Update position based on velocity
         self.position += self.velocity * dt
 
+        self.position.x %= self.screen_size[0]
+        self.position.y %= self.screen_size[1]
+
+
+    def draw_ghosts(self, screen):
+        margin = max(self.spacecraft_surface.get_width(), self.spacecraft_surface.get_height())
+        positions = [self.position]
+
+        # Check horizontal proximity to edge
+        if self.position.x < margin:
+            positions.append(pygame.Vector2(self.position.x + self.screen_size[0], self.position.y))
+        elif self.position.x > self.screen_size[0] - margin:
+            positions.append(pygame.Vector2(self.position.x - self.screen_size[0], self.position.y))
+
+        # Check vertical proximity to edge
+        if self.position.y < margin:
+            positions.append(pygame.Vector2(self.position.x, self.position.y + self.screen_size[1]))
+        elif self.position.y > self.screen_size[1] - margin:
+            positions.append(pygame.Vector2(self.position.x, self.position.y - self.screen_size[1]))
+
+        # Draw spacecraft at all calculated positions
+        for pos in positions:
+            Spacecraft.blitRotate(screen, self.spacecraft_surface, pos, Spacecraft.polygon_centroid(self.spacecraft_lines_points), math.degrees(self.rotation))
+
+    
 
     @staticmethod
     def scale_points(points, scale_factor):

@@ -5,14 +5,16 @@ from src.spacecraft import Spacecraft
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+
+screen_size = (1280, 720)
+screen = pygame.display.set_mode(screen_size)
 clock = pygame.time.Clock()
 running = True
 dt = 0
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 background = StaryNightBackground(50, screen.get_size())
-spacecraft = Spacecraft(player_pos)
+spacecraft = Spacecraft(player_pos, screen_size)
 
 while running:
     # poll for events
