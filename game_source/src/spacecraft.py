@@ -30,8 +30,8 @@ class Spacecraft:
 
 
     def create_spacecraft_surface():
-        spacecraft_surface = pygame.Surface((20, 31))
-        spacecraft_surface.fill("red")
+        spacecraft_surface = pygame.Surface((20, 31), pygame.SRCALPHA)
+        # spacecraft_surface.fill("red")
         spacecraft_color = pygame.Color(255, 255, 255)
         lines_points = [(0, 28), (9, 0), (18, 28), (9, 21)]
 

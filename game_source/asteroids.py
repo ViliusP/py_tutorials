@@ -1,5 +1,6 @@
 # Example file showing a circle moving on screen
 import pygame
+from src.backaground import StaryNightBackground
 from src.spacecraft import Spacecraft
 
 # pygame setup
@@ -10,7 +11,7 @@ running = True
 dt = 0
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-
+background = StaryNightBackground(50, screen.get_size())
 spacecraft = Spacecraft(player_pos)
 
 while running:
@@ -24,7 +25,9 @@ while running:
     screen.fill("black")
 
     spacecraft.update(dt, events)
+    background.update(dt)
 
+    background.draw(screen)
     spacecraft.draw(screen)
 
     # flip() the display to put your work on screen
