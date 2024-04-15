@@ -3,25 +3,26 @@ import pygame
 
 
 class Spacecraft:
-    def __init__(self, initial_position: pygame.Vector2, intial_rotation=0):
+    def __init__(self, initial_position: pygame.Vector2, initial_rotation=0):
         self.position = initial_position
-        self.rotation = intial_rotation
+        self.velocity = pygame.Vector2(0, 0)  # Initial velocity is zero
+        self.rotation = math.radians(initial_rotation)  # Convert rotation to radians
         self.spacecraft_lines_points = [(0, 28), (9, 0), (18, 28), (9, 23)]
         self.scale_factor = 1.5
-        self.spacecraft_lines_points = Spacecraft.scale_points(self.spacecraft_lines_points, 1.8)
+        self.speed = 300  # Speed in pixels per secon
+        self.friction = 0.99  # Friction coefficient; closer to 1 is less friction, closer to 0 is more friction
+        self.braking_friction = 0.975  # Increased friction when braking
 
+        self.spacecraft_lines_points = Spacecraft.scale_points(self.spacecraft_lines_points, 1.8)
         self.spacecraft_surface = self.create_spacecraft_surface()
 
 
     def draw(self, screen: pygame.Surface):
         pivot = Spacecraft.polygon_centroid(self.spacecraft_lines_points)
-        Spacecraft.blitRotate(screen, self.spacecraft_surface, tuple(self.position), pivot, self.rotation)
-
+        Spacecraft.blitRotate(screen, self.spacecraft_surface, tuple(self.position), pivot, math.degrees(self.rotation))
 
     def blitRotate(surf: pygame.Surface, spacecraft_surface: pygame.Surface, origin: tuple[int, int], pivot: tuple[int, int], angle):
         # offset from pivot to center
-        pygame.draw.circle(spacecraft_surface, (255, 0, 0), pivot, 5)
-
         image_rect = spacecraft_surface.get_rect(topleft = (origin[0] - pivot[0], origin[1]-pivot[1]))
         offset_center_to_pivot = pygame.math.Vector2(origin) - image_rect.center
 
@@ -41,18 +42,31 @@ class Spacecraft:
         surf.blit(rotated_image, rotated_image_rect)
 
 
-
     def update(self, dt: float, events: list[pygame.event.Event]):
         pressed_keys = pygame.key.get_pressed()
+        rotation_speed = 2.4  # radians per second
 
         if pressed_keys[pygame.K_a]:
-            self.rotation = self.rotation + 140 * dt
+            self.rotation += rotation_speed * dt
         if pressed_keys[pygame.K_d]:
-            self.rotation = self.rotation - 140 * dt
+            self.rotation -= rotation_speed * dt
+
         if pressed_keys[pygame.K_w]:
-            self.position.y = self.position.y - 300 * dt
+            self.velocity += pygame.Vector2(-math.sin(self.rotation), -math.cos(self.rotation)) * self.speed * dt
         if pressed_keys[pygame.K_s]:
-            self.position.y = self.position.y + 300 * dt
+            self.velocity -= pygame.Vector2(-math.sin(self.rotation), -math.cos(self.rotation)) * self.speed * dt
+
+        # Apply braking friction or normal friction
+        if pressed_keys[pygame.K_s]:
+            # Apply stronger friction to simulate braking without reversing
+            self.velocity *= self.braking_friction
+        else:
+            # Apply normal friction
+            self.velocity *= self.friction
+
+        # Update position based on velocity
+        self.position += self.velocity * dt
+
 
     @staticmethod
     def scale_points(points, scale_factor):
