@@ -39,8 +39,6 @@ class Star:
     def update(self):
         max_blur = 10
         self.blur = (max_blur/2)*(math.sin((0.0008/self.blur_rate_modifier)*pygame.time.get_ticks()+self.blur_offset)+1)
-        print(self.blur)
-        
 
     def draw(self, screen: pygame.Surface):
         surface = pygame.transform.gaussian_blur(self.surface, int(self.blur))
