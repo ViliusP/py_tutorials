@@ -34,6 +34,19 @@ function splitToDigits(n: number): number[] {
   digits.reverse();
   return digits;
 }
+
+// Function to flatten the children
+// function flattenChildren(tutorials: NavItem[]): NavItem[] {
+//   return tutorials.reduce((acc: NavItem[], item: NavItem): NavItem[] => {
+//     if (item.children) {
+//       return acc.concat(item.children);
+//     }
+//     return acc;
+//   }, []);
+// }
+
+console.log(props.chapter)
+
 </script>
 
 <template>
