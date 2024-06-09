@@ -15,11 +15,16 @@ definePageMeta({
 });
 
 const { mdAndUp, sm, smAndUp } = useDisplay();
-const {} = useDisplay();
 
 const { data: navigation } = await useAsyncData("navigation", () =>
   fetchContentNavigation()
 );
+const firstNav = computed(() => navigation.value?.at(0)?.children);
+const secondNav = computed(() => navigation.value?.at(1)?.children);
+
+console.log(navigation.value?.at(0))
+console.log(navigation.value?.at(1))
+
 </script>
 
 <template>
@@ -61,9 +66,9 @@ const { data: navigation } = await useAsyncData("navigation", () =>
             xl="3"
             xxl="3"
             md="4"
-            v-for="(navigationItem, index) in navigation"
+            v-for="(navigationItem, index) in firstNav"
             :key="navigationItem._path"
-            v-if="navigation && Array.isArray(navigation)"
+            v-if="firstNav && Array.isArray(firstNav)"
           >
             <TutorialTopic
               class="mx-md-1 mx-lg-4"
@@ -72,7 +77,29 @@ const { data: navigation } = await useAsyncData("navigation", () =>
               :index="index"
             />
           </v-col>
+
+          <v-col
+            cols="12"
+            sm="6"
+            lg="4"
+            xl="3"
+            xxl="3"
+            md="4"
+            v-for="(navigationItem, index) in secondNav"
+            :key="navigationItem._path"
+            v-if="secondNav && Array.isArray(secondNav)"
+          >
+            <TutorialTopic
+              class="mx-md-1 mx-lg-4"
+              :chapter="navigationItem.title"
+              :tutorials="navigationItem.children || []"
+              :index="index"
+            />
+          </v-col>
+
+
         </v-row>
+        
         <svg class="landing-page-pattern" aria-hidden="true">
           <defs>
             <pattern
