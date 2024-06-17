@@ -6,7 +6,7 @@ __pycache__/
 
 # Virtual environment
 venv/
-pygame_school/
+.pygame_school/
 
 # PyGame specific files that shouldn't be uploaded
 *.pygame-saves
