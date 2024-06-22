@@ -2993,7 +2993,7 @@ __metadata:
     typescript: "npm:^5.3.3"
     vite-plugin-vuetify: "npm:^2.0.1"
     vue: "npm:^3.4.19"
-    vue-router: "npm:^4.3.0"
+    vue-router: "npm:^4.4.0"
     vue-tsc: "npm:^1.8.27"
     vuetify: "npm:^3.6.10"
   languageName: unknown
@@ -10191,6 +10191,17 @@ __metadata:
   peerDependencies:
     vue: ^3.2.0
   checksum: 10c0/72865ad2e5e17035f1d38311caaec77759f9813f3a627553994c05c43d04ceeaf1f9325260be4c060411c49ed176035579bf4815a4c084b908688c0cc6b3cf72
+  languageName: node
+  linkType: hard
+
+"vue-router@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "vue-router@npm:4.4.0"
+  dependencies:
+    "@vue/devtools-api": "npm:^6.5.1"
+  peerDependencies:
+    vue: ^3.2.0
+  checksum: 10c0/aad52e6bf8f52b1fcc3465ad55ff7aaf302b22b7cec14108957eebeba608ad485626fea3eb6750ca516f3d3974c3830a3cd6d97ec8c431aaa45ed23ffede2803
   languageName: node
   linkType: hard
 
