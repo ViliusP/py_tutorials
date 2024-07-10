@@ -19,6 +19,9 @@ const { smAndUp: showToc } = useDisplay();
 
 const author = getAuthorInfo(data, allAuthors)
 
+const updatedAt = data?.value?.updated_at;
+const createdAt = data?.value?.created_at;
+
 function getAuthorInfo(page: any, authors: Author[]) {
   if (page?.value?.authors && Array.isArray(page.value.authors) && page.value.authors.length > 0) {
     const firstAuthor = page.value.authors[0];
@@ -44,7 +47,21 @@ function getAuthorInfo(page: any, authors: Author[]) {
         <ContentRenderer :value="data">
           <article v-if="data" class="prose ml-auto">
             <ProseH1>{{ data?.title }}</ProseH1>
-            <ColoredAvatar class="mt-n3" v-if="author" :author="author"/>
+            <v-row class="px-1" no-gutters>
+              <v-col>
+                <ColoredAvatar v-if="author" :author="author" />
+              </v-col>
+              <v-col cols="2">
+                <div v-if="createdAt"><v-icon class="date-icon" size="x-small">mdi-calendar-blank
+                  </v-icon><span class="ml-1 text-overline">{{ createdAt }}</span>
+                </div>
+                <div v-if="updatedAt && updatedAt !== createdAt"><v-icon class="date-icon" size="x-small">mdi-calendar-edit
+                  </v-icon><span class="ml-1 text-overline">{{ updatedAt }}</span>
+                </div>
+              </v-col>
+            </v-row>
+
+
             <ContentRendererMarkdown :value="data" />
           </article>
         </ContentRenderer>
@@ -65,6 +82,10 @@ function getAuthorInfo(page: any, authors: Author[]) {
 </template>
 
 <style>
+.date-icon {
+  margin-top: 1px;
+}
+
 .prose {
   max-width: 96ch;
 }
