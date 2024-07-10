@@ -35,12 +35,12 @@ const filteredNav = computed(() => {
           xxl="3"
           md="12"
           lg="3"
-          class="me-auto my-2 my-lg-0 justify-center"
+          class="me-auto my-2 my-lg-0 align-self-center"
         >
-            <MaterialH3 class="text-overline text-center mt-4">
+            <MaterialH3 class="text-overline text-center mt-4 px-2">
                 {{ t(`tutorials_${topic}.headline`) }}
             </MaterialH3>
-            <MaterialP class="text-center mt-2 w-75 mx-auto">           
+            <MaterialP class="text-center mt-3 w-75 mx-auto tutorial-description">           
                 {{ t(`tutorials_${topic}.description`) }}
             </MaterialP>
 
@@ -88,3 +88,9 @@ const filteredNav = computed(() => {
     </v-sheet>
   </v-row>
 </template>
+
+<style>
+.tutorial-description {
+  white-space: pre-line
+}
+</style>

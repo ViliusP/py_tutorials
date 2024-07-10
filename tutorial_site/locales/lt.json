@@ -14,10 +14,10 @@
     },
     "tutorials_basics": {
         "headline": "Python pradmenys",
-        "description": "bla bla bla bla bla bla bla bla" 
+        "description": "Pradėkite pažintį su programavimu čia"
     },
     "tutorials_asteroid_clone": {
         "headline": "Žaidimų kūrimo pradmenys su pygame",
-        "description": "Šiose pamokose pristatomi paprastų žaidimų kūrimo principai, bandoma sukurti žaidimo „Asteroids“ kloną" 
+        "description": "Šiose pamokose pristatomi paprastų žaidimų kūrimo principai, kuriant žaidimo „Asteroids“ kloną" 
     }
 }
