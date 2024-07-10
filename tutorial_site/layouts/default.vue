@@ -1,6 +1,6 @@
 <template>
   <v-app class="bg-transition">
-    <v-app-bar class="bg-transition" color="surface-variant" scroll-behavior="elevate">
+    <v-app-bar class="bg-transition px-2" color="surface-variant" scroll-behavior="elevate">
       <v-avatar
         class="ml-2"
         size="large"

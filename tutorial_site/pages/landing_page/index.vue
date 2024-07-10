@@ -2,13 +2,10 @@
 import HelloImage from "./hello_image.vue";
 import HelloImageAlt from "./hello_image_alt.vue";
 
-import TutorialTopic from "~/components/TutorialTopic.vue";
-
 import { useDisplay } from "vuetify";
-import EducationImage from "./education_image.vue";
-import MaterialH3 from "~/components/text/MaterialH3.vue";
 import MaterialH1 from "~/components/text/MaterialH1.vue";
 import MaterialH2 from "~/components/text/MaterialH2.vue";
+import TutorialsByTopic from "./tutorials_by_topic.vue";
 
 definePageMeta({
   path: "/",
@@ -16,14 +13,6 @@ definePageMeta({
 
 const { mdAndUp, sm, smAndUp } = useDisplay();
 
-const { data: navigation } = await useAsyncData("navigation", () =>
-  fetchContentNavigation()
-);
-const firstNav = computed(() => navigation.value?.at(0)?.children);
-const secondNav = computed(() => navigation.value?.at(1)?.children);
-
-console.log(navigation.value?.at(0))
-console.log(navigation.value?.at(1))
 
 </script>
 
@@ -39,89 +28,9 @@ console.log(navigation.value?.at(1))
         <HelloImageAlt v-if="sm" />
       </v-col>
     </v-row>
-    <v-row class="ml-sm-n4 my-8">
-      <v-sheet
-        color="rgba(var(--v-theme-tertiary), 0.15)"
-        class="w-100 mr-sm-8 mr-md-16 py-8 px-4 rounded-e-lg tutorial-sheet pattern-container"
-        :elevation="0"
-      >
-        <v-row align="start" class="d-flex flex-row justify-center">
-          <v-col
-            cols="12"
-            xl="3"
-            xxl="3"
-            md="12"
-            lg="4"
-            class="me-auto my-2 my-lg-0"
-          >
-            <EducationImage />
-            <MaterialH3 class="text-overline text-center mt-4"
-              >Pamokų sąrašas
-            </MaterialH3>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="6"
-            lg="4"
-            xl="3"
-            xxl="3"
-            md="4"
-            v-for="(navigationItem, index) in firstNav"
-            :key="navigationItem._path"
-            v-if="firstNav && Array.isArray(firstNav)"
-          >
-            <TutorialTopic
-              class="mx-md-1 mx-lg-4"
-              :chapter="navigationItem.title"
-              :tutorials="navigationItem.children || []"
-              :index="index"
-            />
-          </v-col>
+    <TutorialsByTopic topic="basics"/>
+    <TutorialsByTopic topic="asteroid_clone"/>
 
-          <v-col
-            cols="12"
-            sm="6"
-            lg="4"
-            xl="3"
-            xxl="3"
-            md="4"
-            v-for="(navigationItem, index) in secondNav"
-            :key="navigationItem._path"
-            v-if="secondNav && Array.isArray(secondNav)"
-          >
-            <TutorialTopic
-              class="mx-md-1 mx-lg-4"
-              :chapter="navigationItem.title"
-              :tutorials="navigationItem.children || []"
-              :index="index"
-            />
-          </v-col>
-
-
-        </v-row>
-        
-        <svg class="landing-page-pattern" aria-hidden="true">
-          <defs>
-            <pattern
-              id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-              width="125"
-              height="125"
-              x="10"
-              y="-1"
-              patternUnits="userSpaceOnUse"
-            >
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <rect
-            width="100%"
-            height="100%"
-            stroke-width="0"
-            fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-          />
-        </svg>
-      </v-sheet>
-    </v-row>
     <div class="mb-6 px-lg-16 mx-0 px-sm-4 mr-sm-2 mr-md-10 dummy-text-section text-justify">
       <MaterialH2 class="text-left">Puslapį užpildantis tekstas</MaterialH2>
       <p class="text-justify">

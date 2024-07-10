@@ -45,12 +45,10 @@ function splitToDigits(n: number): number[] {
 //   }, []);
 // }
 
-console.log(props.chapter)
-
 </script>
 
 <template>
-  <v-card class="px-4 py-2" variant="outlined">
+  <v-card class="px-4 py-2 rounded-lg" variant="outlined">
     <v-card-title class="text-uppercase text-overline pl-2">
       {{ t(`topics.${props.chapter.toLowerCase()}`) }}
     </v-card-title>
