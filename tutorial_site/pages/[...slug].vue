@@ -6,8 +6,8 @@ import allAuthors from "~/assets/authors.json"
 interface Author {
   name: string;
   surname: string;
-  light_color: string;
-  dark_color: string;
+  lightColor: string;
+  darkColor: string;
 }
 
 const { path } = useRoute();

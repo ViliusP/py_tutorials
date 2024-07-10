@@ -2,7 +2,7 @@
   {
     "name": "Vilius",
     "surname": "Paliokas",
-    "light_color": "#D32F2F",
-    "dark_color": "#B71C1C"
+    "lightColor": "#d943a2",
+    "darkColor": "#e32471"
   }
 ]

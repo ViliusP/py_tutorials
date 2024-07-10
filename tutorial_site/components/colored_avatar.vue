@@ -69,7 +69,7 @@ const initialsStyle = computed(() => {
 // Compute the font size for the author name based on the avatar size
 const authorNameStyle = computed(() => {
     return {
-        fontSize: `${size.value * 0.56}px` // Adjust this factor as necessary
+        fontSize: `${size.value * 0.58}px` // Adjust this factor as necessary
     }
 })
 </script>
