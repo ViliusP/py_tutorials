@@ -8,6 +8,7 @@
     <v-menu activator="parent">
       <v-list @click:select="onLanguageSelect">
         <v-list-item
+          :class="{ 'cursor-not-allowed': item !== 'lt' && !dev }"
           v-for="(item, index) in availableLocales"
           :disabled="item !== 'lt' && !dev"
           :active="item == locale"
