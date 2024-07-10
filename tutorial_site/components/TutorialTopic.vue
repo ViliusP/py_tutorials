@@ -45,8 +45,6 @@ function splitToDigits(n: number): number[] {
 //   }, []);
 // }
 
-console.log(props.chapter)
-
 </script>
 
 <template>
