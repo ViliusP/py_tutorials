@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import ColoredAvatar from "~/components/colored_avatar.vue";
 import { useDisplay } from "vuetify";
+import allAuthors from "~/assets/authors.json"
+
+interface Author {
+  name: string;
+  surname: string;
+  light_color: string;
+  dark_color: string;
+}
 
 const { path } = useRoute();
 
@@ -7,6 +16,22 @@ const { data } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne()
 })
 const { smAndUp: showToc } = useDisplay();
+
+const author = getAuthorInfo(data, allAuthors)
+
+function getAuthorInfo(page: any, authors: Author[]) {
+  if (page?.value?.authors && Array.isArray(page.value.authors) && page.value.authors.length > 0) {
+    const firstAuthor = page.value.authors[0];
+    // Split the fullName into name and surname
+    const [name, surname] = firstAuthor.split(' ');
+
+    // Find the author in the array
+    return authors.find(x => x.name === name && x.surname === surname);
+
+  }
+  return null;
+}
+
 </script>
 
 <template>
@@ -14,10 +39,12 @@ const { smAndUp: showToc } = useDisplay();
     <v-row class="flex-nowrap" justify="center">
 
       <!-- Content Column with alignment at the end -->
-      <v-col class="flex-shrink-1" cols="auto" >
+      <v-col class="flex-shrink-1" cols="auto">
+        <!-- @vue-ignore -->
         <ContentRenderer :value="data">
           <article v-if="data" class="prose ml-auto">
             <ProseH1>{{ data?.title }}</ProseH1>
+            <ColoredAvatar class="mt-n3" v-if="author" :author="author"/>
             <ContentRendererMarkdown :value="data" />
           </article>
         </ContentRenderer>
@@ -26,12 +53,12 @@ const { smAndUp: showToc } = useDisplay();
       <!-- TOC Column with alignment at the start, shown only on md and up screens -->
       <v-col v-if="showToc" cols="4" md="3" xl="2" class="toc-column">
         <!-- @vue-skip -->
-        <TOC class="toc" :links="data.body?.toc?.links"/>
+        <TOC class="toc" :links="data.body?.toc?.links" />
       </v-col>
 
     </v-row>
     <v-divider class="my-4" />
-    <v-row justify="space-between"> 
+    <v-row justify="space-between">
       <HorizontalDocsNav />
     </v-row>
   </v-container>
@@ -44,8 +71,10 @@ const { smAndUp: showToc } = useDisplay();
 
 .toc-column .toc {
   position: sticky;
-  top: 100px; /* Adjust based on desired top margin */
-  max-height: 100vh; /* Adjust based on viewport height */
+  top: 100px;
+  /* Adjust based on desired top margin */
+  max-height: 100vh;
+  /* Adjust based on viewport height */
   overflow-y: auto;
 }
 </style>
