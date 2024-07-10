@@ -2,8 +2,10 @@
 title: 'Capabilities'
 description: 'Here we test the capabilities of our site'
 draft: true
+created_at: '2024-01-01'
+updated_at: '2024-01-01'
 authors:
-  - Vilius Paliokas
+  - 'Vilius Paliokas'
 ---
 
 Above, you should see the title in H1 tags. This text is considered a description, so it has a different style than a prose paragraph.
