@@ -11,5 +11,13 @@
     "topics": {
         "start": "Pradžia",
         "basicdrawing": "Piešimo pradmenys"
+    },
+    "tutorials_basics": {
+        "headline": "Python pradmenys",
+        "description": "bla bla bla bla bla bla bla bla" 
+    },
+    "tutorials_asteroid_clone": {
+        "headline": "Žaidimų kūrimo pradmenys su pygame",
+        "description": "Šiose pamokose pristatomi paprastų žaidimų kūrimo principai, bandoma sukurti žaidimo „Asteroids“ kloną" 
     }
 }
