@@ -49,6 +49,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   modules: [
     "@nuxt/content",
     "@nuxtjs/i18n",
@@ -63,9 +64,11 @@ export default defineNuxtConfig({
       );
     },
   ],
+
   ignore: [
     "python_graph_drawing/**"
   ],
+
   googleFonts: {
     families: {
       "Noto Sans": {
@@ -77,6 +80,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   nitro: {
     prerender: {
       concurrency: 12,
@@ -84,6 +88,7 @@ export default defineNuxtConfig({
       failOnError: false,
     },
   },
+
   content: {
     defaultLocale: "lt",
     locales: ["lt", "en"],
@@ -118,16 +123,20 @@ export default defineNuxtConfig({
       },
     },
   },
+
   typescript: {
     typeCheck: true,
   },
+
   css: [
     "vuetify/lib/styles/main.sass",
     "@mdi/font/css/materialdesignicons.css",
   ],
+
   build: {
     transpile: ["vuetify", "vue-i18n"],
   },
+
   i18n: {
     strategy: "no_prefix", // No path changes for locales
     locales: [
@@ -144,6 +153,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false,
     vueI18n: "./i18n.config.ts",
   },
+
   vite: {
     ssr: {
       noExternal: ["vuetify"],
@@ -161,5 +171,12 @@ export default defineNuxtConfig({
       },
     },
   },
+
   devtools: { enabled: true },
+
+  vueCompilerOptions: {
+    plugins: []
+  },
+
+  compatibilityDate: "2024-09-09",
 });
