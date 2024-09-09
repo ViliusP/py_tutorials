@@ -8,7 +8,7 @@
   
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { TocLink } from '@nuxt/content/dist/runtime/types'
+import type { TocLink } from '@nuxt/content'
 
 defineOptions({
   inheritAttrs: true

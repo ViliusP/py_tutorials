@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem } from "@nuxt/content/types";
+import type { NavItem } from '@nuxt/content';
 
 const { t } = useI18n();
 
@@ -26,13 +26,12 @@ const icons = (index: number) => {
 };
 
 function splitToDigits(n: number): number[] {
-  var digits = [];
+  const digits: number[] = [];
   while (n != 0) {
     digits.push(n % 10);
     n = Math.trunc(n / 10);
   }
-  digits.reverse();
-  return digits;
+  return digits.reverse();
 }
 
 // Function to flatten the children
