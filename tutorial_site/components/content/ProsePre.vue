@@ -164,9 +164,7 @@ span.line.highlight {
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
 
-}
-
-.line.highlight > span {
+}.line.highlight>span {
   --shiki-default-bg: initial;
   --shiki-dark-bg: initial;
   /* Reset or apply new styles as needed */
@@ -177,5 +175,9 @@ span.line.highlight {
   width: fit-content;
   min-width: 100%;
   transition: color .5s;
+}
+
+.bg-shiki-bg+.bg-shiki-bg {
+  margin-top: 16px;
 }
 </style>
