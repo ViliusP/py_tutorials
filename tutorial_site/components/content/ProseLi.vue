@@ -31,10 +31,11 @@ const icons = computed(() => {
 });
 
 function splitToDigits(n: number): number[] {
-  var digits = [];
-  while (n != 0) {
+  const digits: number[] = [];
+
+  while (n !== 0) {
     digits.push(n % 10);
-    n = Math.trunc(n / 10);
+    n = Math.trunc(n / 10);  // Use truncation to remove the decimal part
   }
   digits.reverse();
   return digits;

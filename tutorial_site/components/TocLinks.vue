@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { defineProps, type PropType } from 'vue';
-import type { TocLink } from '@nuxt/content/dist/runtime/types';
+import type { TocLink } from '@nuxt/content';
 import { useRouter } from 'vue-router';
 import { useNuxtApp } from '#app';
 import { onMounted } from 'vue';
