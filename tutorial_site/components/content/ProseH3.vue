@@ -14,7 +14,7 @@ import MaterialH3 from '../text/MaterialH3.vue';
 const props = defineProps<{ id?: string }>()
 
 const { headings } = useRuntimeConfig().public.mdc
-const generate = computed(() => props.id && headings?.anchorLinks?.h3)
+const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings?.anchorLinks?.h3)
 </script>
 
 <style>
