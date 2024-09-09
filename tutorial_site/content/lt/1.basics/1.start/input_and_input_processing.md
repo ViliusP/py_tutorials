@@ -274,6 +274,14 @@ Enter a number: not a number
 Input is neither an integer nor a float.
 ```
 
+::ProseAlert{ type="info" }
+
+Kodui sukurti galite panaudoti `int_number = int(float(input))`{lang=python} techniką, kuri tekstą, kuriame yra dešimtainis skaičius, paverčia į sveikąjį: `"16.44"`{ lang=python } **=>** `16.44`{ lang=python } **=>** `16`{ lang=python }.
+
+#title
+Patarimas
+::
+
 ### 3. Didesnis skaičius
 
 Parašykite programa, kuri patikrintų, kuris tarp dviejų įvestų skaičių yra didesnis
@@ -296,6 +304,14 @@ Pavyzdinė programos eiga:
 Enter a number: 5
 The number is odd.
 ```
+
+::ProseAlert{ type="info" }
+
+Šiai užduočiai padaryti reikės naudoti modulo `%`{ lang=python } operatorių. Daugiau ieškokite internete - pavyzdžiui, galite įvesti į paieškos variklį tokią užklausą: "python even or odd".
+
+#title
+Patarimas
+::
 
 ### 5. Skaičiuotuvas
 
