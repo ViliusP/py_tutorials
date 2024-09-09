@@ -14,7 +14,7 @@ import MaterialH2 from '../text/MaterialH2.vue';
 const props = defineProps<{ id?: string }>()
 
 const { headings } = useRuntimeConfig().public.mdc
-const generate = computed(() => props.id && headings?.anchorLinks?.h2)
+const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings?.anchorLinks?.h2)
 </script>
 
 <style>
