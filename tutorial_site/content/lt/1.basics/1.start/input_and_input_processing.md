@@ -205,12 +205,12 @@ b_input=input("Input second number: ")
 try:
     a=int(a_input)
 except: 
-    print("First input is not a number, it will be considered as 0")
+    print("The first input is not a number, it will be considered as 0")
 
 try:
     b=int(b_input)
 except: 
-    print("Second input is not a number, it will be considered as 0")
+    print("The second input is not a number, it will be considered as 0")
 
 result=a+b
 print("Result: " + str(result))
@@ -234,13 +234,13 @@ b_input=input("Input second number: ")
 try:
     a=int(a_input)
 except: 
-    print("First input is not a number, program will exit")
+    print("The first input is not a number; the program will exit")
     quit()
 
 try:
     b=int(b_input)
 except: 
-    print("Second input is not a number, program will exit")
+    print("The second input is not a number; the program will exit")
     quit()
 
 result=a+b
@@ -249,3 +249,64 @@ print("Result: " + str(result))
 
 ## Užduotys
 
+### 1. Temperatūros konvertavimas
+
+Parašykite programa, kuri pateiktą temperatūrą paverstų iš celsijaus į farenheitus. Formulė: $ ^\circ{C}=(^\circ{F}-32)\cdot \frac{5}{9}$.
+
+### 2. Skaičiaus tipas
+
+Paraškite programa, kuri patikrintų, ar įvesti yra sveikasis skaičius, ar slankiojo kablelio.
+
+Programos pavyzdinės išvestys:
+
+```console
+Enter a number: 54
+The input is an integer.
+```
+
+```console
+Enter a number: 14.4
+The input is a float.
+```
+
+```console
+Enter a number: not a number
+Input is neither an integer nor a float.
+```
+
+### 3. Didesnis skaičius
+
+Parašykite programa, kuri patikrintų, kuris tarp dviejų įvestų skaičių yra didesnis
+
+Pavyzdinė programos eiga:
+
+```console
+Enter the first number: 7
+Enter the second number: 10
+The first number is bigger than the second number.
+```
+
+### 4. Lyginis ar nelyginis
+
+Parašykite programa, kuri patikrintų, ar įvestas skaičius yra lyginis ar nelyginis:
+
+Pavyzdinė programos eiga:
+
+```console
+Enter a number: 5
+The number is odd.
+```
+
+### 5. Skaičiuotuvas
+
+Sukurkite skaičiuotuvą, kuris naudojantis 4 operatoriais (+, -, *, /) galėtų atlikti veiksmus tarp dviejų skaičių.
+
+Pavyzdinė programos eiga:
+
+```console
+Enter the first number: 8
+Enter the second number: 4
+Enter operation (+, -, *, /): /
+
+The result is 2.
+```
