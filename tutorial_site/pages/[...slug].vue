@@ -15,12 +15,15 @@ const { path } = useRoute();
 const { data } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne()
 })
+
+console.log(typeof data)
+
 const { smAndUp: showToc } = useDisplay();
 
-const author = getAuthorInfo(data, allAuthors)
+const author = data?.value ? getAuthorInfo(data, allAuthors) : null;
 
-const updatedAt = data?.value?.updated_at;
-const createdAt = data?.value?.created_at;
+const updatedAt = data?.value?.updated_at ?? undefined;
+const createdAt = data?.value?.created_at ?? undefined;
 
 function getAuthorInfo(page: any, authors: Author[]) {
   if (page?.value?.authors && Array.isArray(page.value.authors) && page.value.authors.length > 0) {
@@ -44,7 +47,7 @@ function getAuthorInfo(page: any, authors: Author[]) {
       <!-- Content Column with alignment at the end -->
       <v-col class="flex-shrink-1" cols="auto">
         <!-- @vue-ignore -->
-        <ContentRenderer :value="data">
+        <ContentRenderer :value="data as any">
           <article v-if="data" class="prose ml-auto">
             <ProseH1>{{ data?.title }}</ProseH1>
             <v-row class="px-1" no-gutters>
