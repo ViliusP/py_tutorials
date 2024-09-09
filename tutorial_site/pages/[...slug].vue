@@ -16,8 +16,6 @@ const { data } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne()
 })
 
-console.log(typeof data)
-
 const { smAndUp: showToc } = useDisplay();
 
 const author = data?.value ? getAuthorInfo(data, allAuthors) : null;
