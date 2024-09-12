@@ -45,18 +45,15 @@
         </v-btn>
     </div>
 
-    <pre class="code-container">
-    <div v-for="(line, index) in codeLines" :key="index" :class="['code-line', { 'active-line': index === codeLine }]">
-        {{ line }}</div>
-</pre>
-    <div class="console">
-        <div v-for="(line, index) in consoleLines" :key="index">{{ line }}</div>
-    </div>
+
+    <MDC class="mb-4" :value="mdComputed" />
+    <MDC class="animation-console" :value="consoleOutput" />
+
 
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, nextTick } from 'vue';
 
 const header_row = ["00:00", "03:25", "06:50", "10:15", "13:40", "17:05", "20:30"]
 const header_col = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -72,6 +69,30 @@ const CONSTANT_TEMPERATURES = [
     [11, 16, 21, 26, 31, 36, 41]
 ];
 
+const md = `
+\`\`\`python {-1}
+temperatures = [[5, 10, 15, 20, 25, 30, 35], [8, 12, 18, 22, 27, 32, 37], ...]
+for i in range(7):
+    for j in range(7):
+        print(f"day {i+1}, hour {j+1}: {temperatures[i][j]}")
+\`\`\`
+`
+
+const consoleOutputTmpl = `
+\`\`\`console
+{code}
+\`\`\`
+`
+
+const mdComputed = computed(() => {
+    return md.replace("{-1}", `{${codeLine.value + 1}}`);
+});
+
+const consoleOutput = computed(() => {
+    return consoleOutputTmpl.replace("{code}", consoleLines.value.join("\n"));
+})
+
+
 // Reactive data
 const temperatures = ref(CONSTANT_TEMPERATURES);
 const i = ref(-1);
@@ -81,13 +102,6 @@ const nextLine = ref(-1);
 const interval = ref(null);
 const isPlaying = ref(false);
 const consoleLines = ref([]);
-
-const codeLines = ref(`
-  temperatures = [[5, 10, 15, 20, 25, 30, 35], [8, 12, 18, 22, 27, 32, 37], ...]
-  for i in range(7):
-      for j in range(7):
-          print(f"day {i+1}, hour {j+1}: {temperatures[i][j]}")
-  `.trim().split('\n'));
 
 const getCellClass = (rowIndex, colIndex) => {
     return rowIndex === i.value && colIndex === j.value ? 'highlight-cell' : '';
@@ -105,6 +119,13 @@ const highlightCell = (rowIndex, colIndex) => {
 const updateConsole = () => {
     const consoleLine = `day ${i.value + 1}, hour ${j.value + 1}: ${temperatures.value[i.value][j.value]}°C`;
     consoleLines.value.push(consoleLine);
+
+    // Add a delay to ensure the Shiki card has fully updated its content before scrolling
+    nextTick(() => {
+        setTimeout(() => {
+            scrollToBottom();
+        }, 50);
+    });
 };
 
 const clearConsole = () => {
@@ -189,34 +210,25 @@ const resetLoop = () => {
     codeLine.value = nextLine.value = -1;
 };
 
-onMounted(() => {
-    // Any additional setup needed on component mount
-});
+// Mutations for scrolling
+function scrollToBottom() {
+    const targetNode = document.querySelector('.animation-console .v-card');
+    nextTick(() => {
+        console.log(targetNode.scrollHeight)
+        targetNode.scrollTo({
+            top: targetNode.scrollHeight+24,
+            behavior: 'smooth'
+        });
+        console.log('Scrolled to bottom');
+    });
+    
+}
+
 </script>
 
 
 
 <style scoped>
-/* table {
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th,
-td {
-    width: 60px;
-    height: 60px;
-    border: 1px solid #333;
-    text-align: center;
-    font-size: 18px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-th {
-    background-color: #e0e0e0;
-}
-*/
 .highlight-cell {
     background-color: #1b94034f !important;
     font-weight: 500;
@@ -233,54 +245,12 @@ th {
     font-size: 24px;
     margin-top: 20px;
 }
+</style>
 
-.controls {
-    margin: 20px 0;
-}
-
-.controls button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    background-color: #2196f3;
-    color: white;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.controls button:hover {
-    background-color: #1976d2;
-}
-
-.code-container {
-    margin-top: 30px;
-    font-family: 'Courier New', Courier, monospace;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.code-line {
-    padding-left: 40px;
-    margin-bottom: 5px;
-    min-height: 24px;
-}
-
-.active-line {
-    background-color: #d3d3d3;
-}
-
-.console {
-    border: 1px solid #ccc;
-    background: #222;
-    color: #fff;
-    padding: 10px;
-    font-family: 'Courier New', Courier, monospace;
-    width: 60%;
-    margin: 20px auto;
+<style>
+.animation-console .v-card {
+    padding: 0 !important;
     height: 200px;
-    overflow-y: auto;
+    overflow: auto;
 }
 </style>
