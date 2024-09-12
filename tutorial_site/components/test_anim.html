@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Loop Animation with Code and Fake Console</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #333;
+            text-align: center;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        th {
+            background-color: #e0e0e0;
+        }
+
+        .highlight-cell {
+            background-color: #1b940385 !important;
+            color: #000;
+        }
+
+        .highlight-row {
+            background-color: #ffcc8042;
+        }
+
+        .loop-values {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .controls {
+            margin: 20px 0;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #2196f3;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #1976d2;
+        }
+
+        .code-container {
+            margin-top: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .code-line {
+            padding-left: 40px;
+            margin-bottom: 5px;
+            min-height: 24px;
+        }
+
+        .active-line {
+            background-color: #d3d3d3;
+            padding: 2px;
+        }
+
+        .console {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            height: 150px;
+            overflow-y: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>2D Loop Visualization (7x7 Grid with Code and Fake Console)</h2>
+    <table id="loopTable"></table>
+    <div class="loop-values">
+        <strong>i (Day)</strong>: <span id="iValue">0</span>, <strong>j (Hour)</strong>: <span id="jValue">0</span>
+    </div>
+    <div class="controls">
+        <button id="playPauseBtn">Play</button>
+        <button id="nextBtn">Next</button>
+        <button id="prevBtn">Previous</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+    <div class="code-container">
+        <div id="codeLine0" class="code-line">temperatures = [[5, 10, 15, ...], [8, 12, ...], ...]</div>
+        <div id="codeLine1" class="code-line">for i in range(7):</div>
+        <div id="codeLine2" class="code-line">&nbsp;&nbsp;for j in range(7):</div>
+        <div id="codeLine3" class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;print(f"day {i+1}, hour {j+1}:
+            {temperatures[i][j]}")</div>
+    </div>
+    <div class="console" id="fakeConsole"></div>
+
+    <script>
+        const table = document.getElementById('loopTable');
+        const iValue = document.getElementById('iValue');
+        const jValue = document.getElementById('jValue');
+        const fakeConsole = document.getElementById('fakeConsole');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+
+        let i = -1, j = -1, codeLine = 0, interval = null;
+        let temperatures = Array.from({ length: 7 }, () => Array.from({ length: 7 }, () => Math.floor(Math.random() * 30)));
+
+        const createTable = () => {
+            table.innerHTML = ''; // Clear previous table
+            const headerRow = document.createElement('tr');
+            headerRow.appendChild(document.createElement('th')); // Empty corner
+            for (let col = 0; col < 7; col++) {
+                const th = document.createElement('th');
+                th.innerText = `Hour ${col + 1}`;
+                headerRow.appendChild(th);
+            }
+            table.appendChild(headerRow);
+
+            for (let i = 0; i < 7; i++) {
+                const row = document.createElement('tr');
+                const rowHeader = document.createElement('th');
+                rowHeader.innerText = `Day ${i + 1}`;
+                row.appendChild(rowHeader);
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    cell.setAttribute('id', `cell-${i}-${j}`);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        };
+
+        const removeHighlights = () => {
+            removeCellHighlight()
+            document.querySelectorAll('.highlight-row').forEach(row => row.classList.remove('highlight-row'));
+        }
+
+        const removeCellHighlight = () => {
+            document.querySelectorAll('.highlight-cell').forEach(cell => cell.classList.remove('highlight-cell'));
+        }
+        
+        const removeCodeHighlight = () => {
+            document.querySelectorAll('.code-line').forEach(line => line.classList.remove('active-line'));
+        }
+
+        const highlightCell = (i, j) => {
+            console.log(`i: ${i} | j:${j}`)
+            document.querySelectorAll('.highlight-cell').forEach(cell => cell.classList.remove('highlight-cell'));
+            const cell = document.getElementById(`cell-${i}-${j}`);
+            cell.classList.add('highlight-cell');
+            cell.innerText = `${temperatures[i][j]}°C`;
+        };
+
+        const highlightRow = (i) => {
+            document.querySelectorAll('.highlight-row').forEach(row => row.classList.remove('highlight-row'));
+            for (let col = 0; col < 7; col++) {
+                document.getElementById(`cell-${i}-${col}`).classList.add('highlight-row');
+            }
+        };
+
+        const highlightCodeLine = () => {
+            document.querySelectorAll('.code-line').forEach(line => line.classList.remove('active-line'));
+            document.getElementById(`codeLine${codeLine}`).classList.add('active-line');
+        };
+
+        const updateConsole = () => {
+            const consoleLine = `day ${i + 1}, hour ${j + 1}: ${temperatures[i][j]}°C`;
+            fakeConsole.innerHTML += `${consoleLine}<br>`;
+            fakeConsole.scrollTop = fakeConsole.scrollHeight;
+        };
+
+        const clearConsole = () => {
+            const lines = fakeConsole.innerHTML.split('<br>').filter(line => line.trim() !== '');
+            if (lines.length > 0) {
+                lines.pop();  // Remove the last line
+                fakeConsole.innerHTML = lines.join('<br>') + '<br>';
+            }
+        };
+
+        // Custom logic using a dictionary-like structure
+        const codeFlow = {
+            0: () => { console.log("hello"); populateTable(); return 1; },  // Create and populate the table
+            1: () => firstStep(),                             // Move to next row
+            2: () => { j++; return 3 },                         // Reset to first column
+            3: () => thirdStep() // Highlight and update console, repeat
+        };
+
+        const firstStep = () => {
+            removeCellHighlight();
+            if(i==6) {
+                removeCodeHighlight();
+                removeHighlights()
+                stopLoop()
+                return 4
+            }
+            i++;
+            j = -1;
+            highlightRow(i);
+            return 2;
+        }
+
+        const thirdStep = () => {
+            highlightCell(i, j);
+            updateConsole();
+            if (j >= 6) {
+                return 1;
+            }
+            return 2;
+        }
+
+
+        // Populate table with all temperature values
+        const populateTable = () => {
+            for (let i = 0; i < 7; i++) {
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.getElementById(`cell-${i}-${j}`);
+                    cell.innerText = `${temperatures[i][j]}°C`; // Populate cell with temperature
+                }
+            }
+        };
+
+
+        const nextIteration = () => {
+            if(codeLine == 4) {
+                return
+            }
+            highlightCodeLine();
+            const nextLine = codeFlow[codeLine]();
+            codeLine = nextLine !== undefined ? nextLine : codeLine + 1;
+        };
+
+        const prevIteration = () => {
+            prevStep();
+            clearConsole();
+            highlightCodeLine();
+        };
+
+        const prevStep = () => {
+            if (i > 0 || (i === 0 && j > 0)) {
+                j > 0 ? j-- : (j = 6, i--);
+            }
+            iValue.innerText = i;
+            jValue.innerText = j;
+        };
+
+        const playLoop = () => {
+            interval = setInterval(() => nextIteration(), 5);
+            playPauseBtn.innerText = "Stop";
+        };
+
+        const stopLoop = () => {
+            clearInterval(interval);
+            playPauseBtn.innerText = "Play";
+        };
+
+        const togglePlayPause = () => {
+            interval ? stopLoop() : playLoop();
+        };
+
+        const resetLoop = () => {
+            stopLoop();
+            i = j = -1;
+            removeHighlights()
+            fakeConsole.innerHTML = '';
+            codeLine = 0;  // Reset to the first code line
+            iValue.innerText = "";
+            jValue.innerText = "";
+        };
+
+        document.getElementById('nextBtn').addEventListener('click', nextIteration);
+        document.getElementById('prevBtn').addEventListener('click', prevIteration);
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        document.getElementById('resetBtn').addEventListener('click', resetLoop);
+
+        createTable();
+    </script>
+
+</body>
+
+</html>
