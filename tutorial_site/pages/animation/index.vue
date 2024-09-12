@@ -28,11 +28,9 @@
             <button @click="resetLoop">Reset</button>
         </div>
         <pre class="code-container">
-      <div v-for="(line, index) in codeLines" :key="index"
-          :class="['code-line', { 'active-line': index === codeLine }]">
-        {{ line }}
-      </div>
-    </pre>
+            <div v-for="(line, index) in codeLines" :key="index"
+          :class="['code-line', { 'active-line': index === codeLine }]">{{ line }}</div>
+        </pre>
         <div class="console">
             <div v-for="(line, index) in consoleLines" :key="index">{{ line }}</div>
         </div>
@@ -167,7 +165,7 @@ const resetLoop = () => {
     stopLoop();
     i.value = j.value = -1;
     consoleLines.value = [];
-    codeLine.value = 0;
+    codeLine.value = -1;
 };
 
 onMounted(() => {
@@ -248,7 +246,6 @@ th {
 
 .active-line {
     background-color: #d3d3d3;
-    padding: 2px;
 }
 
 .console {
