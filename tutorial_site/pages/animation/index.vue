@@ -165,7 +165,7 @@ const resetLoop = () => {
     stopLoop();
     i.value = j.value = -1;
     consoleLines.value = [];
-    codeLine.value = -1;
+    codeLine.value = nextLine.value = -1;
 };
 
 onMounted(() => {
