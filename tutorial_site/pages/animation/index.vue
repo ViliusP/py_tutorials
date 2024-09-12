@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="row in 7" :key="row">
+                <tr v-for="row in 7" :key="row" :class="{'highlight-row': row - 1 === i}">
                     <th>Day {{ row }}</th>
                     <td v-for="col in 7" :key="col" :class="getCellClass(row - 1, col - 1)"
                         @click="highlightCell(row - 1, col - 1)">
