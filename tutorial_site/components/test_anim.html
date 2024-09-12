@@ -167,7 +167,7 @@
         const removeCellHighlight = () => {
             document.querySelectorAll('.highlight-cell').forEach(cell => cell.classList.remove('highlight-cell'));
         }
-        
+
         const removeCodeHighlight = () => {
             document.querySelectorAll('.code-line').forEach(line => line.classList.remove('active-line'));
         }
@@ -216,7 +216,7 @@
 
         const firstStep = () => {
             removeCellHighlight();
-            if(i==6) {
+            if (i == 6) {
                 removeCodeHighlight();
                 removeHighlights()
                 stopLoop()
@@ -250,7 +250,7 @@
 
 
         const nextIteration = () => {
-            if(codeLine == 4) {
+            if (codeLine == 4) {
                 return
             }
             highlightCodeLine();
@@ -273,17 +273,26 @@
         };
 
         const playLoop = () => {
-            interval = setInterval(() => nextIteration(), 5);
-            playPauseBtn.innerText = "Stop";
+            if (interval === null) { // Check if interval is not already running
+                interval = setInterval(() => nextIteration(), 5); // Adjust interval timing if needed
+                playPauseBtn.innerText = "Stop";
+            }
         };
 
         const stopLoop = () => {
-            clearInterval(interval);
-            playPauseBtn.innerText = "Play";
+            if (interval !== null) { // Check if interval is running
+                clearInterval(interval);
+                interval = null; // Reset interval to null when stopped
+                playPauseBtn.innerText = "Play";
+            }
         };
 
         const togglePlayPause = () => {
-            interval ? stopLoop() : playLoop();
+            if (interval === null) {
+                playLoop();
+            } else {
+                stopLoop();
+            }
         };
 
         const resetLoop = () => {
