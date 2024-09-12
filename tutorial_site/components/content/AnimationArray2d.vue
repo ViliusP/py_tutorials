@@ -45,7 +45,10 @@
         </v-btn>
     </div>
 
-    <pre class="code-container"><div v-for="(line, index) in codeLines" :key="index" :class="['code-line', { 'active-line': index === codeLine }]">{{ line }}</div></pre>
+    <pre class="code-container">
+    <div v-for="(line, index) in codeLines" :key="index" :class="['code-line', { 'active-line': index === codeLine }]">
+        {{ line }}</div>
+</pre>
     <div class="console">
         <div v-for="(line, index) in consoleLines" :key="index">{{ line }}</div>
     </div>
@@ -215,7 +218,10 @@ th {
 }
 */
 .highlight-cell {
-    background-color: #1b940385 !important;
+    background-color: #1b94034f !important;
+    font-weight: 500;
+    font-size: 16px;
+    transition: font 0.35s ease, background-color 0.35s ease;
     color: #000;
 }
 
