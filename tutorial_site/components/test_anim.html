@@ -274,7 +274,7 @@
 
         const playLoop = () => {
             if (interval === null) { // Check if interval is not already running
-                interval = setInterval(() => nextIteration(), 5); // Adjust interval timing if needed
+                interval = setInterval(() => nextIteration(), 100); // Adjust interval timing if needed
                 playPauseBtn.innerText = "Stop";
             }
         };
