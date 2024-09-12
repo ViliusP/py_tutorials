@@ -124,7 +124,7 @@ const updateConsole = () => {
     nextTick(() => {
         setTimeout(() => {
             scrollToBottom();
-        }, 50);
+        }, 25);
     });
 };
 
@@ -182,7 +182,7 @@ const prevStep = () => {
 
 const playLoop = () => {
     if (interval.value === null) {
-        interval.value = setInterval(() => nextIteration(), 100);
+        interval.value = setInterval(() => nextIteration(), 200);
         isPlaying.value = true;
     }
 };
@@ -214,19 +214,15 @@ const resetLoop = () => {
 function scrollToBottom() {
     const targetNode = document.querySelector('.animation-console .v-card');
     nextTick(() => {
-        console.log(targetNode.scrollHeight)
         targetNode.scrollTo({
-            top: targetNode.scrollHeight+24,
+            top: targetNode.scrollHeight,
             behavior: 'smooth'
         });
-        console.log('Scrolled to bottom');
     });
     
 }
 
 </script>
-
-
 
 <style scoped>
 .highlight-cell {
