@@ -119,13 +119,16 @@ const copyContent = async () => {
   }
 };
 // -----------
-// code highlinting
+// Code Highlighting
 // -----------
 
 const parsedMeta = ref<MetaObject>({});
 
 function parseMeta(metaString: string): MetaObject {
   const metaObject: MetaObject = {};
+  if(metaString == null) {
+    return metaObject
+  }
   metaString.split(";").forEach((pair) => {
     const [key, value] = pair.split("=");
     if (key && value) {
