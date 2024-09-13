@@ -72,9 +72,9 @@ const CONSTANT_TEMPERATURES = [
 const md = `
 \`\`\`python {-1}
 temperatures = [[5, 10, 15, 20, 25, 30, 35], [8, 12, 18, 22, 27, 32, 37], ...]
-for i in range(7):
-    for j in range(7):
-        print(f"day {i+1}, hour {j+1}: {temperatures[i][j]}")
+for i in range(len(temperatures)):
+    for j in range(len(temperatures[i])):
+        print(f"day {i+1}, hour {j+1}: {temperatures[i][j]}°C")
 \`\`\`
 `
 
