@@ -42,8 +42,8 @@
             Next
         </v-btn>
 
-        <div class="ml-3">
-            <strong>i</strong>=<span>{{ i + 1 }}</span>, <strong>j</strong>=<span>{{ j + 1 }}</span>
+        <div class="ml-3 custom-font">
+            <strong>i</strong>=<span>{{ i === -1 ? '&nbsp;' : i }}</span>, <strong>j</strong>=<span>{{ j === -1 ? '&nbsp;' : j }}</span>
         </div>
     </div>
 
@@ -83,7 +83,7 @@ for i in range(len(temperatures)):
 `
 
 const consoleOutputTmpl = `
-\`\`\`console
+\`\`\`console height=200
 {code}
 \`\`\`
 `
@@ -255,7 +255,6 @@ function scrollToBottom() {
 <style>
 .animation-console .v-card {
     padding: 0 !important;
-    height: 200px;
     overflow: auto;
 }
 </style>

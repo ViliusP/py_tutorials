@@ -1,7 +1,7 @@
 <template>
   <v-card
-    :style="{ 'max-width': maxWidth, position: 'relative' }"
-    class="prose-code"
+    :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px', 'height': computedHeight }"
+    :class="['prose-code', { 'd-flex': computedHeight === 'none', 'flex-column': computedHeight === 'none'}]" 
     elevation="1"
     :color="computedColor"
   >
@@ -46,12 +46,13 @@
       {{ languageLabel }}
     </div>
     <!-- Scrollable content wrapper -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto d-flex flex-grow-1 ">
       <div v-if="filename" class="filename ml-2 text-caption text-left">
         <span class="text-medium-emphasis">{{ filename }}</span>
       <v-divider class="mr-12" :thickness="1" color="outline"/>
       </div>
-      <v-card-text :class="{ 'py-2': filename, 'py-3': !filename }">
+      <v-card-text 
+        :class="{ 'py-2': filename, 'py-3': !filename, 'my-auto': true}">
         <pre :class="['custom-font', $props.class]"><slot /></pre>
       </v-card-text>
     </div>
@@ -172,6 +173,13 @@ const maxWidth = computed(() => {
   const maxWidthValue = parsedMeta.value["max-width"]; // Adjusted from 'max-width' to 'min-width'
   return maxWidthValue ? `${maxWidthValue}px` : "960px";
 });
+
+const computedHeight = computed(() => {
+  const heightValue = parsedMeta.value["height"]; // Adjusted from 'max-width' to 'min-width'
+  return heightValue ? `${heightValue}px` : 'none';
+});
+
+
 
 </script>
 
