@@ -1,6 +1,6 @@
 <template>
-    <v-table>
-        <thead>
+    <v-table class="my-4">
+        <thead class="header">
             <tr>
                 <th></th>
                 <th v-for="col in header_row" :key="col">{{ col }}</th>
@@ -8,7 +8,7 @@
         </thead>
         <tbody>
             <tr v-for="row in 7" :key="row" :class="{ 'highlight-row': row - 1 === i }">
-                <th>{{ header_col[row - 1] }}</th>
+                <th class="header">{{ header_col[row - 1] }}</th>
                 <td v-for="col in 7" :key="col" :class="getCellClass(row - 1, col - 1)">
                     {{ getCellContent(row - 1, col - 1) }}
                 </td>
@@ -36,11 +36,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn @click="prevIteration" class="mx-1" prepend-icon="mdi-chevron-left" color="primary" variant="tonal">
+        <!-- <v-btn @click="prevIteration" class="mx-1" prepend-icon="mdi-chevron-left" color="primary" variant="tonal">
             Previous
-        </v-btn>
+        </v-btn> -->
 
-        <v-btn @click="nextIteration" class="mx-1" prepend-icon="mdi-chevron-right" color="primary" variant="tonal">
+        <v-btn @click="nextBtnCallback" class="" prepend-icon="mdi-chevron-right" color="primary" variant="tonal">
             Next
         </v-btn>
     </div>
@@ -54,6 +54,8 @@
 
 <script setup>
 import { ref, nextTick } from 'vue';
+
+const TIME_FOR_ITERATION = 200 // smaller value - faster animation
 
 const header_row = ["00:00", "03:25", "06:50", "10:15", "13:40", "17:05", "20:30"]
 const header_col = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -92,7 +94,6 @@ const consoleOutput = computed(() => {
     return consoleOutputTmpl.replace("{code}", consoleLines.value.join("\n"));
 })
 
-
 // Reactive data
 const temperatures = ref(CONSTANT_TEMPERATURES);
 const i = ref(-1);
@@ -128,9 +129,6 @@ const updateConsole = () => {
     });
 };
 
-const clearConsole = () => {
-    consoleLines.value.pop();
-};
 
 const codeFlow = {
     0: () => { return 1; },
@@ -141,7 +139,6 @@ const codeFlow = {
 
 const firstStep = () => {
     if (i.value === 6) {
-        stopLoop();
         return 4;
     }
     i.value++;
@@ -158,31 +155,38 @@ const thirdStep = () => {
     return 2;
 };
 
+const nextBtnCallback = () => {
+    stopLoop()
+    nextIteration()
+};
+
 const nextIteration = () => {
-    if (nextLine.value === 4) {
-        return;
-    }
     if (nextLine.value === -1) {
         nextLine.value = 0
     }
     codeLine.value = nextLine.value
+    if (nextLine.value === 4) {
+        stopLoop();
+        return;
+    }
     nextLine.value = codeFlow[nextLine.value]();
 };
 
-const prevIteration = () => {
-    prevStep();
-    clearConsole();
-};
+// For future development
+// const prevIteration = () => {
+//     prevStep();
+//     consoleLines.value.pop();
+// };
 
-const prevStep = () => {
-    if (i.value > 0 || (i.value === 0 && j.value > 0)) {
-        j.value > 0 ? j.value-- : (j.value = 6, i.value--);
-    }
-};
+// const prevStep = () => {
+//     if (i.value > 0 || (i.value === 0 && j.value > 0)) {
+//         j.value > 0 ? j.value-- : (j.value = 6, i.value--);
+//     }
+// };
 
 const playLoop = () => {
     if (interval.value === null) {
-        interval.value = setInterval(() => nextIteration(), 200);
+        interval.value = setInterval(() => nextIteration(), TIME_FOR_ITERATION);
         isPlaying.value = true;
     }
 };
@@ -225,16 +229,24 @@ function scrollToBottom() {
 </script>
 
 <style scoped>
+.header {
+    background-color: rgba(var(--v-theme-on-background), 0.05) !important;
+}
+
+:root {
+  --bbyis: #1e90ff;
+  --white: #ffffff;
+}
+
 .highlight-cell {
-    background-color: #1b94034f !important;
+    background-color: rgba(var(--v-theme-secondary), 0.35) !important;
     font-weight: 500;
     font-size: 16px;
     transition: font 0.35s ease, background-color 0.35s ease;
-    color: #000;
 }
 
 .highlight-row {
-    background-color: #ffcc8042;
+    background-color: rgba(var(--v-theme-secondary), .3) !important;
 }
 
 .loop-values {
@@ -249,4 +261,5 @@ function scrollToBottom() {
     height: 200px;
     overflow: auto;
 }
+
 </style>
