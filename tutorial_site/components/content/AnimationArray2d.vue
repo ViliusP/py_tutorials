@@ -75,7 +75,8 @@ const CONSTANT_TEMPERATURES = [
 
 const md = `
 \`\`\`python {-1}
-temperatures = [[5, 10, 15, 20, 25, 30, 35], [8, 12, 18, 22, 27, 32, 37], ...]
+# for space saving purposes, the example list is not completely defined 
+temperatures = [[5, 10, 15, 20, 25, 30, 35], ..., [11, 16, 21, 26, 31, 36, 41]] 
 for i in range(len(temperatures)):
     for j in range(len(temperatures[i])):
         print(f"day {i+1}, hour {j+1}: {temperatures[i][j]}°C")
@@ -133,28 +134,30 @@ const updateConsole = () => {
 
 
 const codeFlow = {
-    0: () => { return 1; },
-    1: () => firstStep(),
-    2: () => { j.value++; return 3; },
-    3: () => thirdStep()
+    0: () => { return 1},
+    1: () => { return 2; },
+    2: () => outerLoop(),
+    3: () => { j.value++; return 4; },
+    4: () => printStatement()
 };
 
-const firstStep = () => {
+const outerLoop = () => {
     if (i.value === 6) {
-        return 4;
+        const keys = Object.keys(codeFlow).map(Number)
+        return keys[keys.length - 1]+1
     }
     i.value++;
     j.value = -1;
-    return 2;
+    return 3;
 };
 
-const thirdStep = () => {
+const printStatement = () => {
     highlightCell(i.value, j.value);
     updateConsole();
     if (j.value >= 6) {
-        return 1;
+        return 2;
     }
-    return 2;
+    return 3;
 };
 
 const nextBtnCallback = () => {
@@ -167,7 +170,7 @@ const nextIteration = () => {
         nextLine.value = 0
     }
     codeLine.value = nextLine.value
-    if (nextLine.value === 4) {
+    if (nextLine.value === 5) {
         stopLoop();
         return;
     }
