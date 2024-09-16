@@ -48,7 +48,8 @@ const lightTheme: ThemeDefinition = {
     'inverse-surface': '#30312c',
     'shadow': '#000000',
     'shiki-bg': '#EFF1F5', // colors for shiki highlighting
-    'shiki-bg-console': '#FAFAFA',
+    'shiki-bg-console': '#FEFEFE',
+    'shiki-bg-text': '#FFFFFE',
     ...primaryPallete,
   },
 }
@@ -78,6 +79,7 @@ const darkTheme: ThemeDefinition = {
     'shadow': '#000000',
     'shiki-bg': '#212121', // colors for shiki highlighting
     'shiki-bg-console': '#161616',
+    'shiki-bg-text': '#0A0A0A',
     ...primaryPallete,
   },
 }
