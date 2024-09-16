@@ -3,7 +3,7 @@
     :style="{ 'max-width': maxWidth, position: 'relative' }"
     class="prose-code"
     elevation="1"
-    color="shiki-bg"
+    :color="computedColor"
   >
     <v-btn
       icon
@@ -118,6 +118,18 @@ const copyContent = async () => {
     }
   }
 };
+
+// Define the color mapping based on language
+const languageColors: Record<string, string> = {
+  console: 'shiki-bg-console'
+};
+
+// Compute the color name based on the language prop
+const computedColor = computed(() => {
+  // Return the corresponding color or default if not found
+  return languageColors[props.language] || 'shiki-bg';
+});
+
 // -----------
 // Code Highlighting
 // -----------
@@ -145,6 +157,7 @@ const maxWidth = computed(() => {
   const maxWidthValue = parsedMeta.value["max-width"]; // Adjusted from 'max-width' to 'min-width'
   return maxWidthValue ? `${maxWidthValue}px` : "960px";
 });
+
 </script>
 
 <style>
