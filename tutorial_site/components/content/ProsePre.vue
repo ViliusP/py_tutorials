@@ -42,6 +42,9 @@
         </v-btn>
         </template>
     </v-snackbar>
+    <div class="floating-label">
+      {{ languageLabel }}
+    </div>
     <!-- Scrollable content wrapper -->
     <div class="overflow-x-auto">
       <div v-if="filename" class="filename ml-2 text-caption text-left">
@@ -130,6 +133,18 @@ const computedColor = computed(() => {
   return languageColors[props.language] || 'shiki-bg';
 });
 
+// Define the color mapping based on language
+const languageLabels: Record<string, string> = {
+  "python": ".py",
+  "console": "cmd"
+};
+
+// Compute the color name based on the language prop
+const languageLabel = computed(() => {
+  // Return the corresponding color or default if not found
+  return languageLabels[props.language] || '';
+});
+
 // -----------
 // Code Highlighting
 // -----------
@@ -195,5 +210,17 @@ span.line.highlight {
 
 .bg-shiki-bg+.bg-shiki-bg {
   margin-top: 16px;
+}
+
+.floating-label {
+  position: absolute;
+  right: 7.5px;
+  bottom: 2.5px;
+  z-index: 2;
+  font-size: 14px;
+  color: rgba(var(--v-theme-on-background), .15) !important;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 </style>
