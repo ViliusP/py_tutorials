@@ -15,9 +15,7 @@
             </tr>
         </tbody>
     </v-table>
-    <div class="loop-values">
-        <strong>i (Day)</strong>: <span>{{ i + 1 }}</span>, <strong>j (Hour)</strong>: <span>{{ j + 1 }}</span>
-    </div>
+
     <div class="pa-4 d-flex align-center">
 
         <v-btn @click="resetLoop" prepend-icon="mdi-reload" class="mx-1" variant="tonal">
@@ -43,6 +41,10 @@
         <v-btn @click="nextBtnCallback" class="" prepend-icon="mdi-chevron-right" color="primary" variant="tonal">
             Next
         </v-btn>
+
+        <div class="ml-3">
+            <strong>i</strong>=<span>{{ i + 1 }}</span>, <strong>j</strong>=<span>{{ j + 1 }}</span>
+        </div>
     </div>
 
 
@@ -223,7 +225,7 @@ function scrollToBottom() {
             behavior: 'smooth'
         });
     });
-    
+
 }
 
 </script>
@@ -234,8 +236,8 @@ function scrollToBottom() {
 }
 
 :root {
-  --bbyis: #1e90ff;
-  --white: #ffffff;
+    --bbyis: #1e90ff;
+    --white: #ffffff;
 }
 
 .highlight-cell {
@@ -248,11 +250,6 @@ function scrollToBottom() {
 .highlight-row {
     background-color: rgba(var(--v-theme-secondary), .3) !important;
 }
-
-.loop-values {
-    font-size: 24px;
-    margin-top: 20px;
-}
 </style>
 
 <style>
@@ -261,5 +258,4 @@ function scrollToBottom() {
     height: 200px;
     overflow: auto;
 }
-
 </style>
