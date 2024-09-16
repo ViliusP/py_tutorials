@@ -1,5 +1,5 @@
 <template>
-    <MaterialH3 :id="id" class="mt-8 mb-4">
+    <MaterialH3 :id="id" class="mt-12 mb-4">
         <a v-if="id && generate" :href="`#${id}`">
             <slot />
         </a>
