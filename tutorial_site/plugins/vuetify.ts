@@ -47,7 +47,9 @@ const lightTheme: ThemeDefinition = {
     'inverse-on-surface': '#f2f1e9',
     'inverse-surface': '#30312c',
     'shadow': '#000000',
-    'shiki-bg': '#EFF1F5', // color for shiki highlighting
+    'shiki-bg': '#EFF1F5', // colors for shiki highlighting
+    'shiki-bg-console': '#FEFEFE',
+    'shiki-bg-text': '#FFFFFE',
     ...primaryPallete,
   },
 }
@@ -75,7 +77,9 @@ const darkTheme: ThemeDefinition = {
     'inverse-on-surface': '#1b1c18',
     'inverse-surface': '#e3e3db',
     'shadow': '#000000',
-    'shiki-bg': '#212121', // color for shiki highlighting
+    'shiki-bg': '#212121', // colors for shiki highlighting
+    'shiki-bg-console': '#161616',
+    'shiki-bg-text': '#0A0A0A',
     ...primaryPallete,
   },
 }

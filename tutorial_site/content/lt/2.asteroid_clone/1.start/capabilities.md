@@ -118,9 +118,17 @@ pygame.quit()
 
 ```
 
+```console
+text without filename
+```
+
+```text [example.txt]
+plain text
+```
+
 ## Javascript code
 
-```js [file.js] max-width=300
+```js [file.js] max-width=450
 export default () => {
     console.log('Code block')
 }

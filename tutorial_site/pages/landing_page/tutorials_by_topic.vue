@@ -18,7 +18,6 @@ const filteredNav = computed(() => {
     return children
 });
 
-
 </script>
 
 <template>

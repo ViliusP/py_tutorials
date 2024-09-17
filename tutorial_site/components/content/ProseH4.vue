@@ -1,5 +1,5 @@
 <template>
-    <MaterialH4 class="mt-12 mb-2">
+    <MaterialH4 class="mt-8 mb-2">
         <slot />
     </MaterialH4>
 </template>

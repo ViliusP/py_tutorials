@@ -1,6 +1,6 @@
 import {visit} from 'unist-util-visit';
 
-export default defineNitroPlugin((nitroApp) => {
+export default defineNitroPlugin((nitroApp: any) => {
   // @ts-ignore
   nitroApp.hooks.hook('content:file:afterParse', (file: any) => {
     if (file._id.endsWith('.md')) {

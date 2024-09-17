@@ -11,7 +11,9 @@
     "topics": {
         "start": "Pradžia",
         "lists": "Sąrašai",
-        "basicdrawing": "Piešimo pradmenys"
+        "basicdrawing": "Piešimo pradmenys",
+        "constructs": "Konstrukcijos",
+        "final": "Pradmenų pabaiga"
     },
     "tutorials_basics": {
         "headline": "Python pradmenys",
