@@ -85,7 +85,6 @@ export default defineNitroPlugin(async (nitroApp) => {
           // Check if src is a network image
           const isRemoteFile = /^https?:\/\//.test(node.props.src)
 
-          // Cloud providers
           if (!node.props.provider || node.props.provider === "ipx" || node.props.provider.trim() === "") {
             if (isRemoteFile) {
               const response = await fetch(node.props.src);
