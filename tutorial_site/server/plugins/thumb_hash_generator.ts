@@ -80,11 +80,14 @@ const blurhashModeInfo: { [key: string]: string } = {
 export default defineNitroPlugin((nitroApp) => {
 
   const cache: ImagesBlurhashCache = blurhashCache as ImagesBlurhashCache;
-  console.info(`Cache has ${Object.keys(cache).length} items`);
+  console.info(`Existing blurhash cache has ${Object.keys(cache).length} items`);
   
-  const mode = import.meta.env.GENERATE_BLURHASH_MODE
+  const mode = import.meta.env.GENERATE_BLURHASH_MODE || "0"
+  console.info("-".repeat(40))
   console.info(`Blurhash generation mode: ${mode}`)
   console.info(blurhashModeInfo[mode])
+  console.info("-".repeat(40))
+
   
   nitroApp.hooks.hook('content:file:afterParse', async (file: ContentFile) => {
     if (file._id.endsWith('.md')) {
