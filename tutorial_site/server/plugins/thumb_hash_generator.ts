@@ -7,6 +7,7 @@ import * as cheerio from 'cheerio';
 import { type Node } from 'unist';
 import blurhashCache from './blurhash_cache.json';
 import fs from 'fs/promises';
+import { ParsedContent, MarkdownParsedContent } from '@nuxt/content';
 
 type ImageBlurhashData = {
   provider: string;
@@ -89,14 +90,15 @@ export default defineNitroPlugin((nitroApp) => {
   console.info("-".repeat(40))
 
 
-  nitroApp.hooks.hook('content:file:afterParse', async (file: ContentFile) => {
+  nitroApp.hooks.hook('content:file:afterParse', async (file: ParsedContent) => {
     if (file._id.endsWith('.md')) {
+      const markdownFile = file as MarkdownParsedContent;
       const projectRoot = process.cwd();
       const imagesBaseDir = path.join(projectRoot, 'public');
 
       const imgNodes: ImageNode[] = [];
 
-      visit(file.body, { tag: 'img' }, (node) => {
+      visit(markdownFile.body, { tag: 'img' }, (node) => {
         imgNodes.push(node as ImageNode);
       });
 
