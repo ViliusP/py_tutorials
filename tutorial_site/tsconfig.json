@@ -3,7 +3,14 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "vite/client"]
+    "types": [
+      "node",
+      "vite/client"
+    ],
   },
-  "include": ["src", "vite-env.d.ts"]
+  "include": [
+    "env.d.ts",
+    ".nuxt/nuxt.d.ts",
+    "**/*"
+  ]
 }
