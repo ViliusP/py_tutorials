@@ -7,7 +7,7 @@ import * as cheerio from 'cheerio';
 import { type Node } from 'unist';
 import blurhashCache from './blurhash_cache.json';
 import fs from 'fs/promises';
-import { ParsedContent, MarkdownParsedContent } from '@nuxt/content';
+import { type ParsedContent, type MarkdownParsedContent } from '@nuxt/content';
 
 type ImageBlurhashData = {
   provider: string;
