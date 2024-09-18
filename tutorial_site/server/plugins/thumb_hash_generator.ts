@@ -80,14 +80,14 @@ const blurhashModeInfo: { [key: string]: string } = {
 
 export default defineNitroPlugin((nitroApp) => {
 
-  const cache: ImagesBlurhashCache = blurhashCache as ImagesBlurhashCache;
-  console.info(`Existing blurhash cache has ${Object.keys(cache).length} items`);
+  const oldBlurhashCache: ImagesBlurhashCache = blurhashCache as ImagesBlurhashCache;
+  console.info(`Existing blurhash cache has ${Object.keys(oldBlurhashCache).length} items`);
 
   const mode = import.meta.env.GENERATE_BLURHASH_MODE || "0"
-  console.info("-".repeat(40))
+  console.info("-".repeat(50))
   console.info(`Blurhash generation mode: ${mode}`)
   console.info(blurhashModeInfo[mode])
-  console.info("-".repeat(40))
+  console.info("-".repeat(50))
 
 
   nitroApp.hooks.hook('content:file:afterParse', async (file: ParsedContent) => {
@@ -111,7 +111,7 @@ export default defineNitroPlugin((nitroApp) => {
         // Skip if blurhash (thumbHash) already exists
         if (!node.props.src || node.props.thumbHash) continue;
 
-        node.props.thumbHash = cache[node.props.src]?.blurhash
+        node.props.thumbHash = oldBlurhashCache[node.props.src]?.blurhash
 
         if (mode === "0") continue;
         if (mode in ["1", "2"] && node.props.thumbHash) continue;
@@ -160,11 +160,11 @@ export default defineNitroPlugin((nitroApp) => {
       if (Object.keys(newBlurhashCache).length !== 0) {
         // Combine blurhashCache and newBlurhashCache, with newBlurhashCache replacing values for common keys
         const combinedCache: ImagesBlurhashCache = {
-          ...blurhashCache,
+          ...oldBlurhashCache,
           ...newBlurhashCache
         };
         await saveThumbHashToJson(combinedCache)
-        const { added, replaced } = countCacheChanges(blurhashCache, newBlurhashCache);
+        const { added, replaced } = countCacheChanges(oldBlurhashCache, newBlurhashCache);
         console.info(`Added items to cache: ${added}`);
         console.info(`Replaced items in cache: ${replaced}`);
       }
