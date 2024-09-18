@@ -124,6 +124,12 @@ export default defineNuxtConfig({
     },
   },
 
+  image: {
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/dpsenoiwu/image/fetch/'
+    }
+  },
+
   typescript: {
     typeCheck: true,
   },
