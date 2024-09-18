@@ -3179,6 +3179,7 @@ __metadata:
     "@nuxt/image": "npm:1.8.0"
     "@nuxtjs/google-fonts": "npm:^3.2.0"
     "@nuxtjs/i18n": "npm:^8.5.3"
+    cloudinary: "npm:^2.5.0"
     front-matter: "npm:^4.0.2"
     nuxt: "npm:^3.13.2"
     rehype-katex: "npm:^7.0.1"
@@ -3600,6 +3601,16 @@ __metadata:
     strip-ansi: "npm:^6.0.1"
     wrap-ansi: "npm:^7.0.0"
   checksum: 10c0/4bda0f09c340cbb6dfdc1ed508b3ca080f12992c18d68c6be4d9cf51756033d5266e61ec57529e610dacbf4da1c634423b0c1b11037709cc6b09045cbd815df5
+  languageName: node
+  linkType: hard
+
+"cloudinary@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "cloudinary@npm:2.5.0"
+  dependencies:
+    lodash: "npm:^4.17.21"
+    q: "npm:^1.5.1"
+  checksum: 10c0/d523a091866ad612f0a7b43eeabcc3e508f6c218881b87ba27a6bdaebb0d84b3858c9fc9bad091089d4f00874d714d3426c58e50684f886adfef22ba05c90456
   languageName: node
   linkType: hard
 
@@ -8197,6 +8208,13 @@ __metadata:
   version: 2.0.1
   resolution: "protocols@npm:2.0.1"
   checksum: 10c0/016cc58a596e401004a028a2f7005e3444bf89ee8f606409c411719374d1e8bba0464fc142a065cce0d19f41669b2f7ffe25a8bde4f16ce3b6eb01fabc51f2e7
+  languageName: node
+  linkType: hard
+
+"q@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "q@npm:1.5.1"
+  checksum: 10c0/7855fbdba126cb7e92ef3a16b47ba998c0786ec7fface236e3eb0135b65df36429d91a86b1fff3ab0927b4ac4ee88a2c44527c7c3b8e2a37efbec9fe34803df4
   languageName: node
   linkType: hard
 
