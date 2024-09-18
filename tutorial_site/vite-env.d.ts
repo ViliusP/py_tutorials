@@ -2,7 +2,7 @@
 /// <reference types="vite/types/importMeta.d.ts" />
 
 interface ImportMetaEnv {
-    readonly GENERATE_REMOTE_BLURHASH: boolean
+    readonly GENERATE_BLURHASH_MODE: number
     // more env variables...
 }
   
