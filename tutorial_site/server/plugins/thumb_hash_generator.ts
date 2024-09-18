@@ -79,7 +79,7 @@ const blurhashModeInfo: { [key: string]: string } = {
 
 
 export default defineNitroPlugin(async (nitroApp) => {
-  
+
   let oldBlurhashCache: ImagesBlurhashCache = await readThumbHashJson()
   console.info(`Existing blurhash cache has ${Object.keys(oldBlurhashCache).length} items`);
 
@@ -104,7 +104,7 @@ export default defineNitroPlugin(async (nitroApp) => {
 
       const newBlurhashCache: ImagesBlurhashCache = {};
       const generationTime = new Date().toISOString()
-    
+
       for (const node of imgNodes) {
         node.props = node.props || {};
 
@@ -115,7 +115,7 @@ export default defineNitroPlugin(async (nitroApp) => {
 
         if (mode === "0") continue;
         if (["1", "2"].includes(mode) && node.props.thumbHash) continue;
-      
+
         try {
           let buffer: Buffer;
           // Check if src is a network image
@@ -159,10 +159,10 @@ export default defineNitroPlugin(async (nitroApp) => {
       }
       if (Object.keys(newBlurhashCache).length !== 0) {
         // Combine blurhashCache and newBlurhashCache, with newBlurhashCache replacing values for common keys
-        const combinedCache: ImagesBlurhashCache = {
+        const combinedCache: ImagesBlurhashCache = Object.fromEntries(Object.entries({
           ...oldBlurhashCache,
           ...newBlurhashCache
-        };
+        }).sort(([keyA], [keyB]) => keyA.localeCompare(keyB)));
         await saveThumbHashToJson(combinedCache)
         const { added, replaced } = countCacheChanges(oldBlurhashCache, newBlurhashCache);
         console.info(`Added items to cache: ${added}`);
@@ -252,10 +252,10 @@ async function readThumbHashJson(): Promise<any> {
   try {
     // Read the file content as a string
     const fileContents = await fs.readFile("./server/plugins/blurhash_cache.json", 'utf-8');
-    
+
     // Parse the file contents as JSON
     const jsonData = JSON.parse(fileContents);
-    
+
     return jsonData;
   } catch (error) {
     console.error('Error reading JSON file:', error);
