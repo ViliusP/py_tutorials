@@ -78,9 +78,9 @@ const blurhashModeInfo: { [key: string]: string } = {
 };
 
 
-export default defineNitroPlugin((nitroApp) => {
-
-  const oldBlurhashCache: ImagesBlurhashCache = blurhashCache as ImagesBlurhashCache;
+export default defineNitroPlugin(async (nitroApp) => {
+  
+  let oldBlurhashCache: ImagesBlurhashCache = await readThumbHashJson()
   console.info(`Existing blurhash cache has ${Object.keys(oldBlurhashCache).length} items`);
 
   const mode = import.meta.env.GENERATE_BLURHASH_MODE || "0"
@@ -104,7 +104,7 @@ export default defineNitroPlugin((nitroApp) => {
 
       const newBlurhashCache: ImagesBlurhashCache = {};
       const generationTime = new Date().toISOString()
-
+    
       for (const node of imgNodes) {
         node.props = node.props || {};
 
@@ -114,13 +114,13 @@ export default defineNitroPlugin((nitroApp) => {
         node.props.thumbHash = oldBlurhashCache[node.props.src]?.blurhash
 
         if (mode === "0") continue;
-        if (mode in ["1", "2"] && node.props.thumbHash) continue;
-
+        if (["1", "2"].includes(mode) && node.props.thumbHash) continue;
+      
         try {
           let buffer: Buffer;
           // Check if src is a network image
           const isNetworkFile = /^https?:\/\//.test(node.props.src)
-          
+
           // Cloud providers
           if (node.props.provider &&
             node.props.provider !== "ipx" &&
@@ -128,7 +128,7 @@ export default defineNitroPlugin((nitroApp) => {
           ) {
             if (!(["2", "4"].includes(mode))) continue
             buffer = await processProviderImage(node.props.provider, node.props.src);
-          } 
+          }
           else if (isNetworkFile) {
             const response = await fetch(node.props.src);
             if (!response.ok) throw new Error(`Failed to fetch image: ${node.props.src}`);
@@ -167,6 +167,7 @@ export default defineNitroPlugin((nitroApp) => {
         const { added, replaced } = countCacheChanges(oldBlurhashCache, newBlurhashCache);
         console.info(`Added items to cache: ${added}`);
         console.info(`Replaced items in cache: ${replaced}`);
+        oldBlurhashCache = combinedCache
       }
     }
   });
@@ -244,5 +245,20 @@ async function saveThumbHashToJson(thumbHashData: ImagesBlurhashCache): Promise<
     console.info('Blurhashes has been cached successfully.');
   } catch (error) {
     console.error('Error saving ThumbHash cache to JSON file:', error);
+  }
+}
+
+async function readThumbHashJson(): Promise<any> {
+  try {
+    // Read the file content as a string
+    const fileContents = await fs.readFile("./server/plugins/blurhash_cache.json", 'utf-8');
+    
+    // Parse the file contents as JSON
+    const jsonData = JSON.parse(fileContents);
+    
+    return jsonData;
+  } catch (error) {
+    console.error('Error reading JSON file:', error);
+    throw error; // Re-throw the error after logging it
   }
 }
