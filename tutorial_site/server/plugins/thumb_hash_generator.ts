@@ -118,19 +118,18 @@ export default defineNitroPlugin((nitroApp) => {
 
         try {
           let buffer: Buffer;
-          console.info(`Generating blurhash for ${node.props.src}`)
           // Check if src is a network image
           const isNetworkFile = /^https?:\/\//.test(node.props.src)
           
           // Cloud providers
           if (node.props.provider &&
             node.props.provider !== "ipx" &&
-            node.props.provider.trim() !== "" &&
-            mode in ["2", "4"]
+            node.props.provider.trim() !== ""
           ) {
+            if (!(["2", "4"].includes(mode))) continue
             buffer = await processProviderImage(node.props.provider, node.props.src);
           } 
-          if (isNetworkFile) {
+          else if (isNetworkFile) {
             const response = await fetch(node.props.src);
             if (!response.ok) throw new Error(`Failed to fetch image: ${node.props.src}`);
             buffer = Buffer.from(await response.arrayBuffer());
@@ -139,6 +138,7 @@ export default defineNitroPlugin((nitroApp) => {
             const imagePath = path.join(imagesBaseDir, node.props.src);
             buffer = await sharp(imagePath).toBuffer();
           }
+          console.info(`Generating blurhash for ${node.props.src}`)
 
           // Proceed with Sharp processing
           const resizedImage = await sharp(buffer).resize(100, 100, { fit: 'inside' }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
