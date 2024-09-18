@@ -68,15 +68,23 @@ interface ContentFile {
   body: any; // Adjusted to any to prevent TS errors, ensure correct type is used
 }
 
+const blurhashModeInfo: { [key: string]: string } = {
+  "0": "Use only cached blurhash values. Missing values will not be generated.",
+  "1": "Generate blurhashes for local images that are missing from the cache.",
+  "2": "Generate blurhashes for both local and remote images that are missing from the cache.",
+  "3": "Recalculate blurhashes for all local images, excluding remote images.",
+  "4": "Forcefully recalculate blurhashes for all images (local and remote)."
+};
+
+
 export default defineNitroPlugin((nitroApp) => {
 
   const cache: ImagesBlurhashCache = blurhashCache as ImagesBlurhashCache;
   console.info(`Cache has ${Object.keys(cache).length} items`);
   
   const mode = import.meta.env.GENERATE_BLURHASH_MODE
-  console.log(`mode: ${mode}`)
-  console.log(`mode type ${typeof mode}`)
-  if (mode === "0") console.log("OK")
+  console.info(`Blurhash generation mode: ${mode}`)
+  console.info(blurhashModeInfo[mode])
   
   nitroApp.hooks.hook('content:file:afterParse', async (file: ContentFile) => {
     if (file._id.endsWith('.md')) {
