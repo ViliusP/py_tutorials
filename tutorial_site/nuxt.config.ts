@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "url";
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import IgnoreDraftsModule from "./modules/ignore_drafts/index.mjs";
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   app: {

@@ -38,3 +38,9 @@ logs
 # Graph generation
 graphs_generation/*.png
 graphs_generation/*.pdf
+
+# Typescript
+tsconfig.tsbuildinfo
+
+# VS code
+.vscode
