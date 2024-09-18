@@ -5,7 +5,7 @@
     max-width="100%"
     :width="width"
     :alt="alt"
-    :src="img(src, { quality: 80 })"
+    :src="img(src, { quality: 80 }, { provider: props.provider })"
     :lazy-src="lazySrc"
     :sizes="_srcset.sizes"
     position="left center"
@@ -63,12 +63,16 @@ const props = defineProps({
   },
   format: {
     type: String,
-    default: "webp",
+    default: "avif,webp",
   },
   thumbHash: {
     type: String,
     default: undefined,
   },
+  provider: {
+    type: String,
+    default: '',
+  }
 });
 
 const img = useImage();
