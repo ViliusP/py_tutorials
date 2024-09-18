@@ -76,82 +76,81 @@ export default defineNitroPlugin((nitroApp) => {
   const mode = import.meta.env.GENERATE_BLURHASH_MODE
   console.log(`mode: ${mode}`)
   console.log(`mode type ${typeof mode}`)
-  if (mode === 0) console.log("OK")
+  if (mode === "0") console.log("OK")
   
-  // @ts-ignore
-  // nitroApp.hooks.hook('content:file:afterParse', async (file: ContentFile) => {
-  //   if (file._id.endsWith('.md')) {
-  //     const projectRoot = process.cwd();
-  //     const imagesBaseDir = path.join(projectRoot, 'public');
+  nitroApp.hooks.hook('content:file:afterParse', async (file: ContentFile) => {
+    if (file._id.endsWith('.md')) {
+      const projectRoot = process.cwd();
+      const imagesBaseDir = path.join(projectRoot, 'public');
 
-  //     const imgNodes: ImageNode[] = [];
-  //     // @ts-ignore
-  //     visit(file.body, { tag: 'img' }, (node) => {
-  //       imgNodes.push(node as ImageNode);
-  //     });
+      const imgNodes: ImageNode[] = [];
 
-  //     const newBlurhashCache: ImagesBlurhashCache = {};
-  //     const generationTime = new Date().toISOString()
+      visit(file.body, { tag: 'img' }, (node) => {
+        imgNodes.push(node as ImageNode);
+      });
 
-  //     for (const node of imgNodes) {
-  //       node.props = node.props || {};
+      const newBlurhashCache: ImagesBlurhashCache = {};
+      const generationTime = new Date().toISOString()
 
-  //       // Skip if blurhash (thumbHash) already exists
-  //       if (!node.props.src || node.props.thumbHash) continue;
+      for (const node of imgNodes) {
+        node.props = node.props || {};
 
-  //       node.props.thumbHash = cache[node.props.src]?.blurhash
+        // Skip if blurhash (thumbHash) already exists
+        if (!node.props.src || node.props.thumbHash) continue;
 
-  //       if (import.meta.env.GENERATE_BLURHASH_MODE === 0) continue
+        node.props.thumbHash = cache[node.props.src]?.blurhash
 
-  //       try {
-  //         let buffer: Buffer;
-  //         console.info(`Generating blurhash for ${node.props.src}`)
-  //         // Check if src is a network image
-  //         const isNetworkFile = /^https?:\/\//.test(node.props.src)
+        if (import.meta.env.GENERATE_BLURHASH_MODE === "0") continue
 
-  //         if (isNetworkFile) {
-  //           const response = await fetch(node.props.src);
-  //           if (!response.ok) throw new Error(`Failed to fetch image: ${node.props.src}`);
-  //           buffer = Buffer.from(await response.arrayBuffer());
-  //         }
-  //         if (node.props.provider && node.props.provider !== "ipx" && node.props.provider.trim() !== "") {
-  //           buffer = await processProviderImage(node.props.provider, node.props.src);
-  //         }
-  //         else { // Local image
-  //           const imagePath = path.join(imagesBaseDir, node.props.src);
-  //           buffer = await sharp(imagePath).toBuffer();
-  //         }
+        try {
+          let buffer: Buffer;
+          console.info(`Generating blurhash for ${node.props.src}`)
+          // Check if src is a network image
+          const isNetworkFile = /^https?:\/\//.test(node.props.src)
 
-  //         // Proceed with Sharp processing
-  //         const resizedImage = await sharp(buffer).resize(100, 100, { fit: 'inside' }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  //         const binaryThumbHash = rgbaToThumbHash(resizedImage.info.width, resizedImage.info.height, resizedImage.data);
-  //         const thumbHashToBase64 = Buffer.from(binaryThumbHash).toString('base64');
+          if (isNetworkFile) {
+            const response = await fetch(node.props.src);
+            if (!response.ok) throw new Error(`Failed to fetch image: ${node.props.src}`);
+            buffer = Buffer.from(await response.arrayBuffer());
+          }
+          if (node.props.provider && node.props.provider !== "ipx" && node.props.provider.trim() !== "") {
+            buffer = await processProviderImage(node.props.provider, node.props.src);
+          }
+          else { // Local image
+            const imagePath = path.join(imagesBaseDir, node.props.src);
+            buffer = await sharp(imagePath).toBuffer();
+          }
 
-  //         node.props.thumbHash = thumbHashToBase64;
+          // Proceed with Sharp processing
+          const resizedImage = await sharp(buffer).resize(100, 100, { fit: 'inside' }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+          const binaryThumbHash = rgbaToThumbHash(resizedImage.info.width, resizedImage.info.height, resizedImage.data);
+          const thumbHashToBase64 = Buffer.from(binaryThumbHash).toString('base64');
 
-  //         newBlurhashCache[node.props.src] = {
-  //           provider: node.props.provider || "ipx",
-  //           blurhash: thumbHashToBase64,
-  //           generated_at: generationTime
-  //         }
-  //       } catch (error) {
-  //         // @ts-ignore
-  //         console.warn(`Error processing image ${node.props.src}:`, error.message);
-  //       }
-  //     }
-  //     if (import.meta.env.GENERATE_BLURHASH_MODE !== 0 && Object.keys(newBlurhashCache).length === 0) {
-  //       // Combine blurhashCache and newBlurhashCache, with newBlurhashCache replacing values for common keys
-  //       const combinedCache: ImagesBlurhashCache = {
-  //         ...blurhashCache,
-  //         ...newBlurhashCache
-  //       };
-  //       await saveThumbHashToJson(combinedCache)
-  //       const { added, replaced } = countCacheChanges(blurhashCache, newBlurhashCache);
-  //       console.info(`Added items to cache: ${added}`);
-  //       console.info(`Replaced items in cache: ${replaced}`);
-  //     }
-  //   }
-  // });
+          node.props.thumbHash = thumbHashToBase64;
+
+          newBlurhashCache[node.props.src] = {
+            provider: node.props.provider || "ipx",
+            blurhash: thumbHashToBase64,
+            generated_at: generationTime
+          }
+        } catch (error) {
+          // @ts-ignore
+          console.warn(`Error processing image ${node.props.src}:`, error.message);
+        }
+      }
+      if (Object.keys(newBlurhashCache).length === 0) {
+        // Combine blurhashCache and newBlurhashCache, with newBlurhashCache replacing values for common keys
+        const combinedCache: ImagesBlurhashCache = {
+          ...blurhashCache,
+          ...newBlurhashCache
+        };
+        await saveThumbHashToJson(combinedCache)
+        const { added, replaced } = countCacheChanges(blurhashCache, newBlurhashCache);
+        console.info(`Added items to cache: ${added}`);
+        console.info(`Replaced items in cache: ${replaced}`);
+      }
+    }
+  });
 });
 
 function countCacheChanges(oldCache: ImagesBlurhashCache, newCache: ImagesBlurhashCache): { added: number; replaced: number } {
