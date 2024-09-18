@@ -63,7 +63,7 @@ const props = defineProps({
   },
   format: {
     type: String,
-    default: "webp",
+    default: "avif,webp",
   },
   thumbHash: {
     type: String,
