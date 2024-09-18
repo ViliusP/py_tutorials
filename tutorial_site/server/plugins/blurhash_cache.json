@@ -138,5 +138,10 @@
     "provider": "cloudinary",
     "blurhash": "WneBC4IEhmlmeGCHeKC3+mVkloiQpYc=",
     "generated_at": "2024-09-18T16:33:26.074Z"
+  },
+  "https://placehold.co/600x400/orange/white": {
+    "provider": "ipx",
+    "blurhash": "ZK6CE4IPR1d3iIC4iI+L+IeHeHiAiAg=",
+    "generated_at": "2024-09-18T16:59:25.506Z"
   }
 }

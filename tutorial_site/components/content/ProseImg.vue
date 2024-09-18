@@ -71,7 +71,7 @@ const props = defineProps({
   },
   provider: {
     type: String,
-    default: 'ipx',
+    default: '',
   }
 });
 
