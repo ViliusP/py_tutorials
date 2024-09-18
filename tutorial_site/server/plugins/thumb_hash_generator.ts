@@ -64,11 +64,6 @@ interface ImageNode extends Node {
   };
 }
 
-interface ContentFile {
-  _id: string;
-  body: any; // Adjusted to any to prevent TS errors, ensure correct type is used
-}
-
 const blurhashModeInfo: { [key: string]: string } = {
   "0": "Use only cached blurhash values. Missing values will not be generated.",
   "1": "Generate blurhashes for local, remote images that are missing from the cache.",
