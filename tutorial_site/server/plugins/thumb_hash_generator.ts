@@ -70,10 +70,10 @@ interface ContentFile {
 
 const blurhashModeInfo: { [key: string]: string } = {
   "0": "Use only cached blurhash values. Missing values will not be generated.",
-  "1": "Generate blurhashes for local images that are missing from the cache.",
-  "2": "Generate blurhashes for both local and remote images that are missing from the cache.",
-  "3": "Recalculate blurhashes for all local images, excluding remote images.",
-  "4": "Forcefully recalculate blurhashes for all images (local and remote)."
+  "1": "Generate blurhashes for local, remote images that are missing from the cache.",
+  "2": "Generate blurhashes for both local, remote, cloud images that are missing from the cache.",
+  "3": "Forcefully recalculate blurhashes for all local, remote images, excluding cloud images.",
+  "4": "Forcefully recalculate blurhashes for all images (local, remote, cloud)."
 };
 
 
@@ -112,20 +112,26 @@ export default defineNitroPlugin((nitroApp) => {
         node.props.thumbHash = cache[node.props.src]?.blurhash
 
         if (mode === "0") continue;
+        if (mode in ["1", "2"] && node.props.thumbHash) continue;
 
         try {
           let buffer: Buffer;
           console.info(`Generating blurhash for ${node.props.src}`)
           // Check if src is a network image
           const isNetworkFile = /^https?:\/\//.test(node.props.src)
-
+          
+          // Cloud providers
+          if (node.props.provider &&
+            node.props.provider !== "ipx" &&
+            node.props.provider.trim() !== "" &&
+            mode in ["2", "4"]
+          ) {
+            buffer = await processProviderImage(node.props.provider, node.props.src);
+          } 
           if (isNetworkFile) {
             const response = await fetch(node.props.src);
             if (!response.ok) throw new Error(`Failed to fetch image: ${node.props.src}`);
             buffer = Buffer.from(await response.arrayBuffer());
-          }
-          if (node.props.provider && node.props.provider !== "ipx" && node.props.provider.trim() !== "") {
-            buffer = await processProviderImage(node.props.provider, node.props.src);
           }
           else { // Local image
             const imagePath = path.join(imagesBaseDir, node.props.src);
