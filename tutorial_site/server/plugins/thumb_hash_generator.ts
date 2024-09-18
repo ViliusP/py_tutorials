@@ -222,9 +222,9 @@ async function downloadImageToBuffer(url: string): Promise<Buffer> {
 async function saveThumbHashToJson(thumbHashData: ImagesBlurhashCache): Promise<void> {
   try {
     // Save the thumbHash to the JSON file
-    await fs.writeFile("./blurhash_cache.json", JSON.stringify(thumbHashData, null, 2), 'utf-8');
-    console.info('Blurhashes cached successfully.');
+    await fs.writeFile("./server/plugins/blurhash_cache.json", JSON.stringify(thumbHashData, null, 2), 'utf-8');
+    console.info('Blurhashes has been cached successfully.');
   } catch (error) {
-    console.error('Error saving ThumbHash to JSON file:', error);
+    console.error('Error saving ThumbHash cache to JSON file:', error);
   }
 }
