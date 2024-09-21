@@ -1,7 +1,9 @@
 <template>
-    <MaterialH4 class="mt-8 mb-2">
+    <MaterialH4 class="prose-h4 mt-12">
         <slot />
+    
     </MaterialH4>
+    
 </template>
   
 <script setup lang="ts">
