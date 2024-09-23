@@ -8,6 +8,9 @@ export class LanguageDefaults {
             javascript: { color: 'shiki-bg', label: '.js', lineNumbers: true },
             python: { color: 'shiki-bg', label: '.py', lineNumbers: true },
             text: { color: 'shiki-bg-text', label: 'text', lineNumbers: false },
+            xml: { color: 'shiki-bg-text', label: '.xml', lineNumbers: false },
+            json: { color: 'shiki-bg-text', label: '.json', lineNumbers: false },
+            csv: { color: 'shiki-bg-text', label: '.csv', lineNumbers: false },
             console: { color: 'shiki-bg-console', label: 'cmd', lineNumbers: false },
             default: { color: 'shiki-bg', label: '', lineNumbers: false },
         };

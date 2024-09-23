@@ -107,6 +107,9 @@ export default defineNuxtConfig({
         "powershell",
         "shell",
         "shellsession",
+        "csv",
+        "json",
+        'xml'
       ],
     },
     markdown: {
