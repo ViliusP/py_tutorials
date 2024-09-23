@@ -2,4 +2,4 @@
 [build]
     publish='dist'
     command='nuxt generate'
-    environment = { NODE_VERSION = "20.9.0" }
+    environment = { NODE_VERSION = "22.9.0" }
