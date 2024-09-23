@@ -5,11 +5,11 @@ export class LanguageDefaults {
     constructor(language: string) {
         this._language = language;
         this._defaults = {
-            javascript: { color: 'shiki-bg', label: '.js', lineNumbers: 'true' },
-            python: { color: 'shiki-bg', label: '.py', lineNumbers: 'true' },
-            text: { color: 'shiki-bg-text', label: 'text', lineNumbers: 'false' },
-            console: { color: 'shiki-bg-console', label: 'cmd', lineNumbers: 'false' },
-            default: { color: 'shiki-bg', label: '', lineNumbers: 'false' },
+            javascript: { color: 'shiki-bg', label: '.js', lineNumbers: true },
+            python: { color: 'shiki-bg', label: '.py', lineNumbers: true },
+            text: { color: 'shiki-bg-text', label: 'text', lineNumbers: false },
+            console: { color: 'shiki-bg-console', label: 'cmd', lineNumbers: false },
+            default: { color: 'shiki-bg', label: '', lineNumbers: false },
         };
     }
 
@@ -29,7 +29,7 @@ export class LanguageDefaults {
     }
 
     // Property to access whether line numbers should be shown
-    get lineNumbers(): string {
-        return this.defaults['line-numbers'];
+    get lineNumbers(): boolean {
+        return Boolean(this.defaults.lineNumbers);
     }
 } 

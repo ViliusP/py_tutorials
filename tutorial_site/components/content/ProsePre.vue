@@ -70,9 +70,9 @@ const props = defineProps({
   },
 });
 
-// Define the type for the parsed metadata object
+// Define the type for the parsed metadata object to handle multiple data types
 interface MetaObject {
-  [key: string]: string;
+  [key: string]: string | boolean | number;
 }
 
 const languageDefaults = new LanguageDefaults(props.language || 'default');
@@ -115,12 +115,13 @@ const parsedMeta = ref<MetaObject>({});
 function parseMeta(metaString: string): MetaObject {
   const metaObject: MetaObject = {};
   if (metaString == null) {
-    return metaObject
+    return metaObject;
   }
   metaString.split(";").forEach((pair) => {
     const [key, value] = pair.split("=");
     if (key && value) {
-      metaObject[key.trim()] = value.trim();
+      // Convert "true"/"false" strings into actual booleans
+      metaObject[key.trim()] = value.trim() === 'true' ? true : value.trim() === 'false' ? false : value.trim();
     }
   });
   return metaObject;
@@ -149,8 +150,7 @@ const languageLabel = computed(() => {
 });
 
 const showLineNumbers = computed(() => {
-  // Check parsedMeta and fallback to the LanguageDefaults
-  return parsedMeta.value["line-numbers"] === "true" || languageDefaults.lineNumbers;
+  return parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
 });
 
 const totalLines = computed(() => {
