@@ -28,8 +28,12 @@
         <span class="text-medium-emphasis">{{ filename }}</span>
         <v-divider class="mr-12" :thickness="1" color="outline" />
       </div>
-      <div>
-        <pre :class="['code-text',  $props.class, { 'py-2': filename, 'py-3': !filename,}]"><slot /></pre>
+      <div :class="{ 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }">
+        <!-- Line numbers column -->
+        <div v-if="showLineNumbers" class="line-numbers code-text" aria-hidden="true">
+          <span v-for="line in totalLines" :key="line">{{ line }}</span>
+        </div>
+        <pre :class="['code-text', $props.class]" :style="preStyle"><slot /></pre>
       </div>
     </div>
   </v-card>
@@ -158,7 +162,15 @@ const computedHeight = computed(() => {
   return heightValue ? `${heightValue}px` : 'none';
 });
 
+const showLineNumbers = computed(() => parsedMeta.value["lineNumbers"] === "true" || true);
 
+const totalLines = computed(() => {
+  return props.code ? props.code.split("\n").length - 1 : 0;
+});
+
+const preStyle = computed(() => ({
+  display: showLineNumbers.value ? "inline-block" : "block",
+}));
 
 </script>
 
@@ -183,13 +195,14 @@ const computedHeight = computed(() => {
 }
 
 span.line {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 span.line.highlight {
   transition: background-color .5s;
-  width: calc(100%);
   display: block;
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
@@ -226,5 +239,23 @@ span.line.highlight {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
+}
+
+.line-numbers {
+  text-align: right;
+  user-select: none;
+  color: rgba(142, 150, 170, 0.6); /* Adjust color as needed */
+  font-size: 0.875rem;
+  line-height: 1.425;
+  min-width: 2.2em;
+}
+
+.line-numbers span {
+  display: block;
+}
+
+pre.code-text {
+  width: 100%;
+  flex: 1;
 }
 </style>
