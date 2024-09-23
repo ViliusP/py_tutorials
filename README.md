@@ -1,77 +1,48 @@
+# Python tutorial website for Lithuanians
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a81def38-4e1d-4e20-964e-5508cd98f65a/deploy-status)](https://app.netlify.com/sites/viliusp-pygame/deploys)
 
-# Nuxt 3 Minimal Starter
+A pet project that serves as a fun and practical platform for teaching Python programming. Although currently intended for personal use, I may share it with educators and learners in the future.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Currently, it is developed simply, slowly, and iteratively in my free time. The philosophy of this project is 'if it works, it works.'
 
-## Setup
+## Website
 
-Make sure to install the dependencies:
+Feel free to visit: [viliusp-pygame.netlify.app](https://viliusp-pygame.netlify.app/)
 
-```bash
-# npm
-npm install
+Under the hood projects uses:
 
-# pnpm
-pnpm install
+- Nuxt
+- Nuxt Content
+- Vuetify
+- Netlify
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
+## Starting the project
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+### Project folders structure
+
+WIP
+
+### Production
 
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
 yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
 yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Contributing
+
+If you would like to contribute to this project, please reach out or submit a pull request.
