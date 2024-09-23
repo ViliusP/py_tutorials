@@ -28,8 +28,12 @@
         <span class="text-medium-emphasis">{{ filename }}</span>
         <v-divider class="mr-12" :thickness="1" color="outline" />
       </div>
-      <div>
-        <pre :class="['code-text',  $props.class, { 'py-2': filename, 'py-3': !filename,}]"><slot /></pre>
+      <div :class="{ 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }">
+        <!-- Line numbers column -->
+        <div v-if="showLineNumbers" class="line-numbers code-text" aria-hidden="true">
+          <span v-for="line in totalLines" :key="line">{{ line }}</span>
+        </div>
+        <pre :class="['code-text', $props.class]" :style="preStyle"><slot /></pre>
       </div>
     </div>
   </v-card>
@@ -66,10 +70,13 @@ const props = defineProps({
   },
 });
 
-// Define the type for the parsed metadata object
+// Define the type for the parsed metadata object to handle multiple data types
 interface MetaObject {
-  [key: string]: string;
+  [key: string]: string | boolean | number;
 }
+
+const languageDefaults = new LanguageDefaults(props.language || 'default');
+
 
 // -----------
 // snackbar
@@ -99,32 +106,6 @@ const copyContent = async () => {
   }
 };
 
-// Define the color mapping based on language
-const languageColors: Record<string, string> = {
-  console: 'shiki-bg-console',
-  text: 'shiki-bg-text'
-};
-
-// Compute the color name based on the language prop
-const computedColor = computed(() => {
-  // Return the corresponding color or default if not found
-  return languageColors[props.language] || 'shiki-bg';
-});
-
-// Define the color mapping based on language
-const languageLabels: Record<string, string> = {
-  "javascript": ".js",
-  "text": "text",
-  "python": ".py",
-  "console": "cmd"
-};
-
-// Compute the color name based on the language prop
-const languageLabel = computed(() => {
-  // Return the corresponding color or default if not found
-  return languageLabels[props.language] || '';
-});
-
 // -----------
 // Code Highlighting
 // -----------
@@ -134,12 +115,13 @@ const parsedMeta = ref<MetaObject>({});
 function parseMeta(metaString: string): MetaObject {
   const metaObject: MetaObject = {};
   if (metaString == null) {
-    return metaObject
+    return metaObject;
   }
   metaString.split(";").forEach((pair) => {
     const [key, value] = pair.split("=");
     if (key && value) {
-      metaObject[key.trim()] = value.trim();
+      // Convert "true"/"false" strings into actual booleans
+      metaObject[key.trim()] = value.trim() === 'true' ? true : value.trim() === 'false' ? false : value.trim();
     }
   });
   return metaObject;
@@ -159,6 +141,25 @@ const computedHeight = computed(() => {
 });
 
 
+const computedColor = computed(() => {
+  return languageDefaults.color;
+});
+
+const languageLabel = computed(() => {
+  return languageDefaults.label;
+});
+
+const showLineNumbers = computed(() => {
+  return parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
+});
+
+const totalLines = computed(() => {
+  return props.code ? props.code.split("\n").length - 1 : 0;
+});
+
+const preStyle = computed(() => ({
+  display: showLineNumbers.value ? "inline-block" : "block",
+}));
 
 </script>
 
@@ -183,13 +184,14 @@ const computedHeight = computed(() => {
 }
 
 span.line {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 span.line.highlight {
   transition: background-color .5s;
-  width: calc(100%);
   display: block;
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
@@ -226,5 +228,23 @@ span.line.highlight {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
+}
+
+.line-numbers {
+  text-align: right;
+  user-select: none;
+  color: rgba(142, 150, 170, 0.6); /* Adjust color as needed */
+  font-size: 0.875rem;
+  line-height: 1.425;
+  min-width: 2.2em;
+}
+
+.line-numbers span {
+  display: block;
+}
+
+pre.code-text {
+  width: 100%;
+  flex: 1;
 }
 </style>
