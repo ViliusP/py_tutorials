@@ -75,6 +75,9 @@ interface MetaObject {
   [key: string]: string;
 }
 
+const languageDefaults = new LanguageDefaults(props.language || 'default');
+
+
 // -----------
 // snackbar
 // -----------
@@ -102,32 +105,6 @@ const copyContent = async () => {
     }
   }
 };
-
-// Define the color mapping based on language
-const languageColors: Record<string, string> = {
-  console: 'shiki-bg-console',
-  text: 'shiki-bg-text'
-};
-
-// Compute the color name based on the language prop
-const computedColor = computed(() => {
-  // Return the corresponding color or default if not found
-  return languageColors[props.language] || 'shiki-bg';
-});
-
-// Define the color mapping based on language
-const languageLabels: Record<string, string> = {
-  "javascript": ".js",
-  "text": "text",
-  "python": ".py",
-  "console": "cmd"
-};
-
-// Compute the color name based on the language prop
-const languageLabel = computed(() => {
-  // Return the corresponding color or default if not found
-  return languageLabels[props.language] || '';
-});
 
 // -----------
 // Code Highlighting
@@ -162,7 +139,19 @@ const computedHeight = computed(() => {
   return heightValue ? `${heightValue}px` : 'none';
 });
 
-const showLineNumbers = computed(() => parsedMeta.value["lineNumbers"] === "true" || true);
+
+const computedColor = computed(() => {
+  return languageDefaults.color;
+});
+
+const languageLabel = computed(() => {
+  return languageDefaults.label;
+});
+
+const showLineNumbers = computed(() => {
+  // Check parsedMeta and fallback to the LanguageDefaults
+  return parsedMeta.value["line-numbers"] === "true" || languageDefaults.lineNumbers;
+});
 
 const totalLines = computed(() => {
   return props.code ? props.code.split("\n").length - 1 : 0;
