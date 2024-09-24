@@ -235,7 +235,6 @@ span.line.highlight {
 .line.highlight>span {
   --shiki-default-bg: initial;
   --shiki-dark-bg: initial;
-  /* Reset or apply new styles as needed */
 }
 
 .shiki code {
