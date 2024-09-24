@@ -164,12 +164,17 @@ const totalLines = computed(() => {
 // Compute custom line numbers from the defined string or fall back to totalLines
 const customLineNumbers = computed(() => {
   const numberingValue = parsedMeta.value["custom-line-numbering"];
+  
   if (typeof numberingValue === 'string') {
     return numberingValue.split(",").flatMap(range => {
       const [start, end] = range.split("-").map(Number);
-      return isNaN(end) ? [start] : Array.from({ length: end - start + 1 }, (_, i) => start + i);
+      const validNumbers = isNaN(end)
+        ? [start]
+        : Array.from({ length: end - start + 1 }, (_, i) => start + i);
+      
+      // Filter out numbers that exceed totalLines
+      return validNumbers.filter(num => num <= totalLines.value);
     });
-
   }
 
   // Fallback to totalLines if custom-line-numbering is not provided
