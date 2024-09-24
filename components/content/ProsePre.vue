@@ -1,6 +1,6 @@
 <template>
   <v-card :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px', 'height': computedHeight }"
-    :class="['prose-code', { 'd-flex': computedHeight === 'none'}]" elevation="1" :color="computedColor">
+    :class="['prose-code', { 'd-flex': computedHeight === 'none' }]" elevation="1" :color="computedColor">
     <v-btn icon variant="plain" size="small" style="position: absolute; right: 2.5px; top: 2.5px; z-index: 2;"
       @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
@@ -31,7 +31,7 @@
       <div :class="{ 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }">
         <!-- Line numbers column -->
         <div v-if="showLineNumbers" class="line-numbers code-text" aria-hidden="true">
-          <span v-for="line in totalLines" :key="line">{{ line }}</span>
+          <span v-for="line in customLineNumbers" :key="line">{{ line }}</span>
         </div>
         <pre :class="['code-text', $props.class]" :style="preStyle"><slot /></pre>
       </div>
@@ -149,12 +149,31 @@ const languageLabel = computed(() => {
   return languageDefaults.label;
 });
 
+// Show line numbers if defined in meta or if custom-line-numbering is provided
 const showLineNumbers = computed(() => {
-  return parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
+  const lineNumbersMeta = parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
+  const customLineNumbering = parsedMeta.value["custom-line-numbering"];
+
+  return lineNumbersMeta || (customLineNumbering !== null && customLineNumbering !== undefined);
 });
 
 const totalLines = computed(() => {
   return props.code ? props.code.split("\n").length - 1 : 0;
+});
+
+// Compute custom line numbers from the defined string or fall back to totalLines
+const customLineNumbers = computed(() => {
+  const numberingValue = parsedMeta.value["custom-line-numbering"];
+  if (typeof numberingValue === 'string') {
+    return numberingValue.split(",").flatMap(range => {
+      const [start, end] = range.split("-").map(Number);
+      return isNaN(end) ? [start] : Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    });
+
+  }
+
+  // Fallback to totalLines if custom-line-numbering is not provided
+  return Array.from({ length: totalLines.value }, (_, i) => i + 1);
 });
 
 const preStyle = computed(() => ({
@@ -233,7 +252,7 @@ span.line.highlight {
 .line-numbers {
   text-align: right;
   user-select: none;
-  color: rgba(142, 150, 170, 0.6); /* Adjust color as needed */
+  color: rgba(142, 150, 170, 0.6);
   font-size: 0.875rem;
   line-height: 1.425;
   min-width: 2.2em;
