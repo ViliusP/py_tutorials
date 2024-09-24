@@ -1,6 +1,6 @@
 <template>
   <v-img
-    :class="{ 'v-img__captionless': !props.title, 'prose-image': true }"
+    :class="{ 'v-img__captionless': !props.title, 'prose-image': true, 'my-auto': centered }"
     :max-height="height"
     max-width="100%"
     :width="width"
@@ -24,7 +24,7 @@
   </v-img>
   <figcaption
     v-if="props.title"
-    class="text-caption image-caption"
+    :class="['text-caption', 'image-caption', { 'text-center': centered }]"
     v-html="processedHtml"
   />
 </template>
@@ -72,6 +72,10 @@ const props = defineProps({
   provider: {
     type: String,
     default: '',
+  },
+  centered: {
+    type: Boolean,
+    default: false
   }
 });
 

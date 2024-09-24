@@ -133,6 +133,7 @@ export default () => {
     console.log('Code block')
 }
 ```
+<!-- TODO add numbered, more languages example -->
 
 Material body 1. :keyboard-keys{:keys='["ctrl", "/"]'} or :keyboard-keys{:keys='["W", "A", "S", "D"]' any}
 
@@ -152,6 +153,7 @@ Below, you will see lazy-loading example - circular progress and blurhash:
 
 ![Colored placehold 600x400 image from https://placehold.co/](https://placehold.cos "Invalid URL gives us demo of circular progress and blurhash"){ width=600 height=400, thumbHash="ZK6CE4IPR1d3iIC4iI+L+IeHeHiAiAg="}
 
+<!-- TODO add centered, provider example -->
 
 ## Link
 
