@@ -1,6 +1,6 @@
 <template>
-  <v-card :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px', 'height': computedHeight }"
-    :class="['prose-code', { 'd-flex': computedHeight === 'none' }]" elevation="1" :color="computedColor">
+  <v-card :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px' }" :class="['prose-code', 'd-flex']"
+    elevation="1" :color="computedColor">
     <v-btn icon variant="plain" size="small" style="position: absolute; right: 2.5px; top: 2.5px; z-index: 2;"
       @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
@@ -23,17 +23,20 @@
       {{ languageLabel }}
     </div>
     <!-- Scrollable content wrapper -->
-    <div class="overflow-x-auto d-flex flex-column  justify-center flex-1-1-100">
+    <div
+      :class="['overflow-x-auto code-content flex-1-0-0 d-flex flex-column', { 'overflow-y-auto': computedHeight !== 'auto' }]"
+      :style="{ height: computedHeight }">
       <div v-if="filename" class="filename ml-2 text-caption text-left">
         <span class="text-medium-emphasis">{{ filename }}</span>
         <v-divider class="mr-12" :thickness="1" color="outline" />
       </div>
-      <div :class="{ 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }">
+      <div
+        :class="['d-flex align-center flex-1-0-0 code-text', { 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }]">
         <!-- Line numbers column -->
-        <div v-if="showLineNumbers" class="line-numbers code-text" aria-hidden="true">
+        <div v-if="showLineNumbers" class="line-numbers" aria-hidden="true">
           <span v-for="line in customLineNumbers" :key="line">{{ line }}</span>
         </div>
-        <pre :class="['code-text', $props.class]" :style="preStyle"><slot /></pre>
+        <pre :class="['flex-1-0-0', $props.class]" :style="preStyle"><slot /></pre>
       </div>
     </div>
   </v-card>
@@ -137,7 +140,7 @@ const maxWidth = computed(() => {
 
 const computedHeight = computed(() => {
   const heightValue = parsedMeta.value["height"]; // Adjusted from 'max-width' to 'min-width'
-  return heightValue ? `${heightValue}px` : 'none';
+  return heightValue ? `${heightValue}px` : 'auto';
 });
 
 
@@ -175,7 +178,7 @@ const customLineNumbers = computed(() => {
 
     // Calculate how many more numbers are needed
     const remaining = totalLines.value - generatedNumbers.length;
-    
+
     if (remaining > 0) {
       const lastNumber = generatedNumbers[generatedNumbers.length - 1] || 0;
       return [
@@ -220,8 +223,8 @@ const preStyle = computed(() => ({
 span.line {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 span.line.highlight {
@@ -229,7 +232,7 @@ span.line.highlight {
   display: block;
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
-
+  border-radius: 4px;
 }
 
 .line.highlight>span {
@@ -274,10 +277,5 @@ span.line.highlight {
 
 .line-numbers span {
   display: block;
-}
-
-pre.code-text {
-  width: 100%;
-  flex: 1;
 }
 </style>
