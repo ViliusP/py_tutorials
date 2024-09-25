@@ -8,7 +8,7 @@
     :src="img(src, { quality: 80 }, { provider: props.provider })"
     :lazy-src="lazySrc"
     :sizes="_srcset.sizes"
-    position="left center"
+    :position="props.centered ? 'center': 'left center'"
     contain
   >
     <template v-slot:placeholder>
