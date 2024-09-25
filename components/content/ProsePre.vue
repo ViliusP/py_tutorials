@@ -200,6 +200,7 @@ const preStyle = computed(() => ({
 
 const codeContent = ref<HTMLElement | null>(null);
 
+// This should be moved out to Nuxt, Nitro or App hook.
 onMounted(() => {
   const highlightElements = codeContent.value?.querySelectorAll<HTMLElement>('.highlight');
 
