@@ -115,15 +115,90 @@ while running: # highlighted code
     clock.tick(60)  # limits FPS to 60
 
 pygame.quit()
-
 ```
 
 ```console
 text without filename
 ```
 
+```python{1} line-numbers=false
+print("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong print")
+```
+
+
 ```text [example.txt]
 plain text
+```
+
+```python height=300 [scrollable_code.py]{7, 11, 19, 24}
+import random
+
+# Constants
+GRID_SIZE = 5
+NUM_ITEMS = 3
+ITEMS = ['Gold', 'Potion', 'Key']
+
+# Initialize grid with empty spaces
+grid = [[' ' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
+
+# Place items randomly on the grid
+for _ in range(NUM_ITEMS):
+    while True:
+        x, y = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        if grid[x][y] == ' ':
+            grid[x][y] = random.choice(ITEMS)
+            break
+
+# Player's starting position
+player_x, player_y = 0, 0
+
+def print_grid():
+    for row in grid:
+        print('| ' + ' | '.join(row) + ' |')
+    print()
+
+def move_player(direction):
+    global player_x, player_y
+    if direction == 'up' and player_x > 0:
+        player_x -= 1
+    elif direction == 'down' and player_x < GRID_SIZE - 1:
+        player_x += 1
+    elif direction == 'left' and player_y > 0:
+        player_y -= 1
+    elif direction == 'right' and player_y < GRID_SIZE - 1:
+        player_y += 1
+    else:
+        print("Can't move in that direction!")
+
+def collect_item():
+    item = grid[player_x][player_y]
+    if item in ITEMS:
+        print(f"Collected {item}!")
+        grid[player_x][player_y] = ' '
+    else:
+        print("No item to collect here.")
+
+def main():
+    print("Welcome to the Grid Game!")
+    print("Collect items by moving around the grid.")
+    print("Commands: 'up', 'down', 'left', 'right', 'collect', 'exit'")
+    
+    while True:
+        print_grid()
+        command = input("Enter your command: ").strip().lower()
+        
+        if command in ['up', 'down', 'left', 'right']:
+            move_player(command)
+        elif command == 'collect':
+            collect_item()
+        elif command == 'exit':
+            print("Thanks for playing!")
+            break
+        else:
+            print("Invalid command!")
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## Javascript code
