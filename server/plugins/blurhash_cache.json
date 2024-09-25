@@ -119,6 +119,26 @@
     "blurhash": "yfcFEoSkhXdzePiHeI2A1wg=",
     "generated_at": "2024-09-18T16:33:25.076Z"
   },
+  "/content_images/vs_code_correct_suggestions.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcBA4AJg4uGiTaH27C9C7o=",
+    "generated_at": "2024-09-25T15:53:52.115Z"
+  },
+  "/content_images/vs_code_correct_type_suggestions.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcBBIBMAZWaiIiFqZipkJgKeQ==",
+    "generated_at": "2024-09-25T16:13:18.550Z"
+  },
+  "/content_images/vs_code_extract_unique_words_incomplete_info.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcBAoB/RjaleZh4UEILFWQ=",
+    "generated_at": "2024-09-25T16:00:10.057Z"
+  },
+  "/content_images/vs_code_extract_unique_words_suggestions.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcBCoICajeoVmaKrUzAyQQ=",
+    "generated_at": "2024-09-25T16:13:06.288Z"
+  },
   "/content_images/vs_code_hello_world.png": {
     "provider": "cloudinary",
     "blurhash": "yveBC4IPsmaHd29pnpDnCScniIdwiAg=",
@@ -134,10 +154,35 @@
     "blurhash": "yfeBC4IPw5V3iI94f4D4Bzc3iIeAiAg=",
     "generated_at": "2024-09-18T16:33:25.076Z"
   },
+  "/content_images/vs_code_no_suggestions.png": {
+    "provider": "cloudinary",
+    "blurhash": "CfgBAoB9NYdohwiWUHoItnc=",
+    "generated_at": "2024-09-25T15:53:12.986Z"
+  },
+  "/content_images/vs_code_no_type_highlight.png": {
+    "provider": "cloudinary",
+    "blurhash": "yfcBAoAuYJlomqZmkGwIy4U=",
+    "generated_at": "2024-09-25T15:47:56.144Z"
+  },
   "/content_images/vs_code_regex.png": {
     "provider": "cloudinary",
     "blurhash": "yvcFAYA5mHeIeQeWEFYPYcY=",
     "generated_at": "2024-09-18T16:33:26.074Z"
+  },
+  "/content_images/vs_is_prime_comment_2.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcBAoCfVjJ3iSeIj2V/KvQ=",
+    "generated_at": "2024-09-25T15:17:13.410Z"
+  },
+  "/content_images/vs_is_prime_comment.png": {
+    "provider": "cloudinary",
+    "blurhash": "ygcCAoC/RSF9eAd5mlKPBoM=",
+    "generated_at": "2024-09-25T14:06:35.063Z"
+  },
+  "/content_images/vs_open_comment.png": {
+    "provider": "cloudinary",
+    "blurhash": "yvcFA4AJU3eVeXiX5Xc/bvY=",
+    "generated_at": "2024-09-25T12:30:02.139Z"
   },
   "/content_images/wordcloud.png": {
     "provider": "cloudinary",
