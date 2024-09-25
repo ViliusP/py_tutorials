@@ -23,7 +23,7 @@
       {{ languageLabel }}
     </div>
     <!-- Scrollable content wrapper -->
-    <div
+    <div ref="codeContent"
       :class="['overflow-x-auto code-content flex-1-0-0 d-flex flex-column', { 'overflow-y-auto': computedHeight !== 'auto' }]"
       :style="{ height: computedHeight }">
       <div v-if="filename" class="filename ml-2 text-caption text-left">
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 const { t } = useI18n();
 
 const props = defineProps({
@@ -198,6 +198,32 @@ const preStyle = computed(() => ({
   display: showLineNumbers.value ? "inline-block" : "block",
 }));
 
+const codeContent = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  const highlightElements = codeContent.value?.querySelectorAll<HTMLElement>('.highlight');
+
+  if (highlightElements) {
+    let lastLine = -1;
+    const totalHighlights = highlightElements.length;
+
+    highlightElements.forEach((element, index) => {
+      const lineNumber = parseInt(element.getAttribute("line") || "-1", 10);
+
+      // Mark the first highlight in the block
+      if (index === 0 || parseInt(highlightElements[index - 1].getAttribute("line") || "-1", 10) !== lineNumber - 1) {
+        element.classList.add('first-highlight');
+      }
+
+      // Mark the last highlight in the block
+      if (index === totalHighlights - 1 || parseInt(highlightElements[index + 1].getAttribute("line") || "-1", 10) !== lineNumber + 1) {
+        element.classList.add('last-highlight');
+      }
+
+      lastLine = lineNumber; // Update lastLine for the next iteration
+    });
+  }
+});
 </script>
 
 <style>
@@ -232,7 +258,16 @@ span.line.highlight {
   display: block;
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
-  border-radius: 4px;
+}
+
+.first-highlight {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.last-highlight {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .line.highlight>span {
