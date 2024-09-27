@@ -16,4 +16,9 @@
 .prose-table th[align="center"]{
     text-align: center !important;
 }
+
+.prose-h4 + .prose-table {
+    margin-top: 1rem;
+    margin-bottom: -0.375;
+}
 </style>
