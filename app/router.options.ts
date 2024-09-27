@@ -5,7 +5,6 @@ function findHashPosition(hash: string): { el: any, behavior: ScrollBehavior, to
   if (el) {
     const scrollPadding = 16
     const toolbarSize = 64
-    console.log(getComputedStyle(el))
     // const top = parseFloat(getComputedStyle(el).marginLeft) + scrollPadding
 
     return {
