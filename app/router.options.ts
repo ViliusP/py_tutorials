@@ -1,22 +1,23 @@
 import type { RouterConfig } from '@nuxt/schema'
 
-function findHashPosition (hash: string): { el: any, behavior: ScrollBehavior, top: number } | undefined {
+function findHashPosition(hash: string): { el: any, behavior: ScrollBehavior, top: number } | undefined {
   const el = document.querySelector(hash)
-  // vue-router does not incorporate scroll-margin-top on its own.
   if (el) {
-    const top = parseFloat(getComputedStyle(el).scrollMarginTop)
+    const scrollPadding = 16
+    const toolbarSize = 64
+    // const top = parseFloat(getComputedStyle(el).marginLeft) + scrollPadding
 
     return {
       el: hash,
       behavior: 'smooth',
-      top
+      top: toolbarSize + scrollPadding 
     }
   }
 }
 
 // https://router.vuejs.org/api/#routeroptions
 export default <RouterConfig>{
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     const nuxtApp = useNuxtApp()
 
     if (history.state && history.state.stop) {
@@ -31,10 +32,20 @@ export default <RouterConfig>{
 
     // If history back
     if (savedPosition) {
-      // Handle Suspense resolution
+      if (to.path === from.path) {
+        return {
+          left: savedPosition.left,
+          top: savedPosition.top,
+          behavior: 'smooth'
+        }
+      }
       return new Promise((resolve) => {
         nuxtApp.hooks.hookOnce('page:finish', () => {
-          setTimeout(() => resolve(savedPosition), 50)
+          setTimeout(() => resolve({
+            left: savedPosition.left,
+            top: savedPosition.top,
+            behavior: 'smooth'
+          }), 50)
         })
       })
     }

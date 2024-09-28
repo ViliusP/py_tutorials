@@ -221,7 +221,7 @@ const resetLoop = () => {
 
 // Mutations for scrolling
 function scrollToBottom() {
-    const targetNode = document.querySelector('.animation-console .v-card');
+    const targetNode = document.querySelector('.animation-console .code-content');
     nextTick(() => {
         targetNode.scrollTo({
             top: targetNode.scrollHeight,
@@ -258,6 +258,5 @@ function scrollToBottom() {
 <style>
 .animation-console .v-card {
     padding: 0 !important;
-    overflow: auto;
 }
 </style>

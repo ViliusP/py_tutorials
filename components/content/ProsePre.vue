@@ -1,6 +1,6 @@
 <template>
-  <v-card :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px', 'height': computedHeight }"
-    :class="['prose-code', { 'd-flex': computedHeight === 'none'}]" elevation="1" :color="computedColor">
+  <v-card :style="{ 'max-width': maxWidth, position: 'relative', minHeight: '65px' }" :class="['prose-code', 'd-flex']"
+    elevation="1" :color="computedColor">
     <v-btn icon variant="plain" size="small" style="position: absolute; right: 2.5px; top: 2.5px; z-index: 2;"
       @click="copyContent">
       <v-icon>mdi-content-copy</v-icon>
@@ -23,24 +23,27 @@
       {{ languageLabel }}
     </div>
     <!-- Scrollable content wrapper -->
-    <div class="overflow-x-auto d-flex flex-column  justify-center flex-1-1-100">
+    <div ref="codeContent"
+      :class="['overflow-x-auto code-content flex-1-0-0 d-flex flex-column', { 'overflow-y-auto': computedHeight !== 'auto' }]"
+      :style="{ height: computedHeight }">
       <div v-if="filename" class="filename ml-2 text-caption text-left">
         <span class="text-medium-emphasis">{{ filename }}</span>
         <v-divider class="mr-12" :thickness="1" color="outline" />
       </div>
-      <div :class="{ 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }">
+      <div
+        :class="['d-flex align-center flex-1-0-0 code-text', { 'd-flex': showLineNumbers, 'py-2': filename, 'py-3': !filename }]">
         <!-- Line numbers column -->
-        <div v-if="showLineNumbers" class="line-numbers code-text" aria-hidden="true">
-          <span v-for="line in totalLines" :key="line">{{ line }}</span>
+        <div v-if="showLineNumbers" class="line-numbers" aria-hidden="true">
+          <span v-for="line in customLineNumbers" :key="line">{{ line }}</span>
         </div>
-        <pre :class="['code-text', $props.class]" :style="preStyle"><slot /></pre>
+        <pre :class="['flex-1-0-0', $props.class]" :style="preStyle"><slot /></pre>
       </div>
     </div>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 const { t } = useI18n();
 
 const props = defineProps({
@@ -137,7 +140,7 @@ const maxWidth = computed(() => {
 
 const computedHeight = computed(() => {
   const heightValue = parsedMeta.value["height"]; // Adjusted from 'max-width' to 'min-width'
-  return heightValue ? `${heightValue}px` : 'none';
+  return heightValue ? `${heightValue}px` : 'auto';
 });
 
 
@@ -149,18 +152,79 @@ const languageLabel = computed(() => {
   return languageDefaults.label;
 });
 
+// Show line numbers if defined in meta or if custom-line-numbering is provided
 const showLineNumbers = computed(() => {
-  return parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
+  const lineNumbersMeta = parsedMeta.value["line-numbers"] ?? languageDefaults.lineNumbers;
+  const customLineNumbering = parsedMeta.value["custom-line-numbering"];
+
+  return lineNumbersMeta || (customLineNumbering !== null && customLineNumbering !== undefined);
 });
 
 const totalLines = computed(() => {
   return props.code ? props.code.split("\n").length - 1 : 0;
 });
 
+// Compute custom line numbers from the defined string or fall back to totalLines
+const customLineNumbers = computed(() => {
+  const numberingValue = parsedMeta.value["custom-line-numbering"];
+
+  if (typeof numberingValue === 'string') {
+    const generatedNumbers = numberingValue.split(",").flatMap(range => {
+      const [start, end] = range.split("-").map(Number);
+      return isNaN(end)
+        ? [start]
+        : Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    }).slice(0, totalLines.value); // Limit to totalLines immediately
+
+    // Calculate how many more numbers are needed
+    const remaining = totalLines.value - generatedNumbers.length;
+
+    if (remaining > 0) {
+      const lastNumber = generatedNumbers[generatedNumbers.length - 1] || 0;
+      return [
+        ...generatedNumbers,
+        ...Array.from({ length: remaining }, (_, i) => lastNumber + i + 1)
+      ];
+    }
+
+    return generatedNumbers;
+  }
+
+  // Fallback to totalLines if custom-line-numbering is not provided
+  return Array.from({ length: totalLines.value }, (_, i) => i + 1);
+});
+
 const preStyle = computed(() => ({
   display: showLineNumbers.value ? "inline-block" : "block",
 }));
 
+const codeContent = ref<HTMLElement | null>(null);
+
+// This should be moved out to Nuxt, Nitro or App hook.
+onMounted(() => {
+  const highlightElements = codeContent.value?.querySelectorAll<HTMLElement>('.highlight');
+
+  if (highlightElements) {
+    let lastLine = -1;
+    const totalHighlights = highlightElements.length;
+
+    highlightElements.forEach((element, index) => {
+      const lineNumber = parseInt(element.getAttribute("line") || "-1", 10);
+
+      // Mark the first highlight in the block
+      if (index === 0 || parseInt(highlightElements[index - 1].getAttribute("line") || "-1", 10) !== lineNumber - 1) {
+        element.classList.add('first-highlight');
+      }
+
+      // Mark the last highlight in the block
+      if (index === totalHighlights - 1 || parseInt(highlightElements[index + 1].getAttribute("line") || "-1", 10) !== lineNumber + 1) {
+        element.classList.add('last-highlight');
+      }
+
+      lastLine = lineNumber; // Update lastLine for the next iteration
+    });
+  }
+});
 </script>
 
 <style>
@@ -186,8 +250,8 @@ const preStyle = computed(() => ({
 span.line {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 span.line.highlight {
@@ -195,13 +259,21 @@ span.line.highlight {
   display: block;
   --shiki-default-bg: rgba(101, 117, 133, .16);
   --shiki-dark-bg: rgba(142, 150, 170, .14);
+}
 
+.first-highlight {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.last-highlight {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .line.highlight>span {
   --shiki-default-bg: initial;
   --shiki-dark-bg: initial;
-  /* Reset or apply new styles as needed */
 }
 
 .shiki code {
@@ -233,7 +305,7 @@ span.line.highlight {
 .line-numbers {
   text-align: right;
   user-select: none;
-  color: rgba(142, 150, 170, 0.6); /* Adjust color as needed */
+  color: rgba(142, 150, 170, 0.6);
   font-size: 0.875rem;
   line-height: 1.425;
   min-width: 2.2em;
@@ -241,10 +313,5 @@ span.line.highlight {
 
 .line-numbers span {
   display: block;
-}
-
-pre.code-text {
-  width: 100%;
-  flex: 1;
 }
 </style>
